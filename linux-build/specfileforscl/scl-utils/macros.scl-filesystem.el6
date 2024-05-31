@@ -9,7 +9,15 @@
 %attr(555,root,root) %{_scl_root}/bin
 %attr(555,root,root) %{_scl_root}/boot
 %{_scl_root}/dev
-%{_sysconfdir}
+%dir %{_sysconfdir}
+%{_sysconfdir}/X11
+%{_sysconfdir}/xdg
+%{_sysconfdir}/opt
+%{_sysconfdir}/pm
+%{_sysconfdir}/xinetd.d
+%{_sysconfdir}/skel
+%{_sysconfdir}/sysconfig
+%{_sysconfdir}/pki
 %{_scl_root}/home
 %attr(555,root,root) %{_scl_root}/lib
 %ifarch x86_64 ppc ppc64 sparc sparc64 s390 s390x
