@@ -1,3 +1,6 @@
+# scl-utils original source and patch
+# original spec file updated here
+# http://archive.kernel.org/centos-vault/6.10/os/Source/SPackages/scl-utils-20120927-29.el6_9.src.rpm
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20120927
