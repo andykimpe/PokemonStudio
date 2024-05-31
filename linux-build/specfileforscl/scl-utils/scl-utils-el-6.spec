@@ -1,78 +1,60 @@
-# scl-utils original source and patch
-# original spec file updated here
-# https://git.centos.org/rpms/scl-utils/raw/c7/f/SPECS/scl-utils.spec
-# https://git.centos.org/rpms/scl-utils/blob/c7/f/SPECS/scl-utils.spec
-# original source code
-# https://github.com/sclorg/scl-utils/
-# archive source code scl-utils
-# https://src.fedoraproject.org/repo/pkgs/scl-utils/
-# update for el4 el5 el6 and el7
-# https://git.centos.org/rpms/scl-utils/tree/c7
-# update for el 8 
-# https://git.centos.org/rpms/scl-utils/tree/c8
-# Remi Collet patch update
-# https://git.remirepo.net/cgit/rpms/scl-utils.git/
-Name:       scl-utils
-Epoch:      1
-Summary:    Utilities for alternative packaging
-
-License:    GPLv2+
-URL:        https://github.com/sclorg/scl-utils
-BuildRequires:	gcc make
-BuildRequires:  rpm-devel
-
-
-Version: 20130529
-Release: 22%{?dist}
-Source0: https://src.fedoraproject.org/repo/pkgs/scl-utils/scl-utils-20130529.tar.gz/e11fb0c27c8c04f72b4a1459be1d27f2/scl-utils-20130529.tar.gz
-Source1: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/macros.scl-filesystem.el6
-Source2: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/scl_source
-
-Patch0:	https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0001-Rename-attr-macros-so-they-are-correctly-named.patch
-Patch1: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0002-Implement-as-a-command-separator.patch
-Patch2: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0003-Mention-environment-modifying-commands-in-the-man-pa.patch
-Patch3: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0004-Check-whether-a-file-was-created-when-doing-mkstemp-.patch
-Patch4: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0005-Various-fixes-in-Provides-and-Requires-of-scl-packag.patch
-Patch5: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0006-Modified-the-behavior-of-debuginfo-generation-proces.patch
-Patch6: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0007-Changed-command-description-in-scl-man-pages.patch
-Patch7: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0008-Changed-script-paths-in-__os_install_post.patch
-Patch8: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0009-Remove-sclbuild-as-it-s-not-that-useful.patch
-Patch9:	https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0010-Added-capability-to-register-and-deregister-collecti.patch
-Patch10: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0011-Fix-missing-allocation-check-in-read_script_output.patch
-Patch11: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0012-Introduce-scl_dependency_generators-macro.patch
-Patch12: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0013-Add-capability-to-share-collections-using-nfs.patch
-Patch13: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/scl-utils-20130529-shebang.patch
+Summary:	Utilities for alternative packaging
+Name:		scl-utils
+Version:	20120927
+Release:	30%{?dist}
+License:	GPLv2+
+Group:		Applications/File
+URL:		http://jnovy.fedorapeople.org/scl-utils/
+Source0:	https://src.fedoraproject.org/repo/pkgs/scl-utils/scl-utils-20120927.tar.gz/b4cd031a44bf0a63d510a446fe60a502/scl-utils-20120927.tar.gz
+Source1:	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/macros.scl-filesystem.el6
+Source2:	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/scl_source
+Patch0: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0001-Add-all-the-collections-enabled-to-SCLS-env-variable.patch
+Patch1: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0002-Allow-overriding-values-in-scl_package.patch
+Patch2: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0003-Delete-unnecessary-argument-from-check_asprintf.patch
+Patch3: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0004-scl-utils-free.patch
+Patch4: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0005-Use-direct-path-when-calling-scl_enabled.patch
+Patch5: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0006-Execute-enable-scriptlets-only-if-they-are-not-alrea.patch
+Patch6: 	https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0007-Implement-as-a-command-separator.patch
+Patch7:     https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0008-Changed-debuginfo-package-handling.patch
+Patch8:     https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0009-Mention-environment-modifying-commands-in-the-man-pa.patch
+Patch9:     https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0010-Changed-command-description-in-scl-man-pages.patch
+Patch10:    https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0011-Added-capability-to-register-and-deregister-collecti.patch
+Patch11:    https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0012-Fixed-dereferencing-of-null-pointer.patch
+Patch12:    https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0013-Fixed_main_metapackage_dependencies.patch
+Patch13:    https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/0014-Add-capability-to-share-collections-using-nfs.patch
+Patch14:    https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/scl-utils-20120927-shebang.patch
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 Run-time utility for alternative packaging.
 
 %package build
-Summary:    RPM build macros for alternative packaging
-Requires:   iso-codes
-Requires:   redhat-rpm-config
+Summary:	RPM build macros for alternative packaging
+Group:		Applications/File
+Requires:	iso-codes
+Requires:	redhat-rpm-config
 
 %description build
 Essential RPM build macros for alternative packaging.
 
 %prep
-	
 %setup -q
+%patch0 -p1 -b .all-collections
+%patch1 -p1 -b .overriding
+%patch2 -p1 -b .check-asprintf
+%patch3 -p1
+%patch4 -p1 -b .direct-path
+%patch5 -p1 -b .enable-once
+%patch6 -p1 -b .command-separator
+%patch7 -p1 -b .debuginfo
+%patch8 -p1 -b .man-env
+%patch9 -p1 -b .man-command
+%patch10 -p1 -b .register
+%patch11 -p1 -b .deref
+%patch12 -p1 -b .meta-deps
+%patch13 -p1 -b .nfsmoutable
+%patch14 -p1 -b .shebang
 
-%patch0 -p1 -b .attr-names
-%patch1 -p1 -b .command-separator
-%patch2 -p1 -b .env-variables-man
-%patch3 -p1 -b .coverity-mkstemp
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1 -b .shebang
-	
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
@@ -80,18 +62,12 @@ make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 rm -rf %buildroot
 mkdir -p %buildroot%{_sysconfdir}/rpm
 mkdir -p %buildroot%{_sysconfdir}/scl/prefixes
-pushd %buildroot%{_sysconfdir}/scl
-ln -s prefixes conf
-popd
 mkdir -p %buildroot/opt/rh
+mkdir -p %buildroot%{_rpmconfigdir}/redhat
 install -d -m 755 %buildroot%{_mandir}/man1
 make install DESTDIR=%buildroot
 cat %SOURCE1 >> %buildroot%{_sysconfdir}/rpm/macros.scl
 install -m 755 %SOURCE2 %buildroot%{_bindir}/scl_source
-# remove brp-python-hardlink invocation as it is not present in RHEL5
-%if 0%{?rhel} == 5
-  sed -i -e '/^.*brp-python-hardlink.*/d' %buildroot%{_sysconfdir}/rpm/macros.scl
-%endif
 
 %clean
 rm -rf %buildroot
@@ -99,14 +75,12 @@ rm -rf %buildroot
 %files
 %defattr(-,root,root,-)
 %dir /opt/rh
-%{_sysconfdir}/scl/conf
 %dir %{_sysconfdir}/scl/prefixes
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 %{_bindir}/scl_source
 %{_mandir}/man1/*
 %{_sysconfdir}/bash_completion.d/scl.bash
-%{!?_rpmconfigdir:%global _rpmconfigdir /usr/lib/rpm}
 
 %files build
 %defattr(-,root,root,-)
@@ -116,76 +90,133 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-compress
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
-
 %changelog
-* Mon Aug 26 2013 Jan Zeleny <jzeleny@redhat.com> - 20130529-3
-- updated the file list to handle /etc/scl/conf correctly
+* Tue Dec 13 2016 Joe Orton <jorton@redhat.com> - 20120927-29
+- fix "scl enable" usage in shebang lines (#1371936)
 
-* Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20130529-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+* Wed Mar 11 2015 Lubos Kardos <lkardos@redhat.com> - 20120927-27
+- If macro buildsubdir doesn't exist then replace it with empty string.
 
-* Wed May 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20130529-1
-- changed the upstream tarball location
-- update to 20130529
+* Thu Feb 05 2015 Lubos Kardos <lkardos@redhat.com> - 20120927-26
+- Remove /scls/ from macros  _sysconfdir, _sharedstatedir and _localstatedir
 
-* Fri Feb 01 2013 Jindrich Novy <jnovy@redhat.com> 20121110-2
-- add build compatibility fixes
+* Tue Jan 27 2015 Lubos Kardos <lkardos@redhat.com> - 20120927-25
+- Creating filelist in build subdirectory instead of build directory.
+- Removing filelist before build.
 
-* Wed Dec 19 2012 Jindrich Novy <jnovy@redhat.com> 20121110-1
-- introduce sclbuild utility
-- fix exporting of env. variables when mutiple collections are
-  enabled at the same time
-- better bash completion
-- fix changelog
+* Tue Jan 06 2015 Jan Zeleny <jzeleny@redhat.com> - 20120927-24
+- Reflect the state of %%nfsmountable macro in collections' rpm macro files
 
-* Thu Sep 27 2012 Jindrich Novy <jnovy@redhat.com> 20120927-1
-- update to 20120927
-- better BUILDROOT processing
-- bash completition for scl command
-- debuginfo package now has SCL-specific provide
-- non-SCL builds are without warning in build log
-- improved help
+* Wed Oct 08 2014 Lubos Kardos <lkardos@redhat.com - 20120927-23
+- Modified paths of state and conf files
+- Add owning and creating of state and conf files if nfsmountable is defined
+- Add printing file names in error messages
 
-* Thu Aug 09 2012 Jindrich Novy <jnovy@redhat.com> 20120809-1
-- update to 20120809
-- processes the SCL buildroot correctly now
+* Thu Sep 25 2014 Jan Zeleny <jzeleny@redhat.com> - 20120927-22
+- Add execution of register and deregister scripts during registration
+  and deregistration if they exist.
+- Add capability to make collection nfs mountable using macro nfsmountable.
+- removed the dependency generators and all related changes
+  (maintainers' demands)
 
-* Thu Aug 02 2012 Jindrich Novy <jnovy@redhat.com> 20120802-1
-- update to 20120802
+* Tue Aug 26 2014 Jan Zeleny <jzeleny@redhat.com> - 20120927-21
+- fix an obscure segfault when listing collections on i386
+- fix registration to work with slash-ended paths
+- add the %%scl_dependency_generators macro
+- drop recursive ownership of /usr/lib within SCL root
 
-* Tue Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120731-1
-- add functionality that allows to list all packages in a collection
-- add dependency generators
+* Fri Aug 01 2014 Jan Zeleny <jzeleny@redhat.com> - 20120927-20
+- register and deregister: if there is an error registering or deregistering
+  one or more collection, skip it but return non-zero return code
+- fix the problem with metapackage dependencies when BuildArch is specified
 
-* Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20120613-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+* Thu Jul 17 2014 Jan Zeleny <jzeleny@redhat.com> - 20120927-19
+- register and deregister: include bash completion and help
 
-* Wed Jun 13 2012 Jindrich Novy <jnovy@redhat.com> 20120613-1
-- Requires: iso-codes for basic filesystem in build subpackage
-- add scl_require_package() macro to depend on a particular package
-  from the collection
-- fix filesystem file list
-- tighten runtime package dependency via scl_require()
-- fix _localstatedir to point to the correct path according to redhat-rpm-config
-- thanks to Bohuslav Kabrda for feature proposals/QA/fixes
+* Wed Jun 25 2014 Albert Uchytil <auchytil@redhat.com> 20120827-18
+- Collection's meta package should now have correct dependencies.
 
-* Thu May 03 2012 Jindrich Novy <jnovy@redhat.com> 20120503-1
+* Mon Jun 23 2014 Albert Uchytil <auchytil@redhat.com> 20120827-17
+- Minor changes to prevent possible leaks.
+
+* Fri Jun 20 2014 Albert Uchytil <auchytil@redhat.com> 20120827-16
+- fixed dereferencing of a null pointer
+
+* Fri Jun 20 2014 Albert Uchytil <auchytil@redhat.com> 20120827-15
+- bumped up release
+
+* Tue Jun 17 2014 Albert Uchytil <auchytil@redhat.com> 20120827-14
+- updated man pages
+- changed debuginfo package handling (#1071834)
+- added capability of dynamically registering and deregistering collections (#1099394)
+
+* Tue Apr 22 2014 Albert Uchytil <auchytil@redhat.com> 20120827-13
+- fixed typo in macros.scl
+
+* Mon Apr 14 2014 Albert Uchytil <auchytil@redhat.com> 20120827-12
+- new dependency generators for RHEL6 (#1054820, #1052907)
+
+* Fri Mar 28 2014 Jan Zeleny <jzeleny@redhat.com> - 20120827-11
+- reverted the last patch, as it breaks some collections. The revert
+  is necessary for RHSCL compose, we are looking for other solutions.
+
+* Mon Mar 10 2014 Jan Zeleny <jzeleny@redhat.com> - 20120927-10
+- new dependency generators for RHEL6 (#1054820, #1052907)
+
+* Wed Nov 20 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-9
+- add scl_source script for intercollection dependencies (#874417)
+- updated macros in macros.scl-filesystem (#1029515, #1029516)
+- add delimiter between collections and command (#1029517)
+
+* Fri May 17 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-8
+- run enable scriptlet only if the collection is not enabled (#964058)
+
+* Mon Apr 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-7
+- use absolute path when calling scl_enabled
+
+* Mon Apr 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-6
+- rename scl-utils-free.patch to match the patch naming scheme
+
+* Mon Apr 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-5
+- Allow overriding values in macro scl_package (#957185)
+- Delete redundant argument from check_asprintf (#957183)
+- Enable all collections given as arguments, not just the first one (#949995)
+- Prevent collections to be enabled multiple times (#955669)
+
+* Mon Apr 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-4
+- prepare for sync with RHEL5 version
+
+* Mon Apr 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20120927-3
+- revert the umask patch, as per #953462 and #957702
+
+* Mon Nov 12 2012 Jindrich Novy <jnovy@redhat.com> 20120927-2
+- fix usage of freed variable and umask for temp files (#874628)
+
+* Fri Oct 12 2012 Jindrich Novy <jnovy@redhat.com> 20120927-1
+- update to 20120927 (#855999)
+
+* Thu Oct  4 2012 Jindrich Novy <jnovy@redhat.com> 20120613-2
+- backport patch from upstream to correctly process buildroot
+  after installation (compress man pages, etc.) (#844028)
+
+* Fri Jun 22 2012 Jindrich Novy <jnovy@redhat.com> 20120613-1
+- update to 20120613 (#855999)
+
+* Thu May 10 2012 Jindrich Novy <jnovy@redhat.com> 20120423-2
 - avoid doublefree corruption when reading commands from stdin
 
-* Sun Apr 22 2012 Jindrich Novy <jnovy@redhat.com> 20120423-1
-- keep filesystem macros out of the main sources as
-  it is distro-dependent
+* Mon Apr 23 2012 Jindrich Novy <jnovy@redhat.com> 20120423-1
+- update to the latest upstream scl-utils-20120423 (#713147)
+ - filesystem ownership by meta package
+ - add man page
+ - fix memory leak when parsing commands from stdin
+ - use more descriptive error message if /etc/prefixes is missing
+ - do not prepend scl_* prefix to package names
+ - unify package naming to <SCL>-package-version
+ - add scl --list functionality to list available SCLs
 
-* Fri Apr 13 2012 Jindrich Novy <jnovy@redhat.com> 20120413-1
-- filesystem ownership by meta package
-- add man page
-- fix memory leak when parsing commands from stdin
-- use more descriptive error message if /etc/prefixes is missing
-
-* Wed Feb 29 2012 Jindrich Novy <jnovy@redhat.com> 20120229-1
-- do not prepend scl_* prefix to package names
-- unify package naming to <SCL>-package-version
-- add scl --list functionality to list available SCLs
+* Wed Feb 15 2012 Jindrich Novy <jnovy@redhat.com> 20120209-2
+- build for 6.3
 
 * Thu Feb 09 2012 Jindrich Novy <jnovy@redhat.com> 20120209-1
 - fix minor bugs (#788194)
@@ -213,7 +244,7 @@ rm -rf %buildroot
 * Mon Oct 17 2011 Jindrich Novy <jnovy@redhat.com> 20111017-1
 - initial packaging for upstream
 
-* Wed Sep 21 2011 Jindrich Novy <jnovy@redhat.com> 0.1-14
+* Thu Sep 22 2011 Jindrich Novy <jnovy@redhat.com> 0.1-14
 - define %%_defaultdocdir to properly relocate docs into
   a stack
 - document a way how to pass command to stack via stdin
