@@ -1,0 +1,3 @@
+%scl_vendor   pokemon-studio
+%_scl_prefix  /opt/
+%_sclreq     (PokemonStudio)
