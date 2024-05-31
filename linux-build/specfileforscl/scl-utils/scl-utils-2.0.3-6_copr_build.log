@@ -1,0 +1,1920 @@
+#copy https://download.copr.fedorainfracloud.org/results/goddabrouquita8280/PokemonStudio/epel-8-x86_64/07471036-scl-utils/builder-live.log.gz
+
+
+Warning: Permanently added '54.165.148.27' (ED25519) to the list of known hosts.
+
+You can reproduce this build on your computer by running:
+
+  sudo dnf install copr-rpmbuild
+  /usr/bin/copr-rpmbuild --verbose --drop-resultdir --task-url https://copr.fedorainfracloud.org/backend/get-build-task/7471036-epel-8-x86_64 --chroot epel-8-x86_64
+
+
+Version: 0.72
+PID: 7827
+Logging PID: 7828
+Task:
+{'allow_user_ssh': False,
+ 'appstream': False,
+ 'background': False,
+ 'build_id': 7471036,
+ 'buildroot_pkgs': [],
+ 'chroot': 'epel-8-x86_64',
+ 'enable_net': True,
+ 'fedora_review': False,
+ 'git_hash': '2ab65c264ae1c8f6b181b6ee856fdb939d28fb06',
+ 'git_repo': 'https://copr-dist-git.fedorainfracloud.org/git/goddabrouquita8280/PokemonStudio/scl-utils',
+ 'isolation': 'default',
+ 'memory_reqs': 2048,
+ 'package_name': 'scl-utils',
+ 'package_version': '1:2.0.3-6',
+ 'project_dirname': 'PokemonStudio',
+ 'project_name': 'PokemonStudio',
+ 'project_owner': 'goddabrouquita8280',
+ 'repo_priority': None,
+ 'repos': [{'baseurl': 'https://download.copr.fedorainfracloud.org/results/goddabrouquita8280/PokemonStudio/epel-8-x86_64/',
+            'id': 'copr_base',
+            'name': 'Copr repository',
+            'priority': None},
+           {'baseurl': 'https://download1.rpmfusion.org/free/el/updates/8/x86_64/',
+            'id': 'https_download1_rpmfusion_org_free_el_updates_8_x86_64',
+            'name': 'Additional repo https_download1_rpmfusion_org_free_el_updates_8_x86_64'},
+           {'baseurl': 'https://download1.rpmfusion.org/nonfree/el/updates/8/x86_64/',
+            'id': 'https_download1_rpmfusion_org_nonfree_el_updates_8_x86_64',
+            'name': 'Additional repo https_download1_rpmfusion_org_nonfree_el_updates_8_x86_64'}],
+ 'sandbox': 'goddabrouquita8280/PokemonStudio--goddabrouquita8280',
+ 'source_json': {},
+ 'source_type': None,
+ 'ssh_public_keys': None,
+ 'submitter': 'goddabrouquita8280',
+ 'tags': [],
+ 'task_id': '7471036-epel-8-x86_64',
+ 'timeout': 18000,
+ 'uses_devel_repo': False,
+ 'with_opts': [],
+ 'without_opts': []}
+
+Running: git clone https://copr-dist-git.fedorainfracloud.org/git/goddabrouquita8280/PokemonStudio/scl-utils /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils --depth 500 --no-single-branch --recursive
+
+cmd: ['git', 'clone', 'https://copr-dist-git.fedorainfracloud.org/git/goddabrouquita8280/PokemonStudio/scl-utils', '/var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils', '--depth', '500', '--no-single-branch', '--recursive']
+cwd: .
+rc: 0
+stdout: 
+stderr: Cloning into '/var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils'...
+
+Running: git checkout 2ab65c264ae1c8f6b181b6ee856fdb939d28fb06 --
+
+cmd: ['git', 'checkout', '2ab65c264ae1c8f6b181b6ee856fdb939d28fb06', '--']
+cwd: /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils
+rc: 0
+stdout: 
+stderr: Note: switching to '2ab65c264ae1c8f6b181b6ee856fdb939d28fb06'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 2ab65c2 automatic import of scl-utils
+
+Running: copr-distgit-client sources
+
+cmd: ['copr-distgit-client', 'sources']
+cwd: /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils
+rc: 0
+stdout: 
+stderr: INFO: Reading stdout from command: git rev-parse --abbrev-ref HEAD
+INFO: Reading stdout from command: git rev-parse HEAD
+INFO: Reading sources specification file: sources
+/usr/bin/tail: /var/lib/copr-rpmbuild/main.log: file truncated
+INFO: Downloading scl-utils-2.0.3.tar.gz
+INFO: Reading stdout from command: curl --help all
+INFO: Calling: curl -H Pragma: -o scl-utils-2.0.3.tar.gz --location --connect-timeout 60 --retry 3 --retry-delay 10 --remote-time --show-error --fail --retry-all-errors https://copr-dist-git.fedorainfracloud.org/repo/pkgs/goddabrouquita8280/PokemonStudio/scl-utils/scl-utils-2.0.3.tar.gz/md5/438dee233c7c2ea7ebba26a441e5a2a7/scl-utils-2.0.3.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 30399  100 30399    0     0  2263k      0 --:--:-- --:--:-- --:--:-- 2283k
+INFO: Reading stdout from command: md5sum scl-utils-2.0.3.tar.gz
+
+Running (timeout=18000): unbuffer mock --spec /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils/scl-utils.spec --sources /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils --resultdir /var/lib/copr-rpmbuild/results --uniqueext 1716304491.226082 -r /var/lib/copr-rpmbuild/results/configs/child.cfg
+INFO: mock.py version 5.5 starting (python version = 3.12.1, NVR = mock-5.5-1.fc39), args: /usr/libexec/mock/mock --spec /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils/scl-utils.spec --sources /var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils --resultdir /var/lib/copr-rpmbuild/results --uniqueext 1716304491.226082 -r /var/lib/copr-rpmbuild/results/configs/child.cfg
+Start(bootstrap): init plugins
+INFO: tmpfs initialized
+INFO: selinux enabled
+INFO: chroot_scan: initialized
+INFO: compress_logs: initialized
+Finish(bootstrap): init plugins
+Start: init plugins
+INFO: tmpfs initialized
+INFO: selinux enabled
+INFO: chroot_scan: initialized
+INFO: compress_logs: initialized
+Finish: init plugins
+INFO: Signal handler active
+Start: run
+INFO: Start(/var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils/scl-utils.spec)  Config(rhel+epel-8-x86_64)
+Start: clean chroot
+Finish: clean chroot
+Mock Version: 5.5
+INFO: Mock Version: 5.5
+Start(bootstrap): chroot init
+INFO: mounting tmpfs at /var/lib/mock/rhel+epel-8-x86_64-bootstrap-1716304491.226082/root.
+INFO: calling preinit hooks
+INFO: enabled root cache
+INFO: enabled package manager cache
+Start(bootstrap): cleaning package manager metadata
+Finish(bootstrap): cleaning package manager metadata
+INFO: Guessed host environment type: unknown
+INFO: Using bootstrap image: registry.access.redhat.com/ubi8/ubi
+INFO: Pulling image: registry.access.redhat.com/ubi8/ubi
+INFO: Copy content of container registry.access.redhat.com/ubi8/ubi to /var/lib/mock/rhel+epel-8-x86_64-bootstrap-1716304491.226082/root
+INFO: Checking that registry.access.redhat.com/ubi8/ubi image matches host's architecture
+INFO: mounting registry.access.redhat.com/ubi8/ubi with podman image mount
+INFO: image registry.access.redhat.com/ubi8/ubi as /var/lib/containers/storage/overlay/7cb2198f105bc6e59faaa598b914fb470c8dc156e75a85234addf42d0c4fd740/merged
+INFO: umounting image registry.access.redhat.com/ubi8/ubi (/var/lib/containers/storage/overlay/7cb2198f105bc6e59faaa598b914fb470c8dc156e75a85234addf42d0c4fd740/merged) with podman image umount
+INFO: Package manager dnf detected and used (fallback)
+INFO: Not updating bootstrap chroot, bootstrap_image_ready=True
+Start(bootstrap): creating root cache
+Finish(bootstrap): creating root cache
+Finish(bootstrap): chroot init
+Start: chroot init
+INFO: mounting tmpfs at /var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root.
+INFO: calling preinit hooks
+INFO: enabled root cache
+INFO: enabled package manager cache
+Start: cleaning package manager metadata
+Finish: cleaning package manager metadata
+INFO: enabled HW Info plugin
+INFO: Package manager dnf detected and used (direct choice)
+INFO: Buildroot is handled by package management downloaded with a bootstrap image:
+  rpm-4.14.3-28.el8_9.x86_64
+  python3-dnf-4.7.0-19.el8.noarch
+  python3-dnf-plugins-core-4.0.21-23.el8.noarch
+  yum-4.7.0-19.el8.noarch
+Start: installing minimal buildroot with dnf
+No matches found for the following disable plugin patterns: local, spacewalk, versionlock
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+Copr repository                                 4.5 kB/s | 257  B     00:00    
+Additional repo https_download1_rpmfusion_org_f 220 kB/s | 325 kB     00:01    
+Additional repo https_download1_rpmfusion_org_n 118 kB/s | 100 kB     00:00    
+Red Hat Enterprise Linux - BaseOS               119 MB/s |  67 MB     00:00    
+Red Hat Enterprise Linux - AppStream             76 MB/s |  61 MB     00:00    
+Red Hat Enterprise Linux - CodeReady Linux Buil  14 MB/s | 9.2 MB     00:00    
+Extra Packages for Enterprise Linux 8 - x86_64   71 MB/s |  14 MB     00:00    
+Dependencies resolved.
+===========================================================================================
+ Package                       Arch    Version                        Repository       Size
+===========================================================================================
+Installing:
+ bash                          x86_64  4.4.20-4.el8_6                 rhel-baseos     1.5 M
+ bzip2                         x86_64  1.0.6-26.el8                   rhel-baseos      60 k
+ coreutils                     x86_64  8.30-15.el8                    rhel-baseos     1.2 M
+ cpio                          x86_64  2.12-11.el8                    rhel-baseos     266 k
+ diffutils                     x86_64  3.6-6.el8                      rhel-baseos     359 k
+ epel-rpm-macros               noarch  8-41                           epel             27 k
+ findutils                     x86_64  1:4.6.0-21.el8                 rhel-baseos     527 k
+ gawk                          x86_64  4.2.1-4.el8                    rhel-baseos     1.1 M
+ gcc                           x86_64  8.5.0-20.el8                   rhel-appstream   23 M
+ gcc-c++                       x86_64  8.5.0-20.el8                   rhel-appstream   12 M
+ grep                          x86_64  3.1-6.el8                      rhel-baseos     274 k
+ gzip                          x86_64  1.9-13.el8_5                   rhel-baseos     167 k
+ info                          x86_64  6.5-7.el8                      rhel-baseos     198 k
+ make                          x86_64  1:4.2.1-11.el8                 rhel-baseos     498 k
+ patch                         x86_64  2.7.6-11.el8                   rhel-baseos     138 k
+ redhat-release                x86_64  8.9-0.1.el8                    rhel-baseos      45 k
+ redhat-rpm-config             noarch  131-1.el8                      rhel-appstream   91 k
+ rpm-build                     x86_64  4.14.3-28.el8_9                rhel-appstream  174 k
+ sed                           x86_64  4.5-5.el8                      rhel-baseos     298 k
+ tar                           x86_64  2:1.30-9.el8                   rhel-baseos     839 k
+ unzip                         x86_64  6.0-46.el8                     rhel-baseos     196 k
+ util-linux                    x86_64  2.32.1-44.el8_9.1              rhel-baseos     2.5 M
+ which                         x86_64  2.21-20.el8                    rhel-baseos      50 k
+ xz                            x86_64  5.2.4-4.el8_6                  rhel-baseos     153 k
+Installing dependencies:
+ annobin                       x86_64  11.13-2.el8                    rhel-appstream  972 k
+ ansible-srpm-macros           noarch  1-12.el8                       epel             21 k
+ audit-libs                    x86_64  3.0.7-5.el8                    rhel-baseos     123 k
+ basesystem                    noarch  11-5.el8                       rhel-baseos      11 k
+ binutils                      x86_64  2.30-123.el8                   rhel-baseos     5.8 M
+ brotli                        x86_64  1.0.6-3.el8                    rhel-baseos     323 k
+ bzip2-libs                    x86_64  1.0.6-26.el8                   rhel-baseos      48 k
+ ca-certificates               noarch  2023.2.60_v7.0.306-80.0.el8_8  rhel-baseos     935 k
+ chkconfig                     x86_64  1.19.2-1.el8                   rhel-baseos     199 k
+ coreutils-common              x86_64  8.30-15.el8                    rhel-baseos     2.0 M
+ cpp                           x86_64  8.5.0-20.el8                   rhel-appstream   10 M
+ cracklib                      x86_64  2.9.6-15.el8                   rhel-baseos      93 k
+ cracklib-dicts                x86_64  2.9.6-15.el8                   rhel-baseos     4.0 M
+ crypto-policies               noarch  20230731-1.git3177e06.el8      rhel-baseos      64 k
+ curl                          x86_64  7.61.1-33.el8_9.5              rhel-baseos     354 k
+ cyrus-sasl-lib                x86_64  2.1.27-6.el8_5                 rhel-baseos     123 k
+ dwz                           x86_64  0.12-10.el8                    rhel-appstream  109 k
+ efi-srpm-macros               noarch  3-3.el8                        rhel-appstream   22 k
+ elfutils                      x86_64  0.189-3.el8                    rhel-baseos     553 k
+ elfutils-default-yama-scope   noarch  0.189-3.el8                    rhel-baseos      52 k
+ elfutils-libelf               x86_64  0.189-3.el8                    rhel-baseos     232 k
+ elfutils-libs                 x86_64  0.189-3.el8                    rhel-baseos     303 k
+ expat                         x86_64  2.2.5-11.el8_9.1               rhel-baseos     114 k
+ file                          x86_64  5.33-25.el8                    rhel-baseos      77 k
+ file-libs                     x86_64  5.33-25.el8                    rhel-baseos     544 k
+ filesystem                    x86_64  3.8-6.el8                      rhel-baseos     1.1 M
+ fpc-srpm-macros               noarch  1.3-1.el8                      epel            8.2 k
+ gc                            x86_64  7.6.4-3.el8                    rhel-appstream  109 k
+ gcc-plugin-annobin            x86_64  8.5.0-20.el8                   rhel-appstream   36 k
+ gdb-headless                  x86_64  8.2-20.el8                     rhel-appstream  3.7 M
+ gdbm                          x86_64  1:1.18-2.el8                   rhel-baseos     130 k
+ gdbm-libs                     x86_64  1:1.18-2.el8                   rhel-baseos      60 k
+ ghc-srpm-macros               noarch  1.4.2-7.el8                    rhel-appstream  9.4 k
+ glib2                         x86_64  2.56.4-161.el8                 rhel-baseos     2.5 M
+ glibc                         x86_64  2.28-236.el8_9.13              rhel-baseos     2.2 M
+ glibc-all-langpacks           x86_64  2.28-236.el8_9.13              rhel-baseos      26 M
+ glibc-common                  x86_64  2.28-236.el8_9.13              rhel-baseos     1.0 M
+ glibc-devel                   x86_64  2.28-236.el8_9.13              rhel-baseos      86 k
+ glibc-gconv-extra             x86_64  2.28-236.el8_9.13              rhel-baseos     1.5 M
+ glibc-headers                 x86_64  2.28-236.el8_9.13              rhel-baseos     491 k
+ gmp                           x86_64  1:6.1.2-10.el8                 rhel-baseos     321 k
+ gnupg2                        x86_64  2.2.20-3.el8_6                 rhel-baseos     2.4 M
+ gnutls                        x86_64  3.6.16-8.el8_9.3               rhel-baseos     1.0 M
+ go-srpm-macros                noarch  2-17.el8                       rhel-appstream   13 k
+ guile                         x86_64  5:2.0.14-7.el8                 rhel-appstream  3.5 M
+ ima-evm-utils                 x86_64  1.3.2-12.el8                   rhel-baseos      64 k
+ isl                           x86_64  0.16.1-6.el8                   rhel-appstream  841 k
+ kernel-headers                x86_64  4.18.0-513.24.1.el8_9          rhel-baseos      11 M
+ keyutils-libs                 x86_64  1.5.10-9.el8                   rhel-baseos      34 k
+ krb5-libs                     x86_64  1.18.2-26.el8_9                rhel-baseos     842 k
+ libacl                        x86_64  2.2.53-1.el8                   rhel-baseos      35 k
+ libarchive                    x86_64  3.3.3-5.el8                    rhel-baseos     360 k
+ libassuan                     x86_64  2.5.1-3.el8                    rhel-baseos      83 k
+ libatomic_ops                 x86_64  7.6.2-3.el8                    rhel-appstream   38 k
+ libattr                       x86_64  2.4.48-3.el8                   rhel-baseos      27 k
+ libbabeltrace                 x86_64  1.5.4-4.el8                    rhel-baseos     200 k
+ libblkid                      x86_64  2.32.1-44.el8_9.1              rhel-baseos     221 k
+ libcap                        x86_64  2.48-6.el8_9                   rhel-baseos      74 k
+ libcap-ng                     x86_64  0.7.11-1.el8                   rhel-baseos      33 k
+ libcom_err                    x86_64  1.45.6-5.el8                   rhel-baseos      49 k
+ libcurl                       x86_64  7.61.1-33.el8_9.5              rhel-baseos     304 k
+ libdb                         x86_64  5.3.28-42.el8_4                rhel-baseos     751 k
+ libdb-utils                   x86_64  5.3.28-42.el8_4                rhel-baseos     150 k
+ libfdisk                      x86_64  2.32.1-44.el8_9.1              rhel-baseos     254 k
+ libffi                        x86_64  3.1-24.el8                     rhel-baseos      38 k
+ libgcc                        x86_64  8.5.0-20.el8                   rhel-baseos      81 k
+ libgcrypt                     x86_64  1.8.5-7.el8_6                  rhel-baseos     463 k
+ libgomp                       x86_64  8.5.0-20.el8                   rhel-baseos     208 k
+ libgpg-error                  x86_64  1.31-1.el8                     rhel-baseos     242 k
+ libidn2                       x86_64  2.2.0-1.el8                    rhel-baseos      94 k
+ libipt                        x86_64  1.6.1-8.el8                    rhel-appstream   50 k
+ libksba                       x86_64  1.3.5-9.el8_7                  rhel-baseos     134 k
+ libmount                      x86_64  2.32.1-44.el8_9.1              rhel-baseos     237 k
+ libmpc                        x86_64  1.1.0-9.1.el8                  rhel-appstream   61 k
+ libnghttp2                    x86_64  1.33.0-5.el8_9                 rhel-baseos      78 k
+ libnsl2                       x86_64  1.2.0-2.20180605git4a062cf.el8 rhel-baseos      58 k
+ libpkgconf                    x86_64  1.4.2-1.el8                    rhel-baseos      35 k
+ libpsl                        x86_64  0.20.2-6.el8                   rhel-baseos      61 k
+ libpwquality                  x86_64  1.4.4-6.el8                    rhel-baseos     107 k
+ libselinux                    x86_64  2.9-8.el8                      rhel-baseos     166 k
+ libsemanage                   x86_64  2.9-9.el8_6                    rhel-baseos     168 k
+ libsepol                      x86_64  2.9-3.el8                      rhel-baseos     340 k
+ libsigsegv                    x86_64  2.11-5.el8                     rhel-baseos      30 k
+ libsmartcols                  x86_64  2.32.1-44.el8_9.1              rhel-baseos     180 k
+ libssh                        x86_64  0.9.6-13.el8_9                 rhel-baseos     220 k
+ libssh-config                 noarch  0.9.6-13.el8_9                 rhel-baseos      21 k
+ libstdc++                     x86_64  8.5.0-20.el8                   rhel-baseos     455 k
+ libstdc++-devel               x86_64  8.5.0-20.el8                   rhel-appstream  2.1 M
+ libtasn1                      x86_64  4.13-4.el8_7                   rhel-baseos      76 k
+ libtirpc                      x86_64  1.1.4-8.el8                    rhel-baseos     113 k
+ libtool-ltdl                  x86_64  2.4.6-25.el8                   rhel-baseos      58 k
+ libunistring                  x86_64  0.9.9-3.el8                    rhel-baseos     422 k
+ libusbx                       x86_64  1.0.23-4.el8                   rhel-baseos      74 k
+ libutempter                   x86_64  1.1.6-14.el8                   rhel-baseos      32 k
+ libuuid                       x86_64  2.32.1-44.el8_9.1              rhel-baseos      99 k
+ libverto                      x86_64  0.3.2-2.el8                    rhel-baseos      24 k
+ libxcrypt                     x86_64  4.1.1-6.el8                    rhel-baseos      73 k
+ libxcrypt-devel               x86_64  4.1.1-6.el8                    rhel-baseos      25 k
+ libxml2                       x86_64  2.9.7-18.el8_9                 rhel-baseos     697 k
+ libzstd                       x86_64  1.4.4-1.el8                    rhel-baseos     266 k
+ lua-libs                      x86_64  5.3.4-12.el8                   rhel-baseos     118 k
+ lua-srpm-macros               noarch  1-13.el8                       epel            9.2 k
+ lz4-libs                      x86_64  1.8.3-3.el8_4                  rhel-baseos      66 k
+ mpfr                          x86_64  3.1.6-1.el8                    rhel-baseos     221 k
+ ncurses                       x86_64  6.1-10.20180224.el8            rhel-baseos     387 k
+ ncurses-base                  noarch  6.1-10.20180224.el8            rhel-baseos      81 k
+ ncurses-libs                  x86_64  6.1-10.20180224.el8            rhel-baseos     334 k
+ nettle                        x86_64  3.4.1-7.el8                    rhel-baseos     301 k
+ npth                          x86_64  1.5-4.el8                      rhel-baseos      26 k
+ ocaml-srpm-macros             noarch  5-4.el8                        rhel-appstream  9.5 k
+ openblas-srpm-macros          noarch  2-2.el8                        rhel-appstream  8.0 k
+ openldap                      x86_64  2.4.46-18.el8                  rhel-baseos     352 k
+ openssl-libs                  x86_64  1:1.1.1k-12.el8_9              rhel-baseos     1.5 M
+ p11-kit                       x86_64  0.23.22-1.el8                  rhel-baseos     324 k
+ p11-kit-trust                 x86_64  0.23.22-1.el8                  rhel-baseos     137 k
+ pam                           x86_64  1.3.1-27.el8                   rhel-baseos     746 k
+ pcre                          x86_64  8.42-6.el8                     rhel-baseos     211 k
+ pcre2                         x86_64  10.32-3.el8_6                  rhel-baseos     247 k
+ perl-srpm-macros              noarch  1-25.el8                       rhel-appstream   11 k
+ pkgconf                       x86_64  1.4.2-1.el8                    rhel-baseos      38 k
+ pkgconf-m4                    noarch  1.4.2-1.el8                    rhel-baseos      17 k
+ pkgconf-pkg-config            x86_64  1.4.2-1.el8                    rhel-baseos      15 k
+ platform-python               x86_64  3.6.8-56.el8_9.3               rhel-baseos      87 k
+ platform-python-setuptools    noarch  39.2.0-7.el8                   rhel-baseos     632 k
+ popt                          x86_64  1.18-1.el8                     rhel-baseos      61 k
+ publicsuffix-list-dafsa       noarch  20180723-1.el8                 rhel-baseos      56 k
+ python-rpm-macros             noarch  3-45.el8                       rhel-appstream   16 k
+ python-srpm-macros            noarch  3-45.el8                       rhel-appstream   16 k
+ python3-libs                  x86_64  3.6.8-56.el8_9.3               rhel-baseos     7.8 M
+ python3-pip-wheel             noarch  9.0.3-23.el8_9.1               rhel-baseos     866 k
+ python3-rpm-macros            noarch  3-45.el8                       rhel-appstream   15 k
+ python3-setuptools-wheel      noarch  39.2.0-7.el8                   rhel-baseos     289 k
+ qt5-srpm-macros               noarch  5.15.3-1.el8                   rhel-appstream   11 k
+ readline                      x86_64  7.0-10.el8                     rhel-baseos     199 k
+ rpm                           x86_64  4.14.3-28.el8_9                rhel-baseos     544 k
+ rpm-build-libs                x86_64  4.14.3-28.el8_9                rhel-baseos     157 k
+ rpm-libs                      x86_64  4.14.3-28.el8_9                rhel-baseos     348 k
+ rust-srpm-macros              noarch  5-2.el8                        rhel-appstream  9.3 k
+ setup                         noarch  2.12.2-9.el8                   rhel-baseos     181 k
+ shadow-utils                  x86_64  2:4.6-19.el8                   rhel-baseos     1.2 M
+ sqlite-libs                   x86_64  3.26.0-19.el8_9                rhel-baseos     581 k
+ systemd-libs                  x86_64  239-78.el8                     rhel-baseos     1.1 M
+ tpm2-tss                      x86_64  2.3.2-5.el8                    rhel-baseos     275 k
+ tzdata                        noarch  2024a-1.el8                    rhel-baseos     475 k
+ xz-libs                       x86_64  5.2.4-4.el8_6                  rhel-baseos      94 k
+ zip                           x86_64  3.0-23.el8                     rhel-baseos     270 k
+ zlib                          x86_64  1.2.11-25.el8                  rhel-baseos     103 k
+ zstd                          x86_64  1.4.4-1.el8                    rhel-appstream  393 k
+
+Transaction Summary
+===========================================================================================
+Install  172 Packages
+
+Total download size: 163 M
+Installed size: 813 M
+Downloading Packages:
+(1/172): bzip2-libs-1.0.6-26.el8.x86_64.rpm     506 kB/s |  48 kB     00:00    
+(2/172): bzip2-1.0.6-26.el8.x86_64.rpm          622 kB/s |  60 kB     00:00    
+(3/172): cracklib-2.9.6-15.el8.x86_64.rpm       831 kB/s |  93 kB     00:00    
+(4/172): libassuan-2.5.1-3.el8.x86_64.rpm       1.4 MB/s |  83 kB     00:00    
+(5/172): grep-3.1-6.el8.x86_64.rpm              3.6 MB/s | 274 kB     00:00    
+(6/172): cracklib-dicts-2.9.6-15.el8.x86_64.rpm  46 MB/s | 4.0 MB     00:00    
+(7/172): libsigsegv-2.11-5.el8.x86_64.rpm       697 kB/s |  30 kB     00:00    
+(8/172): libattr-2.4.48-3.el8.x86_64.rpm        526 kB/s |  27 kB     00:00    
+(9/172): libutempter-1.1.6-14.el8.x86_64.rpm    434 kB/s |  32 kB     00:00    
+(10/172): mpfr-3.1.6-1.el8.x86_64.rpm           3.0 MB/s | 221 kB     00:00    
+(11/172): libunistring-0.9.9-3.el8.x86_64.rpm   3.5 MB/s | 422 kB     00:00    
+(12/172): npth-1.5-4.el8.x86_64.rpm             527 kB/s |  26 kB     00:00    
+(13/172): pkgconf-1.4.2-1.el8.x86_64.rpm        852 kB/s |  38 kB     00:00    
+(14/172): pkgconf-pkg-config-1.4.2-1.el8.x86_64 302 kB/s |  15 kB     00:00    
+(15/172): basesystem-11-5.el8.noarch.rpm        234 kB/s |  11 kB     00:00    
+(16/172): readline-7.0-10.el8.x86_64.rpm        3.2 MB/s | 199 kB     00:00    
+(17/172): zip-3.0-23.el8.x86_64.rpm             4.3 MB/s | 270 kB     00:00    
+(18/172): libacl-2.2.53-1.el8.x86_64.rpm        744 kB/s |  35 kB     00:00    
+(19/172): libnsl2-1.2.0-2.20180605git4a062cf.el 1.3 MB/s |  58 kB     00:00    
+(20/172): libpkgconf-1.4.2-1.el8.x86_64.rpm     818 kB/s |  35 kB     00:00    
+(21/172): libgpg-error-1.31-1.el8.x86_64.rpm    2.8 MB/s | 242 kB     00:00    
+(22/172): publicsuffix-list-dafsa-20180723-1.el 1.2 MB/s |  56 kB     00:00    
+(23/172): pkgconf-m4-1.4.2-1.el8.noarch.rpm     320 kB/s |  17 kB     00:00    
+(24/172): libtool-ltdl-2.4.6-25.el8.x86_64.rpm  580 kB/s |  58 kB     00:00    
+(25/172): gmp-6.1.2-10.el8.x86_64.rpm           6.2 MB/s | 321 kB     00:00    
+(26/172): diffutils-3.6-6.el8.x86_64.rpm        6.0 MB/s | 359 kB     00:00    
+(27/172): patch-2.7.6-11.el8.x86_64.rpm         2.7 MB/s | 138 kB     00:00    
+(28/172): libusbx-1.0.23-4.el8.x86_64.rpm       1.0 MB/s |  74 kB     00:00    
+(29/172): libzstd-1.4.4-1.el8.x86_64.rpm        5.5 MB/s | 266 kB     00:00    
+(30/172): libidn2-2.2.0-1.el8.x86_64.rpm        636 kB/s |  94 kB     00:00    
+(31/172): libpsl-0.20.2-6.el8.x86_64.rpm        1.2 MB/s |  61 kB     00:00    
+(32/172): p11-kit-trust-0.23.22-1.el8.x86_64.rp 2.9 MB/s | 137 kB     00:00    
+(33/172): popt-1.18-1.el8.x86_64.rpm            943 kB/s |  61 kB     00:00    
+(34/172): brotli-1.0.6-3.el8.x86_64.rpm         5.5 MB/s | 323 kB     00:00    
+(35/172): ima-evm-utils-1.3.2-12.el8.x86_64.rpm 914 kB/s |  64 kB     00:00    
+(36/172): lz4-libs-1.8.3-3.el8_4.x86_64.rpm     1.5 MB/s |  66 kB     00:00    
+(37/172): p11-kit-0.23.22-1.el8.x86_64.rpm      6.3 MB/s | 324 kB     00:00    
+(38/172): filesystem-3.8-6.el8.x86_64.rpm        22 MB/s | 1.1 MB     00:00    
+(39/172): libdb-5.3.28-42.el8_4.x86_64.rpm       13 MB/s | 751 kB     00:00    
+(40/172): libcap-ng-0.7.11-1.el8.x86_64.rpm     354 kB/s |  33 kB     00:00    
+(41/172): libdb-utils-5.3.28-42.el8_4.x86_64.rp 2.6 MB/s | 150 kB     00:00    
+(42/172): libxcrypt-4.1.1-6.el8.x86_64.rpm      1.4 MB/s |  73 kB     00:00    
+(43/172): libxcrypt-devel-4.1.1-6.el8.x86_64.rp 378 kB/s |  25 kB     00:00    
+(44/172): nettle-3.4.1-7.el8.x86_64.rpm         3.6 MB/s | 301 kB     00:00    
+(45/172): openldap-2.4.46-18.el8.x86_64.rpm     4.8 MB/s | 352 kB     00:00    
+(46/172): cyrus-sasl-lib-2.1.27-6.el8_5.x86_64. 2.8 MB/s | 123 kB     00:00    
+(47/172): gzip-1.9-13.el8_5.x86_64.rpm          3.2 MB/s | 167 kB     00:00    
+(48/172): pcre-8.42-6.el8.x86_64.rpm            2.2 MB/s | 211 kB     00:00    
+(49/172): keyutils-libs-1.5.10-9.el8.x86_64.rpm 594 kB/s |  34 kB     00:00    
+(50/172): libsepol-2.9-3.el8.x86_64.rpm         7.1 MB/s | 340 kB     00:00    
+(51/172): cpio-2.12-11.el8.x86_64.rpm           5.8 MB/s | 266 kB     00:00    
+(52/172): lua-libs-5.3.4-12.el8.x86_64.rpm      1.3 MB/s | 118 kB     00:00    
+(53/172): info-6.5-7.el8.x86_64.rpm             4.2 MB/s | 198 kB     00:00    
+(54/172): gawk-4.2.1-4.el8.x86_64.rpm            14 MB/s | 1.1 MB     00:00    
+(55/172): make-4.2.1-11.el8.x86_64.rpm          9.2 MB/s | 498 kB     00:00    
+(56/172): unzip-6.0-46.el8.x86_64.rpm           4.4 MB/s | 196 kB     00:00    
+(57/172): sed-4.5-5.el8.x86_64.rpm              4.6 MB/s | 298 kB     00:00    
+(58/172): xz-libs-5.2.4-4.el8_6.x86_64.rpm      2.1 MB/s |  94 kB     00:00    
+(59/172): xz-5.2.4-4.el8_6.x86_64.rpm           2.3 MB/s | 153 kB     00:00    
+(60/172): bash-4.4.20-4.el8_6.x86_64.rpm         26 MB/s | 1.5 MB     00:00    
+(61/172): gdbm-libs-1.18-2.el8.x86_64.rpm       1.1 MB/s |  60 kB     00:00    
+(62/172): libbabeltrace-1.5.4-4.el8.x86_64.rpm  4.1 MB/s | 200 kB     00:00    
+(63/172): libcom_err-1.45.6-5.el8.x86_64.rpm    779 kB/s |  49 kB     00:00    
+(64/172): libgcrypt-1.8.5-7.el8_6.x86_64.rpm    9.0 MB/s | 463 kB     00:00    
+(65/172): gnupg2-2.2.20-3.el8_6.x86_64.rpm       17 MB/s | 2.4 MB     00:00    
+(66/172): libsemanage-2.9-9.el8_6.x86_64.rpm    3.6 MB/s | 168 kB     00:00    
+(67/172): libtirpc-1.1.4-8.el8.x86_64.rpm       2.2 MB/s | 113 kB     00:00    
+(68/172): libverto-0.3.2-2.el8.x86_64.rpm       315 kB/s |  24 kB     00:00    
+(69/172): pcre2-10.32-3.el8_6.x86_64.rpm        3.9 MB/s | 247 kB     00:00    
+(70/172): gdbm-1.18-2.el8.x86_64.rpm            2.7 MB/s | 130 kB     00:00    
+(71/172): coreutils-8.30-15.el8.x86_64.rpm       24 MB/s | 1.2 MB     00:00    
+(72/172): libksba-1.3.5-9.el8_7.x86_64.rpm      2.0 MB/s | 134 kB     00:00    
+(73/172): libtasn1-4.13-4.el8_7.x86_64.rpm      1.2 MB/s |  76 kB     00:00    
+(74/172): coreutils-common-8.30-15.el8.x86_64.r  35 MB/s | 2.0 MB     00:00    
+(75/172): libarchive-3.3.3-5.el8.x86_64.rpm     6.8 MB/s | 360 kB     00:00    
+(76/172): glib2-2.56.4-161.el8.x86_64.rpm        27 MB/s | 2.5 MB     00:00    
+(77/172): libffi-3.1-24.el8.x86_64.rpm          554 kB/s |  38 kB     00:00    
+(78/172): libpwquality-1.4.4-6.el8.x86_64.rpm   1.5 MB/s | 107 kB     00:00    
+(79/172): libselinux-2.9-8.el8.x86_64.rpm       3.3 MB/s | 166 kB     00:00    
+(80/172): platform-python-setuptools-39.2.0-7.e  12 MB/s | 632 kB     00:00    
+(81/172): python3-setuptools-wheel-39.2.0-7.el8 5.4 MB/s | 289 kB     00:00    
+(82/172): tar-1.30-9.el8.x86_64.rpm              16 MB/s | 839 kB     00:00    
+(83/172): setup-2.12.2-9.el8.noarch.rpm         1.8 MB/s | 181 kB     00:00    
+(84/172): audit-libs-3.0.7-5.el8.x86_64.rpm     1.6 MB/s | 123 kB     00:00    
+(85/172): chkconfig-1.19.2-1.el8.x86_64.rpm     2.9 MB/s | 199 kB     00:00    
+(86/172): binutils-2.30-123.el8.x86_64.rpm       57 MB/s | 5.8 MB     00:00    
+(87/172): crypto-policies-20230731-1.git3177e06 1.0 MB/s |  64 kB     00:00    
+(88/172): ca-certificates-2023.2.60_v7.0.306-80 5.3 MB/s | 935 kB     00:00    
+(89/172): elfutils-0.189-3.el8.x86_64.rpm       6.4 MB/s | 553 kB     00:00    
+(90/172): elfutils-libs-0.189-3.el8.x86_64.rpm  6.3 MB/s | 303 kB     00:00    
+(91/172): file-5.33-25.el8.x86_64.rpm           1.1 MB/s |  77 kB     00:00    
+(92/172): elfutils-libelf-0.189-3.el8.x86_64.rp 2.3 MB/s | 232 kB     00:00    
+(93/172): findutils-4.6.0-21.el8.x86_64.rpm      11 MB/s | 527 kB     00:00    
+(94/172): file-libs-5.33-25.el8.x86_64.rpm      5.4 MB/s | 544 kB     00:00    
+(95/172): libgomp-8.5.0-20.el8.x86_64.rpm       4.0 MB/s | 208 kB     00:00    
+(96/172): libgcc-8.5.0-20.el8.x86_64.rpm        789 kB/s |  81 kB     00:00    
+(97/172): libstdc++-8.5.0-20.el8.x86_64.rpm     5.4 MB/s | 455 kB     00:00    
+(98/172): ncurses-libs-6.1-10.20180224.el8.x86_ 4.0 MB/s | 334 kB     00:00    
+(99/172): libnghttp2-1.33.0-5.el8_9.x86_64.rpm  577 kB/s |  78 kB     00:00    
+(100/172): pam-1.3.1-27.el8.x86_64.rpm          8.8 MB/s | 746 kB     00:00    
+(101/172): which-2.21-20.el8.x86_64.rpm         507 kB/s |  50 kB     00:00    
+(102/172): elfutils-default-yama-scope-0.189-3. 667 kB/s |  52 kB     00:00    
+(103/172): krb5-libs-1.18.2-26.el8_9.x86_64.rpm  16 MB/s | 842 kB     00:00    
+(104/172): ncurses-6.1-10.20180224.el8.x86_64.r 7.3 MB/s | 387 kB     00:00    
+(105/172): libcap-2.48-6.el8_9.x86_64.rpm       749 kB/s |  74 kB     00:00    
+(106/172): ncurses-base-6.1-10.20180224.el8.noa 1.1 MB/s |  81 kB     00:00    
+(107/172): openssl-libs-1.1.1k-12.el8_9.x86_64.  22 MB/s | 1.5 MB     00:00    
+(108/172): libxml2-2.9.7-18.el8_9.x86_64.rpm    3.8 MB/s | 697 kB     00:00    
+(109/172): platform-python-3.6.8-56.el8_9.3.x86 1.5 MB/s |  87 kB     00:00    
+(110/172): redhat-release-8.9-0.1.el8.x86_64.rp 894 kB/s |  45 kB     00:00    
+(111/172): shadow-utils-4.6-19.el8.x86_64.rpm    22 MB/s | 1.2 MB     00:00    
+(112/172): systemd-libs-239-78.el8.x86_64.rpm    18 MB/s | 1.1 MB     00:00    
+(113/172): sqlite-libs-3.26.0-19.el8_9.x86_64.r 5.4 MB/s | 581 kB     00:00    
+(114/172): zlib-1.2.11-25.el8.x86_64.rpm        2.2 MB/s | 103 kB     00:00    
+(115/172): tpm2-tss-2.3.2-5.el8.x86_64.rpm      5.2 MB/s | 275 kB     00:00    
+(116/172): libssh-config-0.9.6-13.el8_9.noarch. 486 kB/s |  21 kB     00:00    
+(117/172): libssh-0.9.6-13.el8_9.x86_64.rpm     4.5 MB/s | 220 kB     00:00    
+(118/172): python3-libs-3.6.8-56.el8_9.3.x86_64  27 MB/s | 7.8 MB     00:00    
+(119/172): rpm-build-libs-4.14.3-28.el8_9.x86_6 3.5 MB/s | 157 kB     00:00    
+(120/172): rpm-4.14.3-28.el8_9.x86_64.rpm       8.3 MB/s | 544 kB     00:00    
+(121/172): curl-7.61.1-33.el8_9.5.x86_64.rpm    7.5 MB/s | 354 kB     00:00    
+(122/172): tzdata-2024a-1.el8.noarch.rpm        4.2 MB/s | 475 kB     00:00    
+(123/172): rpm-libs-4.14.3-28.el8_9.x86_64.rpm  2.5 MB/s | 348 kB     00:00    
+(124/172): kernel-headers-4.18.0-513.24.1.el8_9  83 MB/s |  11 MB     00:00    
+(125/172): libcurl-7.61.1-33.el8_9.5.x86_64.rpm 2.6 MB/s | 304 kB     00:00    
+(126/172): libfdisk-2.32.1-44.el8_9.1.x86_64.rp 5.5 MB/s | 254 kB     00:00    
+(127/172): libblkid-2.32.1-44.el8_9.1.x86_64.rp 1.6 MB/s | 221 kB     00:00    
+(128/172): libmount-2.32.1-44.el8_9.1.x86_64.rp 4.9 MB/s | 237 kB     00:00    
+(129/172): libuuid-2.32.1-44.el8_9.1.x86_64.rpm 1.8 MB/s |  99 kB     00:00    
+(130/172): python3-pip-wheel-9.0.3-23.el8_9.1.n  17 MB/s | 866 kB     00:00    
+(131/172): libsmartcols-2.32.1-44.el8_9.1.x86_6 2.0 MB/s | 180 kB     00:00    
+(132/172): util-linux-2.32.1-44.el8_9.1.x86_64.  43 MB/s | 2.5 MB     00:00    
+(133/172): expat-2.2.5-11.el8_9.1.x86_64.rpm    2.6 MB/s | 114 kB     00:00    
+(134/172): gnutls-3.6.16-8.el8_9.3.x86_64.rpm    17 MB/s | 1.0 MB     00:00    
+(135/172): glibc-2.28-236.el8_9.13.x86_64.rpm    29 MB/s | 2.2 MB     00:00    
+(136/172): glibc-common-2.28-236.el8_9.13.x86_6  19 MB/s | 1.0 MB     00:00    
+(137/172): glibc-devel-2.28-236.el8_9.13.x86_64 1.5 MB/s |  86 kB     00:00    
+(138/172): glibc-gconv-extra-2.28-236.el8_9.13.  28 MB/s | 1.5 MB     00:00    
+(139/172): glibc-all-langpacks-2.28-236.el8_9.1 131 MB/s |  26 MB     00:00    
+(140/172): ghc-srpm-macros-1.4.2-7.el8.noarch.r 144 kB/s | 9.4 kB     00:00    
+(141/172): glibc-headers-2.28-236.el8_9.13.x86_ 4.9 MB/s | 491 kB     00:00    
+(142/172): openblas-srpm-macros-2-2.el8.noarch. 103 kB/s | 8.0 kB     00:00    
+(143/172): ocaml-srpm-macros-5-4.el8.noarch.rpm  96 kB/s | 9.5 kB     00:00    
+(144/172): perl-srpm-macros-1-25.el8.noarch.rpm 151 kB/s |  11 kB     00:00    
+(145/172): libatomic_ops-7.6.2-3.el8.x86_64.rpm 856 kB/s |  38 kB     00:00    
+(146/172): rust-srpm-macros-5-2.el8.noarch.rpm  129 kB/s | 9.3 kB     00:00    
+(147/172): isl-0.16.1-6.el8.x86_64.rpm           17 MB/s | 841 kB     00:00    
+(148/172): gc-7.6.4-3.el8.x86_64.rpm            785 kB/s | 109 kB     00:00    
+(149/172): libipt-1.6.1-8.el8.x86_64.rpm        930 kB/s |  50 kB     00:00    
+(150/172): guile-2.0.14-7.el8.x86_64.rpm         26 MB/s | 3.5 MB     00:00    
+(151/172): libmpc-1.1.0-9.1.el8.x86_64.rpm      1.3 MB/s |  61 kB     00:00    
+(152/172): zstd-1.4.4-1.el8.x86_64.rpm          5.0 MB/s | 393 kB     00:00    
+(153/172): go-srpm-macros-2-17.el8.noarch.rpm   274 kB/s |  13 kB     00:00    
+(154/172): efi-srpm-macros-3-3.el8.noarch.rpm   297 kB/s |  22 kB     00:00    
+(155/172): dwz-0.12-10.el8.x86_64.rpm           2.3 MB/s | 109 kB     00:00    
+(156/172): python-rpm-macros-3-45.el8.noarch.rp 337 kB/s |  16 kB     00:00    
+(157/172): qt5-srpm-macros-5.15.3-1.el8.noarch. 158 kB/s |  11 kB     00:00    
+(158/172): python3-rpm-macros-3-45.el8.noarch.r 272 kB/s |  15 kB     00:00    
+(159/172): redhat-rpm-config-131-1.el8.noarch.r 1.8 MB/s |  91 kB     00:00    
+(160/172): python-srpm-macros-3-45.el8.noarch.r 360 kB/s |  16 kB     00:00    
+(161/172): gcc-plugin-annobin-8.5.0-20.el8.x86_ 638 kB/s |  36 kB     00:00    
+(162/172): annobin-11.13-2.el8.x86_64.rpm       6.9 MB/s | 972 kB     00:00    
+(163/172): cpp-8.5.0-20.el8.x86_64.rpm           46 MB/s |  10 MB     00:00    
+(164/172): gcc-c++-8.5.0-20.el8.x86_64.rpm       34 MB/s |  12 MB     00:00    
+(165/172): gcc-8.5.0-20.el8.x86_64.rpm           91 MB/s |  23 MB     00:00    
+(166/172): gdb-headless-8.2-20.el8.x86_64.rpm    21 MB/s | 3.7 MB     00:00    
+(167/172): ansible-srpm-macros-1-12.el8.noarch. 1.8 MB/s |  21 kB     00:00    
+(168/172): epel-rpm-macros-8-41.noarch.rpm      6.8 MB/s |  27 kB     00:00    
+(169/172): fpc-srpm-macros-1.3-1.el8.noarch.rpm 3.5 MB/s | 8.2 kB     00:00    
+(170/172): lua-srpm-macros-1-13.el8.noarch.rpm  5.2 MB/s | 9.2 kB     00:00    
+(171/172): libstdc++-devel-8.5.0-20.el8.x86_64.  11 MB/s | 2.1 MB     00:00    
+(172/172): rpm-build-4.14.3-28.el8_9.x86_64.rpm 697 kB/s | 174 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                            36 MB/s | 163 MB     00:04     
+Red Hat Enterprise Linux - BaseOS               3.1 MB/s | 3.1 kB     00:00    
+Importing GPG key 0xFD431D51:
+ Userid     : "Red Hat, Inc. (release key 2) <security@redhat.com>"
+ Fingerprint: 567E 347A D004 4ADE 55BA 8A5F 199E 2F91 FD43 1D51
+ From       : /usr/share/distribution-gpg-keys/redhat/RPM-GPG-KEY-redhat8-release
+Key imported successfully
+Importing GPG key 0x2FA658E0:
+ Userid     : "Red Hat, Inc. (auxiliary key) <security@redhat.com>"
+ Fingerprint: 43A6 E49C 4A38 F4BE 9ABF 2A53 4568 9C88 2FA6 58E0
+ From       : /usr/share/distribution-gpg-keys/redhat/RPM-GPG-KEY-redhat8-release
+Key imported successfully
+Extra Packages for Enterprise Linux 8 - x86_64  1.6 MB/s | 1.6 kB     00:00    
+Importing GPG key 0x2F86D6A1:
+ Userid     : "Fedora EPEL (8) <epel@fedoraproject.org>"
+ Fingerprint: 94E2 79EB 8D8F 25B2 1810 ADF1 21EA 45AB 2F86 D6A1
+ From       : /usr/share/distribution-gpg-keys/epel/RPM-GPG-KEY-EPEL-8
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Running scriptlet: filesystem-3.8-6.el8.x86_64                            1/1 
+  Preparing        :                                                        1/1 
+  Installing       : libgcc-8.5.0-20.el8.x86_64                           1/172 
+  Running scriptlet: libgcc-8.5.0-20.el8.x86_64                           1/172 
+  Installing       : python-srpm-macros-3-45.el8.noarch                   2/172 
+  Installing       : crypto-policies-20230731-1.git3177e06.el8.noarch     3/172 
+  Running scriptlet: crypto-policies-20230731-1.git3177e06.el8.noarch     3/172 
+  Installing       : python-rpm-macros-3-45.el8.noarch                    4/172 
+  Installing       : python3-pip-wheel-9.0.3-23.el8_9.1.noarch            5/172 
+  Installing       : redhat-release-8.9-0.1.el8.x86_64                    6/172 
+  Installing       : setup-2.12.2-9.el8.noarch                            7/172 
+warning: /etc/hosts created as /etc/hosts.rpmnew
+
+  Running scriptlet: setup-2.12.2-9.el8.noarch                            7/172 
+  Installing       : filesystem-3.8-6.el8.x86_64                          8/172 
+  Installing       : python3-setuptools-wheel-39.2.0-7.el8.noarch         9/172 
+  Installing       : basesystem-11-5.el8.noarch                          10/172 
+  Installing       : python3-rpm-macros-3-45.el8.noarch                  11/172 
+  Installing       : fpc-srpm-macros-1.3-1.el8.noarch                    12/172 
+  Installing       : ansible-srpm-macros-1-12.el8.noarch                 13/172 
+  Installing       : qt5-srpm-macros-5.15.3-1.el8.noarch                 14/172 
+  Installing       : go-srpm-macros-2-17.el8.noarch                      15/172 
+  Installing       : rust-srpm-macros-5-2.el8.noarch                     16/172 
+  Installing       : perl-srpm-macros-1-25.el8.noarch                    17/172 
+  Installing       : openblas-srpm-macros-2-2.el8.noarch                 18/172 
+  Installing       : ocaml-srpm-macros-5-4.el8.noarch                    19/172 
+  Installing       : ghc-srpm-macros-1.4.2-7.el8.noarch                  20/172 
+  Installing       : kernel-headers-4.18.0-513.24.1.el8_9.x86_64         21/172 
+  Installing       : tzdata-2024a-1.el8.noarch                           22/172 
+  Installing       : libssh-config-0.9.6-13.el8_9.noarch                 23/172 
+  Installing       : ncurses-base-6.1-10.20180224.el8.noarch             24/172 
+  Installing       : pcre2-10.32-3.el8_6.x86_64                          25/172 
+  Installing       : libselinux-2.9-8.el8.x86_64                         26/172 
+  Installing       : ncurses-libs-6.1-10.20180224.el8.x86_64             27/172 
+  Installing       : glibc-all-langpacks-2.28-236.el8_9.13.x86_64        28/172 
+  Installing       : glibc-common-2.28-236.el8_9.13.x86_64               29/172 
+  Installing       : glibc-gconv-extra-2.28-236.el8_9.13.x86_64          30/172 
+  Running scriptlet: glibc-gconv-extra-2.28-236.el8_9.13.x86_64          30/172 
+  Running scriptlet: glibc-2.28-236.el8_9.13.x86_64                      31/172 
+  Installing       : glibc-2.28-236.el8_9.13.x86_64                      31/172 
+  Running scriptlet: glibc-2.28-236.el8_9.13.x86_64                      31/172 
+  Installing       : bash-4.4.20-4.el8_6.x86_64                          32/172 
+  Running scriptlet: bash-4.4.20-4.el8_6.x86_64                          32/172 
+  Installing       : libsepol-2.9-3.el8.x86_64                           33/172 
+  Running scriptlet: libsepol-2.9-3.el8.x86_64                           33/172 
+  Installing       : zlib-1.2.11-25.el8.x86_64                           34/172 
+  Installing       : info-6.5-7.el8.x86_64                               35/172 
+  Installing       : bzip2-libs-1.0.6-26.el8.x86_64                      36/172 
+  Installing       : xz-libs-5.2.4-4.el8_6.x86_64                        37/172 
+  Installing       : gmp-1:6.1.2-10.el8.x86_64                           38/172 
+  Running scriptlet: gmp-1:6.1.2-10.el8.x86_64                           38/172 
+  Installing       : libstdc++-8.5.0-20.el8.x86_64                       39/172 
+  Running scriptlet: libstdc++-8.5.0-20.el8.x86_64                       39/172 
+  Installing       : libzstd-1.4.4-1.el8.x86_64                          40/172 
+  Installing       : elfutils-libelf-0.189-3.el8.x86_64                  41/172 
+  Installing       : libxcrypt-4.1.1-6.el8.x86_64                        42/172 
+  Installing       : mpfr-3.1.6-1.el8.x86_64                             43/172 
+  Running scriptlet: mpfr-3.1.6-1.el8.x86_64                             43/172 
+  Installing       : readline-7.0-10.el8.x86_64                          44/172 
+  Running scriptlet: readline-7.0-10.el8.x86_64                          44/172 
+  Installing       : sqlite-libs-3.26.0-19.el8_9.x86_64                  45/172 
+  Installing       : popt-1.18-1.el8.x86_64                              46/172 
+  Installing       : libcap-2.48-6.el8_9.x86_64                          47/172 
+  Installing       : libcom_err-1.45.6-5.el8.x86_64                      48/172 
+  Running scriptlet: libcom_err-1.45.6-5.el8.x86_64                      48/172 
+  Installing       : libuuid-2.32.1-44.el8_9.1.x86_64                    49/172 
+  Running scriptlet: libuuid-2.32.1-44.el8_9.1.x86_64                    49/172 
+  Installing       : chkconfig-1.19.2-1.el8.x86_64                       50/172 
+  Installing       : libunistring-0.9.9-3.el8.x86_64                     51/172 
+  Installing       : libattr-2.4.48-3.el8.x86_64                         52/172 
+  Installing       : libacl-2.2.53-1.el8.x86_64                          53/172 
+  Installing       : sed-4.5-5.el8.x86_64                                54/172 
+  Running scriptlet: sed-4.5-5.el8.x86_64                                54/172 
+  Installing       : libgpg-error-1.31-1.el8.x86_64                      55/172 
+  Installing       : lua-libs-5.3.4-12.el8.x86_64                        56/172 
+  Installing       : libffi-3.1-24.el8.x86_64                            57/172 
+  Installing       : p11-kit-0.23.22-1.el8.x86_64                        58/172 
+  Installing       : libidn2-2.2.0-1.el8.x86_64                          59/172 
+  Installing       : libmpc-1.1.0-9.1.el8.x86_64                         60/172 
+  Installing       : file-libs-5.33-25.el8.x86_64                        61/172 
+  Installing       : file-5.33-25.el8.x86_64                             62/172 
+  Installing       : libgcrypt-1.8.5-7.el8_6.x86_64                      63/172 
+  Running scriptlet: libgcrypt-1.8.5-7.el8_6.x86_64                      63/172 
+  Installing       : unzip-6.0-46.el8.x86_64                             64/172 
+  Installing       : findutils-1:4.6.0-21.el8.x86_64                     65/172 
+  Running scriptlet: findutils-1:4.6.0-21.el8.x86_64                     65/172 
+  Installing       : elfutils-default-yama-scope-0.189-3.el8.noarch      66/172 
+  Running scriptlet: elfutils-default-yama-scope-0.189-3.el8.noarch      66/172 
+  Installing       : elfutils-libs-0.189-3.el8.x86_64                    67/172 
+  Running scriptlet: glibc-headers-2.28-236.el8_9.13.x86_64              68/172 
+  Installing       : glibc-headers-2.28-236.el8_9.13.x86_64              68/172 
+  Installing       : lz4-libs-1.8.3-3.el8_4.x86_64                       69/172 
+  Installing       : libcap-ng-0.7.11-1.el8.x86_64                       70/172 
+  Installing       : audit-libs-3.0.7-5.el8.x86_64                       71/172 
+  Installing       : pcre-8.42-6.el8.x86_64                              72/172 
+  Installing       : grep-3.1-6.el8.x86_64                               73/172 
+  Running scriptlet: grep-3.1-6.el8.x86_64                               73/172 
+  Installing       : keyutils-libs-1.5.10-9.el8.x86_64                   74/172 
+  Installing       : gdbm-libs-1:1.18-2.el8.x86_64                       75/172 
+  Installing       : libtasn1-4.13-4.el8_7.x86_64                        76/172 
+  Running scriptlet: libtasn1-4.13-4.el8_7.x86_64                        76/172 
+  Installing       : p11-kit-trust-0.23.22-1.el8.x86_64                  77/172 
+  Running scriptlet: p11-kit-trust-0.23.22-1.el8.x86_64                  77/172 
+  Installing       : expat-2.2.5-11.el8_9.1.x86_64                       78/172 
+  Installing       : gdbm-1:1.18-2.el8.x86_64                            79/172 
+  Installing       : xz-5.2.4-4.el8_6.x86_64                             80/172 
+  Installing       : libsemanage-2.9-9.el8_6.x86_64                      81/172 
+  Installing       : elfutils-0.189-3.el8.x86_64                         82/172 
+  Installing       : zip-3.0-23.el8.x86_64                               83/172 
+  Installing       : cpp-8.5.0-20.el8.x86_64                             84/172 
+  Running scriptlet: cpp-8.5.0-20.el8.x86_64                             84/172 
+  Installing       : libassuan-2.5.1-3.el8.x86_64                        85/172 
+  Installing       : libksba-1.3.5-9.el8_7.x86_64                        86/172 
+  Installing       : tar-2:1.30-9.el8.x86_64                             87/172 
+  Running scriptlet: tar-2:1.30-9.el8.x86_64                             87/172 
+  Installing       : patch-2.7.6-11.el8.x86_64                           88/172 
+  Installing       : dwz-0.12-10.el8.x86_64                              89/172 
+  Installing       : zstd-1.4.4-1.el8.x86_64                             90/172 
+  Installing       : libstdc++-devel-8.5.0-20.el8.x86_64                 91/172 
+  Installing       : nettle-3.4.1-7.el8.x86_64                           92/172 
+  Running scriptlet: nettle-3.4.1-7.el8.x86_64                           92/172 
+  Installing       : gnutls-3.6.16-8.el8_9.3.x86_64                      93/172 
+  Installing       : isl-0.16.1-6.el8.x86_64                             94/172 
+  Running scriptlet: isl-0.16.1-6.el8.x86_64                             94/172 
+  Installing       : libxml2-2.9.7-18.el8_9.x86_64                       95/172 
+  Installing       : bzip2-1.0.6-26.el8.x86_64                           96/172 
+  Installing       : diffutils-3.6-6.el8.x86_64                          97/172 
+  Running scriptlet: diffutils-3.6-6.el8.x86_64                          97/172 
+  Installing       : coreutils-common-8.30-15.el8.x86_64                 98/172 
+  Running scriptlet: coreutils-common-8.30-15.el8.x86_64                 98/172 
+  Installing       : libgomp-8.5.0-20.el8.x86_64                         99/172 
+  Running scriptlet: libgomp-8.5.0-20.el8.x86_64                         99/172 
+  Installing       : libsigsegv-2.11-5.el8.x86_64                       100/172 
+  Installing       : gawk-4.2.1-4.el8.x86_64                            101/172 
+  Installing       : npth-1.5-4.el8.x86_64                              102/172 
+  Installing       : libpkgconf-1.4.2-1.el8.x86_64                      103/172 
+  Installing       : pkgconf-1.4.2-1.el8.x86_64                         104/172 
+  Installing       : libtool-ltdl-2.4.6-25.el8.x86_64                   105/172 
+  Running scriptlet: libtool-ltdl-2.4.6-25.el8.x86_64                   105/172 
+  Installing       : brotli-1.0.6-3.el8.x86_64                          106/172 
+  Installing       : cpio-2.12-11.el8.x86_64                            107/172 
+  Installing       : libverto-0.3.2-2.el8.x86_64                        108/172 
+  Installing       : libnghttp2-1.33.0-5.el8_9.x86_64                   109/172 
+  Installing       : ncurses-6.1-10.20180224.el8.x86_64                 110/172 
+  Installing       : openssl-libs-1:1.1.1k-12.el8_9.x86_64              111/172 
+  Running scriptlet: openssl-libs-1:1.1.1k-12.el8_9.x86_64              111/172 
+  Installing       : coreutils-8.30-15.el8.x86_64                       112/172 
+  Running scriptlet: ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.no   113/172 
+  Installing       : ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.no   113/172 
+  Running scriptlet: ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.no   113/172 
+  Installing       : libdb-5.3.28-42.el8_4.x86_64                       114/172 
+  Running scriptlet: libdb-5.3.28-42.el8_4.x86_64                       114/172 
+  Installing       : krb5-libs-1.18.2-26.el8_9.x86_64                   115/172 
+  Installing       : libtirpc-1.1.4-8.el8.x86_64                        116/172 
+  Running scriptlet: libtirpc-1.1.4-8.el8.x86_64                        116/172 
+  Installing       : libblkid-2.32.1-44.el8_9.1.x86_64                  117/172 
+  Running scriptlet: libblkid-2.32.1-44.el8_9.1.x86_64                  117/172 
+  Installing       : libmount-2.32.1-44.el8_9.1.x86_64                  118/172 
+  Running scriptlet: libmount-2.32.1-44.el8_9.1.x86_64                  118/172 
+  Installing       : systemd-libs-239-78.el8.x86_64                     119/172 
+  Running scriptlet: systemd-libs-239-78.el8.x86_64                     119/172 
+  Installing       : libnsl2-1.2.0-2.20180605git4a062cf.el8.x86_64      120/172 
+  Running scriptlet: libnsl2-1.2.0-2.20180605git4a062cf.el8.x86_64      120/172 
+  Installing       : platform-python-setuptools-39.2.0-7.el8.noarch     121/172 
+  Installing       : platform-python-3.6.8-56.el8_9.3.x86_64            122/172 
+  Running scriptlet: platform-python-3.6.8-56.el8_9.3.x86_64            122/172 
+  Installing       : python3-libs-3.6.8-56.el8_9.3.x86_64               123/172 
+  Installing       : gzip-1.9-13.el8_5.x86_64                           124/172 
+  Running scriptlet: gzip-1.9-13.el8_5.x86_64                           124/172 
+  Installing       : cracklib-2.9.6-15.el8.x86_64                       125/172 
+  Installing       : cracklib-dicts-2.9.6-15.el8.x86_64                 126/172 
+  Installing       : binutils-2.30-123.el8.x86_64                       127/172 
+  Running scriptlet: binutils-2.30-123.el8.x86_64                       127/172 
+  Installing       : shadow-utils-2:4.6-19.el8.x86_64                   128/172 
+  Running scriptlet: libutempter-1.1.6-14.el8.x86_64                    129/172 
+  Installing       : libutempter-1.1.6-14.el8.x86_64                    129/172 
+  Running scriptlet: tpm2-tss-2.3.2-5.el8.x86_64                        130/172 
+  Installing       : tpm2-tss-2.3.2-5.el8.x86_64                        130/172 
+  Running scriptlet: tpm2-tss-2.3.2-5.el8.x86_64                        130/172 
+  Installing       : ima-evm-utils-1.3.2-12.el8.x86_64                  131/172 
+  Installing       : libpwquality-1.4.4-6.el8.x86_64                    132/172 
+  Installing       : pam-1.3.1-27.el8.x86_64                            133/172 
+  Running scriptlet: pam-1.3.1-27.el8.x86_64                            133/172 
+  Installing       : libusbx-1.0.23-4.el8.x86_64                        134/172 
+  Installing       : glib2-2.56.4-161.el8.x86_64                        135/172 
+  Installing       : libbabeltrace-1.5.4-4.el8.x86_64                   136/172 
+  Running scriptlet: libbabeltrace-1.5.4-4.el8.x86_64                   136/172 
+  Installing       : libfdisk-2.32.1-44.el8_9.1.x86_64                  137/172 
+  Running scriptlet: libfdisk-2.32.1-44.el8_9.1.x86_64                  137/172 
+  Installing       : cyrus-sasl-lib-2.1.27-6.el8_5.x86_64               138/172 
+  Running scriptlet: cyrus-sasl-lib-2.1.27-6.el8_5.x86_64               138/172 
+  Installing       : openldap-2.4.46-18.el8.x86_64                      139/172 
+  Installing       : gnupg2-2.2.20-3.el8_6.x86_64                       140/172 
+  Installing       : libssh-0.9.6-13.el8_9.x86_64                       141/172 
+  Installing       : libdb-utils-5.3.28-42.el8_4.x86_64                 142/172 
+  Installing       : libarchive-3.3.3-5.el8.x86_64                      143/172 
+  Installing       : libsmartcols-2.32.1-44.el8_9.1.x86_64              144/172 
+  Running scriptlet: libsmartcols-2.32.1-44.el8_9.1.x86_64              144/172 
+  Installing       : libatomic_ops-7.6.2-3.el8.x86_64                   145/172 
+  Installing       : gc-7.6.4-3.el8.x86_64                              146/172 
+  Installing       : guile-5:2.0.14-7.el8.x86_64                        147/172 
+  Running scriptlet: guile-5:2.0.14-7.el8.x86_64                        147/172 
+  Installing       : libipt-1.6.1-8.el8.x86_64                          148/172 
+  Installing       : publicsuffix-list-dafsa-20180723-1.el8.noarch      149/172 
+  Installing       : libpsl-0.20.2-6.el8.x86_64                         150/172 
+  Installing       : libcurl-7.61.1-33.el8_9.5.x86_64                   151/172 
+  Installing       : curl-7.61.1-33.el8_9.5.x86_64                      152/172 
+  Installing       : rpm-4.14.3-28.el8_9.x86_64                         153/172 
+  Installing       : rpm-libs-4.14.3-28.el8_9.x86_64                    154/172 
+  Running scriptlet: rpm-libs-4.14.3-28.el8_9.x86_64                    154/172 
+  Installing       : rpm-build-libs-4.14.3-28.el8_9.x86_64              155/172 
+  Running scriptlet: rpm-build-libs-4.14.3-28.el8_9.x86_64              155/172 
+  Installing       : gdb-headless-8.2-20.el8.x86_64                     156/172 
+  Installing       : efi-srpm-macros-3-3.el8.noarch                     157/172 
+  Installing       : lua-srpm-macros-1-13.el8.noarch                    158/172 
+  Installing       : pkgconf-m4-1.4.2-1.el8.noarch                      159/172 
+  Installing       : pkgconf-pkg-config-1.4.2-1.el8.x86_64              160/172 
+  Installing       : glibc-devel-2.28-236.el8_9.13.x86_64               161/172 
+  Running scriptlet: glibc-devel-2.28-236.el8_9.13.x86_64               161/172 
+  Installing       : libxcrypt-devel-4.1.1-6.el8.x86_64                 162/172 
+  Installing       : gcc-8.5.0-20.el8.x86_64                            163/172 
+  Running scriptlet: gcc-8.5.0-20.el8.x86_64                            163/172 
+  Installing       : gcc-plugin-annobin-8.5.0-20.el8.x86_64             164/172 
+  Installing       : annobin-11.13-2.el8.x86_64                         165/172 
+  Installing       : redhat-rpm-config-131-1.el8.noarch                 166/172 
+  Running scriptlet: redhat-rpm-config-131-1.el8.noarch                 166/172 
+  Installing       : rpm-build-4.14.3-28.el8_9.x86_64                   167/172 
+  Installing       : gcc-c++-8.5.0-20.el8.x86_64                        168/172 
+  Installing       : epel-rpm-macros-8-41.noarch                        169/172 
+  Installing       : util-linux-2.32.1-44.el8_9.1.x86_64                170/172 
+  Running scriptlet: util-linux-2.32.1-44.el8_9.1.x86_64                170/172 
+  Installing       : which-2.21-20.el8.x86_64                           171/172 
+  Installing       : make-1:4.2.1-11.el8.x86_64                         172/172 
+  Running scriptlet: make-1:4.2.1-11.el8.x86_64                         172/172 
+  Running scriptlet: filesystem-3.8-6.el8.x86_64                        172/172 
+  Running scriptlet: glibc-all-langpacks-2.28-236.el8_9.13.x86_64       172/172 
+  Running scriptlet: ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.no   172/172 
+  Running scriptlet: guile-5:2.0.14-7.el8.x86_64                        172/172 
+  Running scriptlet: glibc-common-2.28-236.el8_9.13.x86_64              172/172 
+  Running scriptlet: info-6.5-7.el8.x86_64                              172/172 
+  Running scriptlet: glib2-2.56.4-161.el8.x86_64                        172/172 
+  Verifying        : bzip2-1.0.6-26.el8.x86_64                            1/172 
+  Verifying        : bzip2-libs-1.0.6-26.el8.x86_64                       2/172 
+  Verifying        : cracklib-2.9.6-15.el8.x86_64                         3/172 
+  Verifying        : cracklib-dicts-2.9.6-15.el8.x86_64                   4/172 
+  Verifying        : grep-3.1-6.el8.x86_64                                5/172 
+  Verifying        : libassuan-2.5.1-3.el8.x86_64                         6/172 
+  Verifying        : libattr-2.4.48-3.el8.x86_64                          7/172 
+  Verifying        : libsigsegv-2.11-5.el8.x86_64                         8/172 
+  Verifying        : libunistring-0.9.9-3.el8.x86_64                      9/172 
+  Verifying        : libutempter-1.1.6-14.el8.x86_64                     10/172 
+  Verifying        : mpfr-3.1.6-1.el8.x86_64                             11/172 
+  Verifying        : npth-1.5-4.el8.x86_64                               12/172 
+  Verifying        : pkgconf-1.4.2-1.el8.x86_64                          13/172 
+  Verifying        : pkgconf-pkg-config-1.4.2-1.el8.x86_64               14/172 
+  Verifying        : readline-7.0-10.el8.x86_64                          15/172 
+  Verifying        : zip-3.0-23.el8.x86_64                               16/172 
+  Verifying        : basesystem-11-5.el8.noarch                          17/172 
+  Verifying        : libacl-2.2.53-1.el8.x86_64                          18/172 
+  Verifying        : libgpg-error-1.31-1.el8.x86_64                      19/172 
+  Verifying        : libnsl2-1.2.0-2.20180605git4a062cf.el8.x86_64       20/172 
+  Verifying        : libpkgconf-1.4.2-1.el8.x86_64                       21/172 
+  Verifying        : libtool-ltdl-2.4.6-25.el8.x86_64                    22/172 
+  Verifying        : pkgconf-m4-1.4.2-1.el8.noarch                       23/172 
+  Verifying        : publicsuffix-list-dafsa-20180723-1.el8.noarch       24/172 
+  Verifying        : gmp-1:6.1.2-10.el8.x86_64                           25/172 
+  Verifying        : diffutils-3.6-6.el8.x86_64                          26/172 
+  Verifying        : libidn2-2.2.0-1.el8.x86_64                          27/172 
+  Verifying        : patch-2.7.6-11.el8.x86_64                           28/172 
+  Verifying        : libusbx-1.0.23-4.el8.x86_64                         29/172 
+  Verifying        : libzstd-1.4.4-1.el8.x86_64                          30/172 
+  Verifying        : libpsl-0.20.2-6.el8.x86_64                          31/172 
+  Verifying        : p11-kit-trust-0.23.22-1.el8.x86_64                  32/172 
+  Verifying        : popt-1.18-1.el8.x86_64                              33/172 
+  Verifying        : brotli-1.0.6-3.el8.x86_64                           34/172 
+  Verifying        : ima-evm-utils-1.3.2-12.el8.x86_64                   35/172 
+  Verifying        : lz4-libs-1.8.3-3.el8_4.x86_64                       36/172 
+  Verifying        : p11-kit-0.23.22-1.el8.x86_64                        37/172 
+  Verifying        : filesystem-3.8-6.el8.x86_64                         38/172 
+  Verifying        : libcap-ng-0.7.11-1.el8.x86_64                       39/172 
+  Verifying        : libdb-5.3.28-42.el8_4.x86_64                        40/172 
+  Verifying        : libdb-utils-5.3.28-42.el8_4.x86_64                  41/172 
+  Verifying        : libxcrypt-4.1.1-6.el8.x86_64                        42/172 
+  Verifying        : libxcrypt-devel-4.1.1-6.el8.x86_64                  43/172 
+  Verifying        : nettle-3.4.1-7.el8.x86_64                           44/172 
+  Verifying        : openldap-2.4.46-18.el8.x86_64                       45/172 
+  Verifying        : pcre-8.42-6.el8.x86_64                              46/172 
+  Verifying        : cyrus-sasl-lib-2.1.27-6.el8_5.x86_64                47/172 
+  Verifying        : gzip-1.9-13.el8_5.x86_64                            48/172 
+  Verifying        : keyutils-libs-1.5.10-9.el8.x86_64                   49/172 
+  Verifying        : libsepol-2.9-3.el8.x86_64                           50/172 
+  Verifying        : lua-libs-5.3.4-12.el8.x86_64                        51/172 
+  Verifying        : cpio-2.12-11.el8.x86_64                             52/172 
+  Verifying        : gawk-4.2.1-4.el8.x86_64                             53/172 
+  Verifying        : info-6.5-7.el8.x86_64                               54/172 
+  Verifying        : make-1:4.2.1-11.el8.x86_64                          55/172 
+  Verifying        : sed-4.5-5.el8.x86_64                                56/172 
+  Verifying        : unzip-6.0-46.el8.x86_64                             57/172 
+  Verifying        : xz-5.2.4-4.el8_6.x86_64                             58/172 
+  Verifying        : xz-libs-5.2.4-4.el8_6.x86_64                        59/172 
+  Verifying        : bash-4.4.20-4.el8_6.x86_64                          60/172 
+  Verifying        : gdbm-libs-1:1.18-2.el8.x86_64                       61/172 
+  Verifying        : gnupg2-2.2.20-3.el8_6.x86_64                        62/172 
+  Verifying        : libbabeltrace-1.5.4-4.el8.x86_64                    63/172 
+  Verifying        : libcom_err-1.45.6-5.el8.x86_64                      64/172 
+  Verifying        : libgcrypt-1.8.5-7.el8_6.x86_64                      65/172 
+  Verifying        : libsemanage-2.9-9.el8_6.x86_64                      66/172 
+  Verifying        : libtirpc-1.1.4-8.el8.x86_64                         67/172 
+  Verifying        : libverto-0.3.2-2.el8.x86_64                         68/172 
+  Verifying        : pcre2-10.32-3.el8_6.x86_64                          69/172 
+  Verifying        : gdbm-1:1.18-2.el8.x86_64                            70/172 
+  Verifying        : libksba-1.3.5-9.el8_7.x86_64                        71/172 
+  Verifying        : libtasn1-4.13-4.el8_7.x86_64                        72/172 
+  Verifying        : coreutils-8.30-15.el8.x86_64                        73/172 
+  Verifying        : coreutils-common-8.30-15.el8.x86_64                 74/172 
+  Verifying        : glib2-2.56.4-161.el8.x86_64                         75/172 
+  Verifying        : libarchive-3.3.3-5.el8.x86_64                       76/172 
+  Verifying        : libffi-3.1-24.el8.x86_64                            77/172 
+  Verifying        : libpwquality-1.4.4-6.el8.x86_64                     78/172 
+  Verifying        : libselinux-2.9-8.el8.x86_64                         79/172 
+  Verifying        : platform-python-setuptools-39.2.0-7.el8.noarch      80/172 
+  Verifying        : python3-setuptools-wheel-39.2.0-7.el8.noarch        81/172 
+  Verifying        : setup-2.12.2-9.el8.noarch                           82/172 
+  Verifying        : tar-2:1.30-9.el8.x86_64                             83/172 
+  Verifying        : audit-libs-3.0.7-5.el8.x86_64                       84/172 
+  Verifying        : binutils-2.30-123.el8.x86_64                        85/172 
+  Verifying        : ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.no    86/172 
+  Verifying        : chkconfig-1.19.2-1.el8.x86_64                       87/172 
+  Verifying        : crypto-policies-20230731-1.git3177e06.el8.noarch    88/172 
+  Verifying        : elfutils-0.189-3.el8.x86_64                         89/172 
+  Verifying        : elfutils-libelf-0.189-3.el8.x86_64                  90/172 
+  Verifying        : elfutils-libs-0.189-3.el8.x86_64                    91/172 
+  Verifying        : file-5.33-25.el8.x86_64                             92/172 
+  Verifying        : file-libs-5.33-25.el8.x86_64                        93/172 
+  Verifying        : findutils-1:4.6.0-21.el8.x86_64                     94/172 
+  Verifying        : libgcc-8.5.0-20.el8.x86_64                          95/172 
+  Verifying        : libgomp-8.5.0-20.el8.x86_64                         96/172 
+  Verifying        : libnghttp2-1.33.0-5.el8_9.x86_64                    97/172 
+  Verifying        : libstdc++-8.5.0-20.el8.x86_64                       98/172 
+  Verifying        : ncurses-libs-6.1-10.20180224.el8.x86_64             99/172 
+  Verifying        : pam-1.3.1-27.el8.x86_64                            100/172 
+  Verifying        : which-2.21-20.el8.x86_64                           101/172 
+  Verifying        : elfutils-default-yama-scope-0.189-3.el8.noarch     102/172 
+  Verifying        : krb5-libs-1.18.2-26.el8_9.x86_64                   103/172 
+  Verifying        : libcap-2.48-6.el8_9.x86_64                         104/172 
+  Verifying        : libxml2-2.9.7-18.el8_9.x86_64                      105/172 
+  Verifying        : ncurses-6.1-10.20180224.el8.x86_64                 106/172 
+  Verifying        : ncurses-base-6.1-10.20180224.el8.noarch            107/172 
+  Verifying        : openssl-libs-1:1.1.1k-12.el8_9.x86_64              108/172 
+  Verifying        : platform-python-3.6.8-56.el8_9.3.x86_64            109/172 
+  Verifying        : python3-libs-3.6.8-56.el8_9.3.x86_64               110/172 
+  Verifying        : redhat-release-8.9-0.1.el8.x86_64                  111/172 
+  Verifying        : shadow-utils-2:4.6-19.el8.x86_64                   112/172 
+  Verifying        : sqlite-libs-3.26.0-19.el8_9.x86_64                 113/172 
+  Verifying        : systemd-libs-239-78.el8.x86_64                     114/172 
+  Verifying        : tpm2-tss-2.3.2-5.el8.x86_64                        115/172 
+  Verifying        : zlib-1.2.11-25.el8.x86_64                          116/172 
+  Verifying        : libssh-0.9.6-13.el8_9.x86_64                       117/172 
+  Verifying        : libssh-config-0.9.6-13.el8_9.noarch                118/172 
+  Verifying        : rpm-4.14.3-28.el8_9.x86_64                         119/172 
+  Verifying        : rpm-build-libs-4.14.3-28.el8_9.x86_64              120/172 
+  Verifying        : rpm-libs-4.14.3-28.el8_9.x86_64                    121/172 
+  Verifying        : tzdata-2024a-1.el8.noarch                          122/172 
+  Verifying        : curl-7.61.1-33.el8_9.5.x86_64                      123/172 
+  Verifying        : kernel-headers-4.18.0-513.24.1.el8_9.x86_64        124/172 
+  Verifying        : libblkid-2.32.1-44.el8_9.1.x86_64                  125/172 
+  Verifying        : libcurl-7.61.1-33.el8_9.5.x86_64                   126/172 
+  Verifying        : libfdisk-2.32.1-44.el8_9.1.x86_64                  127/172 
+  Verifying        : libmount-2.32.1-44.el8_9.1.x86_64                  128/172 
+  Verifying        : libsmartcols-2.32.1-44.el8_9.1.x86_64              129/172 
+  Verifying        : libuuid-2.32.1-44.el8_9.1.x86_64                   130/172 
+  Verifying        : python3-pip-wheel-9.0.3-23.el8_9.1.noarch          131/172 
+  Verifying        : util-linux-2.32.1-44.el8_9.1.x86_64                132/172 
+  Verifying        : expat-2.2.5-11.el8_9.1.x86_64                      133/172 
+  Verifying        : gnutls-3.6.16-8.el8_9.3.x86_64                     134/172 
+  Verifying        : glibc-2.28-236.el8_9.13.x86_64                     135/172 
+  Verifying        : glibc-all-langpacks-2.28-236.el8_9.13.x86_64       136/172 
+  Verifying        : glibc-common-2.28-236.el8_9.13.x86_64              137/172 
+  Verifying        : glibc-devel-2.28-236.el8_9.13.x86_64               138/172 
+  Verifying        : glibc-gconv-extra-2.28-236.el8_9.13.x86_64         139/172 
+  Verifying        : glibc-headers-2.28-236.el8_9.13.x86_64             140/172 
+  Verifying        : ghc-srpm-macros-1.4.2-7.el8.noarch                 141/172 
+  Verifying        : ocaml-srpm-macros-5-4.el8.noarch                   142/172 
+  Verifying        : openblas-srpm-macros-2-2.el8.noarch                143/172 
+  Verifying        : perl-srpm-macros-1-25.el8.noarch                   144/172 
+  Verifying        : rust-srpm-macros-5-2.el8.noarch                    145/172 
+  Verifying        : libatomic_ops-7.6.2-3.el8.x86_64                   146/172 
+  Verifying        : gc-7.6.4-3.el8.x86_64                              147/172 
+  Verifying        : guile-5:2.0.14-7.el8.x86_64                        148/172 
+  Verifying        : isl-0.16.1-6.el8.x86_64                            149/172 
+  Verifying        : libipt-1.6.1-8.el8.x86_64                          150/172 
+  Verifying        : zstd-1.4.4-1.el8.x86_64                            151/172 
+  Verifying        : libmpc-1.1.0-9.1.el8.x86_64                        152/172 
+  Verifying        : efi-srpm-macros-3-3.el8.noarch                     153/172 
+  Verifying        : go-srpm-macros-2-17.el8.noarch                     154/172 
+  Verifying        : dwz-0.12-10.el8.x86_64                             155/172 
+  Verifying        : qt5-srpm-macros-5.15.3-1.el8.noarch                156/172 
+  Verifying        : python-rpm-macros-3-45.el8.noarch                  157/172 
+  Verifying        : python3-rpm-macros-3-45.el8.noarch                 158/172 
+  Verifying        : redhat-rpm-config-131-1.el8.noarch                 159/172 
+  Verifying        : python-srpm-macros-3-45.el8.noarch                 160/172 
+  Verifying        : gcc-c++-8.5.0-20.el8.x86_64                        161/172 
+  Verifying        : gcc-plugin-annobin-8.5.0-20.el8.x86_64             162/172 
+  Verifying        : annobin-11.13-2.el8.x86_64                         163/172 
+  Verifying        : cpp-8.5.0-20.el8.x86_64                            164/172 
+  Verifying        : gcc-8.5.0-20.el8.x86_64                            165/172 
+  Verifying        : gdb-headless-8.2-20.el8.x86_64                     166/172 
+  Verifying        : libstdc++-devel-8.5.0-20.el8.x86_64                167/172 
+  Verifying        : rpm-build-4.14.3-28.el8_9.x86_64                   168/172 
+  Verifying        : ansible-srpm-macros-1-12.el8.noarch                169/172 
+  Verifying        : epel-rpm-macros-8-41.noarch                        170/172 
+  Verifying        : fpc-srpm-macros-1.3-1.el8.noarch                   171/172 
+  Verifying        : lua-srpm-macros-1-13.el8.noarch                    172/172 
+Installed products updated.
+
+Installed:
+  annobin-11.13-2.el8.x86_64                                                    
+  ansible-srpm-macros-1-12.el8.noarch                                           
+  audit-libs-3.0.7-5.el8.x86_64                                                 
+  basesystem-11-5.el8.noarch                                                    
+  bash-4.4.20-4.el8_6.x86_64                                                    
+  binutils-2.30-123.el8.x86_64                                                  
+  brotli-1.0.6-3.el8.x86_64                                                     
+  bzip2-1.0.6-26.el8.x86_64                                                     
+  bzip2-libs-1.0.6-26.el8.x86_64                                                
+  ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.noarch                          
+  chkconfig-1.19.2-1.el8.x86_64                                                 
+  coreutils-8.30-15.el8.x86_64                                                  
+  coreutils-common-8.30-15.el8.x86_64                                           
+  cpio-2.12-11.el8.x86_64                                                       
+  cpp-8.5.0-20.el8.x86_64                                                       
+  cracklib-2.9.6-15.el8.x86_64                                                  
+  cracklib-dicts-2.9.6-15.el8.x86_64                                            
+  crypto-policies-20230731-1.git3177e06.el8.noarch                              
+  curl-7.61.1-33.el8_9.5.x86_64                                                 
+  cyrus-sasl-lib-2.1.27-6.el8_5.x86_64                                          
+  diffutils-3.6-6.el8.x86_64                                                    
+  dwz-0.12-10.el8.x86_64                                                        
+  efi-srpm-macros-3-3.el8.noarch                                                
+  elfutils-0.189-3.el8.x86_64                                                   
+  elfutils-default-yama-scope-0.189-3.el8.noarch                                
+  elfutils-libelf-0.189-3.el8.x86_64                                            
+  elfutils-libs-0.189-3.el8.x86_64                                              
+  epel-rpm-macros-8-41.noarch                                                   
+  expat-2.2.5-11.el8_9.1.x86_64                                                 
+  file-5.33-25.el8.x86_64                                                       
+  file-libs-5.33-25.el8.x86_64                                                  
+  filesystem-3.8-6.el8.x86_64                                                   
+  findutils-1:4.6.0-21.el8.x86_64                                               
+  fpc-srpm-macros-1.3-1.el8.noarch                                              
+  gawk-4.2.1-4.el8.x86_64                                                       
+  gc-7.6.4-3.el8.x86_64                                                         
+  gcc-8.5.0-20.el8.x86_64                                                       
+  gcc-c++-8.5.0-20.el8.x86_64                                                   
+  gcc-plugin-annobin-8.5.0-20.el8.x86_64                                        
+  gdb-headless-8.2-20.el8.x86_64                                                
+  gdbm-1:1.18-2.el8.x86_64                                                      
+  gdbm-libs-1:1.18-2.el8.x86_64                                                 
+  ghc-srpm-macros-1.4.2-7.el8.noarch                                            
+  glib2-2.56.4-161.el8.x86_64                                                   
+  glibc-2.28-236.el8_9.13.x86_64                                                
+  glibc-all-langpacks-2.28-236.el8_9.13.x86_64                                  
+  glibc-common-2.28-236.el8_9.13.x86_64                                         
+  glibc-devel-2.28-236.el8_9.13.x86_64                                          
+  glibc-gconv-extra-2.28-236.el8_9.13.x86_64                                    
+  glibc-headers-2.28-236.el8_9.13.x86_64                                        
+  gmp-1:6.1.2-10.el8.x86_64                                                     
+  gnupg2-2.2.20-3.el8_6.x86_64                                                  
+  gnutls-3.6.16-8.el8_9.3.x86_64                                                
+  go-srpm-macros-2-17.el8.noarch                                                
+  grep-3.1-6.el8.x86_64                                                         
+  guile-5:2.0.14-7.el8.x86_64                                                   
+  gzip-1.9-13.el8_5.x86_64                                                      
+  ima-evm-utils-1.3.2-12.el8.x86_64                                             
+  info-6.5-7.el8.x86_64                                                         
+  isl-0.16.1-6.el8.x86_64                                                       
+  kernel-headers-4.18.0-513.24.1.el8_9.x86_64                                   
+  keyutils-libs-1.5.10-9.el8.x86_64                                             
+  krb5-libs-1.18.2-26.el8_9.x86_64                                              
+  libacl-2.2.53-1.el8.x86_64                                                    
+  libarchive-3.3.3-5.el8.x86_64                                                 
+  libassuan-2.5.1-3.el8.x86_64                                                  
+  libatomic_ops-7.6.2-3.el8.x86_64                                              
+  libattr-2.4.48-3.el8.x86_64                                                   
+  libbabeltrace-1.5.4-4.el8.x86_64                                              
+  libblkid-2.32.1-44.el8_9.1.x86_64                                             
+  libcap-2.48-6.el8_9.x86_64                                                    
+  libcap-ng-0.7.11-1.el8.x86_64                                                 
+  libcom_err-1.45.6-5.el8.x86_64                                                
+  libcurl-7.61.1-33.el8_9.5.x86_64                                              
+  libdb-5.3.28-42.el8_4.x86_64                                                  
+  libdb-utils-5.3.28-42.el8_4.x86_64                                            
+  libfdisk-2.32.1-44.el8_9.1.x86_64                                             
+  libffi-3.1-24.el8.x86_64                                                      
+  libgcc-8.5.0-20.el8.x86_64                                                    
+  libgcrypt-1.8.5-7.el8_6.x86_64                                                
+  libgomp-8.5.0-20.el8.x86_64                                                   
+  libgpg-error-1.31-1.el8.x86_64                                                
+  libidn2-2.2.0-1.el8.x86_64                                                    
+  libipt-1.6.1-8.el8.x86_64                                                     
+  libksba-1.3.5-9.el8_7.x86_64                                                  
+  libmount-2.32.1-44.el8_9.1.x86_64                                             
+  libmpc-1.1.0-9.1.el8.x86_64                                                   
+  libnghttp2-1.33.0-5.el8_9.x86_64                                              
+  libnsl2-1.2.0-2.20180605git4a062cf.el8.x86_64                                 
+  libpkgconf-1.4.2-1.el8.x86_64                                                 
+  libpsl-0.20.2-6.el8.x86_64                                                    
+  libpwquality-1.4.4-6.el8.x86_64                                               
+  libselinux-2.9-8.el8.x86_64                                                   
+  libsemanage-2.9-9.el8_6.x86_64                                                
+  libsepol-2.9-3.el8.x86_64                                                     
+  libsigsegv-2.11-5.el8.x86_64                                                  
+  libsmartcols-2.32.1-44.el8_9.1.x86_64                                         
+  libssh-0.9.6-13.el8_9.x86_64                                                  
+  libssh-config-0.9.6-13.el8_9.noarch                                           
+  libstdc++-8.5.0-20.el8.x86_64                                                 
+  libstdc++-devel-8.5.0-20.el8.x86_64                                           
+  libtasn1-4.13-4.el8_7.x86_64                                                  
+  libtirpc-1.1.4-8.el8.x86_64                                                   
+  libtool-ltdl-2.4.6-25.el8.x86_64                                              
+  libunistring-0.9.9-3.el8.x86_64                                               
+  libusbx-1.0.23-4.el8.x86_64                                                   
+  libutempter-1.1.6-14.el8.x86_64                                               
+  libuuid-2.32.1-44.el8_9.1.x86_64                                              
+  libverto-0.3.2-2.el8.x86_64                                                   
+  libxcrypt-4.1.1-6.el8.x86_64                                                  
+  libxcrypt-devel-4.1.1-6.el8.x86_64                                            
+  libxml2-2.9.7-18.el8_9.x86_64                                                 
+  libzstd-1.4.4-1.el8.x86_64                                                    
+  lua-libs-5.3.4-12.el8.x86_64                                                  
+  lua-srpm-macros-1-13.el8.noarch                                               
+  lz4-libs-1.8.3-3.el8_4.x86_64                                                 
+  make-1:4.2.1-11.el8.x86_64                                                    
+  mpfr-3.1.6-1.el8.x86_64                                                       
+  ncurses-6.1-10.20180224.el8.x86_64                                            
+  ncurses-base-6.1-10.20180224.el8.noarch                                       
+  ncurses-libs-6.1-10.20180224.el8.x86_64                                       
+  nettle-3.4.1-7.el8.x86_64                                                     
+  npth-1.5-4.el8.x86_64                                                         
+  ocaml-srpm-macros-5-4.el8.noarch                                              
+  openblas-srpm-macros-2-2.el8.noarch                                           
+  openldap-2.4.46-18.el8.x86_64                                                 
+  openssl-libs-1:1.1.1k-12.el8_9.x86_64                                         
+  p11-kit-0.23.22-1.el8.x86_64                                                  
+  p11-kit-trust-0.23.22-1.el8.x86_64                                            
+  pam-1.3.1-27.el8.x86_64                                                       
+  patch-2.7.6-11.el8.x86_64                                                     
+  pcre-8.42-6.el8.x86_64                                                        
+  pcre2-10.32-3.el8_6.x86_64                                                    
+  perl-srpm-macros-1-25.el8.noarch                                              
+  pkgconf-1.4.2-1.el8.x86_64                                                    
+  pkgconf-m4-1.4.2-1.el8.noarch                                                 
+  pkgconf-pkg-config-1.4.2-1.el8.x86_64                                         
+  platform-python-3.6.8-56.el8_9.3.x86_64                                       
+  platform-python-setuptools-39.2.0-7.el8.noarch                                
+  popt-1.18-1.el8.x86_64                                                        
+  publicsuffix-list-dafsa-20180723-1.el8.noarch                                 
+  python-rpm-macros-3-45.el8.noarch                                             
+  python-srpm-macros-3-45.el8.noarch                                            
+  python3-libs-3.6.8-56.el8_9.3.x86_64                                          
+  python3-pip-wheel-9.0.3-23.el8_9.1.noarch                                     
+  python3-rpm-macros-3-45.el8.noarch                                            
+  python3-setuptools-wheel-39.2.0-7.el8.noarch                                  
+  qt5-srpm-macros-5.15.3-1.el8.noarch                                           
+  readline-7.0-10.el8.x86_64                                                    
+  redhat-release-8.9-0.1.el8.x86_64                                             
+  redhat-rpm-config-131-1.el8.noarch                                            
+  rpm-4.14.3-28.el8_9.x86_64                                                    
+  rpm-build-4.14.3-28.el8_9.x86_64                                              
+  rpm-build-libs-4.14.3-28.el8_9.x86_64                                         
+  rpm-libs-4.14.3-28.el8_9.x86_64                                               
+  rust-srpm-macros-5-2.el8.noarch                                               
+  sed-4.5-5.el8.x86_64                                                          
+  setup-2.12.2-9.el8.noarch                                                     
+  shadow-utils-2:4.6-19.el8.x86_64                                              
+  sqlite-libs-3.26.0-19.el8_9.x86_64                                            
+  systemd-libs-239-78.el8.x86_64                                                
+  tar-2:1.30-9.el8.x86_64                                                       
+  tpm2-tss-2.3.2-5.el8.x86_64                                                   
+  tzdata-2024a-1.el8.noarch                                                     
+  unzip-6.0-46.el8.x86_64                                                       
+  util-linux-2.32.1-44.el8_9.1.x86_64                                           
+  which-2.21-20.el8.x86_64                                                      
+  xz-5.2.4-4.el8_6.x86_64                                                       
+  xz-libs-5.2.4-4.el8_6.x86_64                                                  
+  zip-3.0-23.el8.x86_64                                                         
+  zlib-1.2.11-25.el8.x86_64                                                     
+  zstd-1.4.4-1.el8.x86_64                                                       
+
+Complete!
+Finish: installing minimal buildroot with dnf
+Start: creating root cache
+Finish: creating root cache
+Finish: chroot init
+INFO: Installed packages:
+INFO: annobin-11.13-2.el8.x86_64
+ansible-srpm-macros-1-12.el8.noarch
+audit-libs-3.0.7-5.el8.x86_64
+basesystem-11-5.el8.noarch
+bash-4.4.20-4.el8_6.x86_64
+binutils-2.30-123.el8.x86_64
+brotli-1.0.6-3.el8.x86_64
+bzip2-1.0.6-26.el8.x86_64
+bzip2-libs-1.0.6-26.el8.x86_64
+ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.noarch
+chkconfig-1.19.2-1.el8.x86_64
+coreutils-8.30-15.el8.x86_64
+coreutils-common-8.30-15.el8.x86_64
+cpio-2.12-11.el8.x86_64
+cpp-8.5.0-20.el8.x86_64
+cracklib-2.9.6-15.el8.x86_64
+cracklib-dicts-2.9.6-15.el8.x86_64
+crypto-policies-20230731-1.git3177e06.el8.noarch
+curl-7.61.1-33.el8_9.5.x86_64
+cyrus-sasl-lib-2.1.27-6.el8_5.x86_64
+diffutils-3.6-6.el8.x86_64
+dwz-0.12-10.el8.x86_64
+efi-srpm-macros-3-3.el8.noarch
+elfutils-0.189-3.el8.x86_64
+elfutils-default-yama-scope-0.189-3.el8.noarch
+elfutils-libelf-0.189-3.el8.x86_64
+elfutils-libs-0.189-3.el8.x86_64
+epel-rpm-macros-8-41.noarch
+expat-2.2.5-11.el8_9.1.x86_64
+file-5.33-25.el8.x86_64
+file-libs-5.33-25.el8.x86_64
+filesystem-3.8-6.el8.x86_64
+findutils-4.6.0-21.el8.x86_64
+fpc-srpm-macros-1.3-1.el8.noarch
+gawk-4.2.1-4.el8.x86_64
+gc-7.6.4-3.el8.x86_64
+gcc-8.5.0-20.el8.x86_64
+gcc-c++-8.5.0-20.el8.x86_64
+gcc-plugin-annobin-8.5.0-20.el8.x86_64
+gdb-headless-8.2-20.el8.x86_64
+gdbm-1.18-2.el8.x86_64
+gdbm-libs-1.18-2.el8.x86_64
+ghc-srpm-macros-1.4.2-7.el8.noarch
+glib2-2.56.4-161.el8.x86_64
+glibc-2.28-236.el8_9.13.x86_64
+glibc-all-langpacks-2.28-236.el8_9.13.x86_64
+glibc-common-2.28-236.el8_9.13.x86_64
+glibc-devel-2.28-236.el8_9.13.x86_64
+glibc-gconv-extra-2.28-236.el8_9.13.x86_64
+glibc-headers-2.28-236.el8_9.13.x86_64
+gmp-6.1.2-10.el8.x86_64
+gnupg2-2.2.20-3.el8_6.x86_64
+gnutls-3.6.16-8.el8_9.3.x86_64
+go-srpm-macros-2-17.el8.noarch
+gpg-pubkey-2f86d6a1-5cf7cefb
+gpg-pubkey-2fa658e0-45700c69
+gpg-pubkey-fd431d51-4ae0493b
+grep-3.1-6.el8.x86_64
+guile-2.0.14-7.el8.x86_64
+gzip-1.9-13.el8_5.x86_64
+ima-evm-utils-1.3.2-12.el8.x86_64
+info-6.5-7.el8.x86_64
+isl-0.16.1-6.el8.x86_64
+kernel-headers-4.18.0-513.24.1.el8_9.x86_64
+keyutils-libs-1.5.10-9.el8.x86_64
+krb5-libs-1.18.2-26.el8_9.x86_64
+libacl-2.2.53-1.el8.x86_64
+libarchive-3.3.3-5.el8.x86_64
+libassuan-2.5.1-3.el8.x86_64
+libatomic_ops-7.6.2-3.el8.x86_64
+libattr-2.4.48-3.el8.x86_64
+libbabeltrace-1.5.4-4.el8.x86_64
+libblkid-2.32.1-44.el8_9.1.x86_64
+libcap-2.48-6.el8_9.x86_64
+libcap-ng-0.7.11-1.el8.x86_64
+libcom_err-1.45.6-5.el8.x86_64
+libcurl-7.61.1-33.el8_9.5.x86_64
+libdb-5.3.28-42.el8_4.x86_64
+libdb-utils-5.3.28-42.el8_4.x86_64
+libfdisk-2.32.1-44.el8_9.1.x86_64
+libffi-3.1-24.el8.x86_64
+libgcc-8.5.0-20.el8.x86_64
+libgcrypt-1.8.5-7.el8_6.x86_64
+libgomp-8.5.0-20.el8.x86_64
+libgpg-error-1.31-1.el8.x86_64
+libidn2-2.2.0-1.el8.x86_64
+libipt-1.6.1-8.el8.x86_64
+libksba-1.3.5-9.el8_7.x86_64
+libmount-2.32.1-44.el8_9.1.x86_64
+libmpc-1.1.0-9.1.el8.x86_64
+libnghttp2-1.33.0-5.el8_9.x86_64
+libnsl2-1.2.0-2.20180605git4a062cf.el8.x86_64
+libpkgconf-1.4.2-1.el8.x86_64
+libpsl-0.20.2-6.el8.x86_64
+libpwquality-1.4.4-6.el8.x86_64
+libselinux-2.9-8.el8.x86_64
+libsemanage-2.9-9.el8_6.x86_64
+libsepol-2.9-3.el8.x86_64
+libsigsegv-2.11-5.el8.x86_64
+libsmartcols-2.32.1-44.el8_9.1.x86_64
+libssh-0.9.6-13.el8_9.x86_64
+libssh-config-0.9.6-13.el8_9.noarch
+libstdc++-8.5.0-20.el8.x86_64
+libstdc++-devel-8.5.0-20.el8.x86_64
+libtasn1-4.13-4.el8_7.x86_64
+libtirpc-1.1.4-8.el8.x86_64
+libtool-ltdl-2.4.6-25.el8.x86_64
+libunistring-0.9.9-3.el8.x86_64
+libusbx-1.0.23-4.el8.x86_64
+libutempter-1.1.6-14.el8.x86_64
+libuuid-2.32.1-44.el8_9.1.x86_64
+libverto-0.3.2-2.el8.x86_64
+libxcrypt-4.1.1-6.el8.x86_64
+libxcrypt-devel-4.1.1-6.el8.x86_64
+libxml2-2.9.7-18.el8_9.x86_64
+libzstd-1.4.4-1.el8.x86_64
+lua-libs-5.3.4-12.el8.x86_64
+lua-srpm-macros-1-13.el8.noarch
+lz4-libs-1.8.3-3.el8_4.x86_64
+make-4.2.1-11.el8.x86_64
+mpfr-3.1.6-1.el8.x86_64
+ncurses-6.1-10.20180224.el8.x86_64
+ncurses-base-6.1-10.20180224.el8.noarch
+ncurses-libs-6.1-10.20180224.el8.x86_64
+nettle-3.4.1-7.el8.x86_64
+npth-1.5-4.el8.x86_64
+ocaml-srpm-macros-5-4.el8.noarch
+openblas-srpm-macros-2-2.el8.noarch
+openldap-2.4.46-18.el8.x86_64
+openssl-libs-1.1.1k-12.el8_9.x86_64
+p11-kit-0.23.22-1.el8.x86_64
+p11-kit-trust-0.23.22-1.el8.x86_64
+pam-1.3.1-27.el8.x86_64
+patch-2.7.6-11.el8.x86_64
+pcre-8.42-6.el8.x86_64
+pcre2-10.32-3.el8_6.x86_64
+perl-srpm-macros-1-25.el8.noarch
+pkgconf-1.4.2-1.el8.x86_64
+pkgconf-m4-1.4.2-1.el8.noarch
+pkgconf-pkg-config-1.4.2-1.el8.x86_64
+platform-python-3.6.8-56.el8_9.3.x86_64
+platform-python-setuptools-39.2.0-7.el8.noarch
+popt-1.18-1.el8.x86_64
+publicsuffix-list-dafsa-20180723-1.el8.noarch
+python-rpm-macros-3-45.el8.noarch
+python-srpm-macros-3-45.el8.noarch
+python3-libs-3.6.8-56.el8_9.3.x86_64
+python3-pip-wheel-9.0.3-23.el8_9.1.noarch
+python3-rpm-macros-3-45.el8.noarch
+python3-setuptools-wheel-39.2.0-7.el8.noarch
+qt5-srpm-macros-5.15.3-1.el8.noarch
+readline-7.0-10.el8.x86_64
+redhat-release-8.9-0.1.el8.x86_64
+redhat-rpm-config-131-1.el8.noarch
+rpm-4.14.3-28.el8_9.x86_64
+rpm-build-4.14.3-28.el8_9.x86_64
+rpm-build-libs-4.14.3-28.el8_9.x86_64
+rpm-libs-4.14.3-28.el8_9.x86_64
+rust-srpm-macros-5-2.el8.noarch
+sed-4.5-5.el8.x86_64
+setup-2.12.2-9.el8.noarch
+shadow-utils-4.6-19.el8.x86_64
+sqlite-libs-3.26.0-19.el8_9.x86_64
+systemd-libs-239-78.el8.x86_64
+tar-1.30-9.el8.x86_64
+tpm2-tss-2.3.2-5.el8.x86_64
+tzdata-2024a-1.el8.noarch
+unzip-6.0-46.el8.x86_64
+util-linux-2.32.1-44.el8_9.1.x86_64
+which-2.21-20.el8.x86_64
+xz-5.2.4-4.el8_6.x86_64
+xz-libs-5.2.4-4.el8_6.x86_64
+zip-3.0-23.el8.x86_64
+zlib-1.2.11-25.el8.x86_64
+zstd-1.4.4-1.el8.x86_64
+Start: buildsrpm
+Start: rpmbuild -bs
+warning: Macro expanded in comment on line 68: %{?fedora} <= 21
+
+warning: Macro expanded in comment on line 69: %{_datadir}/bash-completion/completions/scl
+
+Building target platforms: x86_64
+Building for target x86_64
+Wrote: /builddir/build/SRPMS/scl-utils-2.0.3-6.el8.src.rpm
+Finish: rpmbuild -bs
+cp: preserving permissions for â€˜/var/lib/copr-rpmbuild/results/chroot_scan/var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/logâ€™: No such file or directory
+INFO: chroot_scan: 3 files copied to /var/lib/copr-rpmbuild/results/chroot_scan
+INFO: /var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/log/dnf.rpm.log
+/var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/log/dnf.librepo.log
+/var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/log/dnf.log
+Finish: buildsrpm
+INFO: Done(/var/lib/copr-rpmbuild/workspace/workdir-xbwb1lck/scl-utils/scl-utils.spec) Config(child) 1 minutes 13 seconds
+INFO: Results and/or logs in: /var/lib/copr-rpmbuild/results
+INFO: Cleaning up build root ('cleanup_on_success=True')
+Start: clean chroot
+INFO: unmounting tmpfs.
+Finish: clean chroot
+INFO: Start(/var/lib/copr-rpmbuild/results/scl-utils-2.0.3-6.el8.src.rpm)  Config(rhel+epel-8-x86_64)
+Start(bootstrap): chroot init
+INFO: mounting tmpfs at /var/lib/mock/rhel+epel-8-x86_64-bootstrap-1716304491.226082/root.
+INFO: reusing tmpfs at /var/lib/mock/rhel+epel-8-x86_64-bootstrap-1716304491.226082/root.
+INFO: calling preinit hooks
+INFO: enabled root cache
+INFO: enabled package manager cache
+Start(bootstrap): cleaning package manager metadata
+Finish(bootstrap): cleaning package manager metadata
+Finish(bootstrap): chroot init
+Start: chroot init
+INFO: mounting tmpfs at /var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root.
+INFO: calling preinit hooks
+INFO: enabled root cache
+Start: unpacking root cache
+Finish: unpacking root cache
+INFO: enabled package manager cache
+Start: cleaning package manager metadata
+Finish: cleaning package manager metadata
+INFO: enabled HW Info plugin
+INFO: Buildroot is handled by package management downloaded with a bootstrap image:
+  rpm-4.14.3-28.el8_9.x86_64
+  python3-dnf-4.7.0-19.el8.noarch
+  python3-dnf-plugins-core-4.0.21-23.el8.noarch
+  yum-4.7.0-19.el8.noarch
+Finish: chroot init
+Start: build phase for scl-utils-2.0.3-6.el8.src.rpm
+Start: build setup for scl-utils-2.0.3-6.el8.src.rpm
+warning: Macro expanded in comment on line 68: %{?fedora} <= 21
+
+warning: Macro expanded in comment on line 69: %{_datadir}/bash-completion/completions/scl
+
+Building target platforms: x86_64
+Building for target x86_64
+Wrote: /builddir/build/SRPMS/scl-utils-2.0.3-6.el8.src.rpm
+No matches found for the following disable plugin patterns: local, spacewalk, versionlock
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+Copr repository                                  82 kB/s | 1.5 kB     00:00    
+Additional repo https_download1_rpmfusion_org_f  12 kB/s | 3.7 kB     00:00    
+Additional repo https_download1_rpmfusion_org_n  11 kB/s | 3.7 kB     00:00    
+Red Hat Enterprise Linux - BaseOS                63 kB/s | 4.1 kB     00:00    
+Red Hat Enterprise Linux - AppStream             62 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux - CodeReady Linux Buil  40 kB/s | 4.5 kB     00:00    
+Extra Packages for Enterprise Linux 8 - x86_64  175 kB/s |  26 kB     00:00    
+Package gcc-8.5.0-20.el8.x86_64 is already installed.
+Package make-1:4.2.1-11.el8.x86_64 is already installed.
+Dependencies resolved.
+================================================================================
+ Package              Arch    Version                  Repository          Size
+================================================================================
+Installing:
+ cmake                x86_64  3.26.5-1.el8_9           rhel-appstream      14 M
+ environment-modules  x86_64  4.5.2-4.el8              rhel-baseos        422 k
+ libcmocka            x86_64  1.1.5-1.el8              codeready-builder   39 k
+ libcmocka-devel      x86_64  1.1.5-1.el8              codeready-builder  178 k
+ rpm-devel            x86_64  4.14.3-28.el8_9          rhel-baseos        144 k
+Installing dependencies:
+ cmake-data           noarch  3.26.5-1.el8_9           rhel-appstream     1.9 M
+ cmake-filesystem     x86_64  3.26.5-1.el8_9           rhel-appstream      45 k
+ cmake-rpm-macros     noarch  3.26.5-1.el8_9           rhel-appstream      44 k
+ emacs-filesystem     noarch  1:26.1-11.el8            rhel-baseos         70 k
+ groff-base           x86_64  1.22.3-18.el8            rhel-baseos        1.0 M
+ less                 x86_64  530-2.el8_9              rhel-baseos        164 k
+ libpipeline          x86_64  1.5.0-2.el8              rhel-baseos         54 k
+ libuv                x86_64  1:1.41.1-1.el8_4         rhel-appstream     156 k
+ libzstd-devel        x86_64  1.4.4-1.el8              rhel-baseos         44 k
+ man-db               x86_64  2.7.6.1-18.el8           rhel-baseos        887 k
+ popt-devel           x86_64  1.18-1.el8               rhel-baseos         30 k
+ procps-ng            x86_64  3.3.15-14.el8            rhel-baseos        330 k
+ tcl                  x86_64  1:8.6.8-2.el8            rhel-baseos        1.1 M
+ vim-filesystem       noarch  2:8.0.1763-19.el8_6.4    rhel-appstream      50 k
+
+Transaction Summary
+================================================================================
+Install  19 Packages
+
+Total download size: 20 M
+Installed size: 60 M
+Downloading Packages:
+(1/19): libpipeline-1.5.0-2.el8.x86_64.rpm      871 kB/s |  54 kB     00:00    
+(2/19): groff-base-1.22.3-18.el8.x86_64.rpm      13 MB/s | 1.0 MB     00:00    
+(3/19): libzstd-devel-1.4.4-1.el8.x86_64.rpm    738 kB/s |  44 kB     00:00    
+(4/19): tcl-8.6.8-2.el8.x86_64.rpm              8.2 MB/s | 1.1 MB     00:00    
+(5/19): man-db-2.7.6.1-18.el8.x86_64.rpm         14 MB/s | 887 kB     00:00    
+(6/19): popt-devel-1.18-1.el8.x86_64.rpm        274 kB/s |  30 kB     00:00    
+(7/19): emacs-filesystem-26.1-11.el8.noarch.rpm 1.2 MB/s |  70 kB     00:00    
+(8/19): procps-ng-3.3.15-14.el8.x86_64.rpm      7.5 MB/s | 330 kB     00:00    
+(9/19): rpm-devel-4.14.3-28.el8_9.x86_64.rpm    3.1 MB/s | 144 kB     00:00    
+(10/19): environment-modules-4.5.2-4.el8.x86_64 5.9 MB/s | 422 kB     00:00    
+(11/19): less-530-2.el8_9.x86_64.rpm            3.0 MB/s | 164 kB     00:00    
+(12/19): vim-filesystem-8.0.1763-19.el8_6.4.noa 1.1 MB/s |  50 kB     00:00    
+(13/19): libuv-1.41.1-1.el8_4.x86_64.rpm        1.9 MB/s | 156 kB     00:00    
+(14/19): cmake-data-3.26.5-1.el8_9.noarch.rpm    33 MB/s | 1.9 MB     00:00    
+(15/19): cmake-filesystem-3.26.5-1.el8_9.x86_64 972 kB/s |  45 kB     00:00    
+(16/19): cmake-3.26.5-1.el8_9.x86_64.rpm        139 MB/s |  14 MB     00:00    
+(17/19): cmake-rpm-macros-3.26.5-1.el8_9.noarch 1.0 MB/s |  44 kB     00:00    
+(18/19): libcmocka-1.1.5-1.el8.x86_64.rpm       777 kB/s |  39 kB     00:00    
+(19/19): libcmocka-devel-1.1.5-1.el8.x86_64.rpm 3.7 MB/s | 178 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                            47 MB/s |  20 MB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : cmake-filesystem-3.26.5-1.el8_9.x86_64                1/19 
+  Installing       : cmake-rpm-macros-3.26.5-1.el8_9.noarch                2/19 
+  Installing       : less-530-2.el8_9.x86_64                               3/19 
+  Installing       : libcmocka-1.1.5-1.el8.x86_64                          4/19 
+  Installing       : vim-filesystem-2:8.0.1763-19.el8_6.4.noarch           5/19 
+  Installing       : libuv-1:1.41.1-1.el8_4.x86_64                         6/19 
+  Installing       : procps-ng-3.3.15-14.el8.x86_64                        7/19 
+  Installing       : emacs-filesystem-1:26.1-11.el8.noarch                 8/19 
+  Installing       : cmake-3.26.5-1.el8_9.x86_64                           9/19 
+  Installing       : cmake-data-3.26.5-1.el8_9.noarch                     10/19 
+  Installing       : popt-devel-1.18-1.el8.x86_64                         11/19 
+  Installing       : libzstd-devel-1.4.4-1.el8.x86_64                     12/19 
+  Installing       : libpipeline-1.5.0-2.el8.x86_64                       13/19 
+  Running scriptlet: libpipeline-1.5.0-2.el8.x86_64                       13/19 
+  Installing       : tcl-1:8.6.8-2.el8.x86_64                             14/19 
+  Running scriptlet: tcl-1:8.6.8-2.el8.x86_64                             14/19 
+  Installing       : groff-base-1.22.3-18.el8.x86_64                      15/19 
+  Running scriptlet: man-db-2.7.6.1-18.el8.x86_64                         16/19 
+  Installing       : man-db-2.7.6.1-18.el8.x86_64                         16/19 
+  Running scriptlet: man-db-2.7.6.1-18.el8.x86_64                         16/19 
+  Installing       : environment-modules-4.5.2-4.el8.x86_64               17/19 
+  Running scriptlet: environment-modules-4.5.2-4.el8.x86_64               17/19 
+  Installing       : rpm-devel-4.14.3-28.el8_9.x86_64                     18/19 
+  Installing       : libcmocka-devel-1.1.5-1.el8.x86_64                   19/19 
+  Running scriptlet: libcmocka-devel-1.1.5-1.el8.x86_64                   19/19 
+  Running scriptlet: man-db-2.7.6.1-18.el8.x86_64                         19/19 
+  Verifying        : groff-base-1.22.3-18.el8.x86_64                       1/19 
+  Verifying        : tcl-1:8.6.8-2.el8.x86_64                              2/19 
+  Verifying        : libpipeline-1.5.0-2.el8.x86_64                        3/19 
+  Verifying        : libzstd-devel-1.4.4-1.el8.x86_64                      4/19 
+  Verifying        : popt-devel-1.18-1.el8.x86_64                          5/19 
+  Verifying        : man-db-2.7.6.1-18.el8.x86_64                          6/19 
+  Verifying        : emacs-filesystem-1:26.1-11.el8.noarch                 7/19 
+  Verifying        : environment-modules-4.5.2-4.el8.x86_64                8/19 
+  Verifying        : procps-ng-3.3.15-14.el8.x86_64                        9/19 
+  Verifying        : rpm-devel-4.14.3-28.el8_9.x86_64                     10/19 
+  Verifying        : less-530-2.el8_9.x86_64                              11/19 
+  Verifying        : libuv-1:1.41.1-1.el8_4.x86_64                        12/19 
+  Verifying        : vim-filesystem-2:8.0.1763-19.el8_6.4.noarch          13/19 
+  Verifying        : cmake-3.26.5-1.el8_9.x86_64                          14/19 
+  Verifying        : cmake-data-3.26.5-1.el8_9.noarch                     15/19 
+  Verifying        : cmake-filesystem-3.26.5-1.el8_9.x86_64               16/19 
+  Verifying        : cmake-rpm-macros-3.26.5-1.el8_9.noarch               17/19 
+  Verifying        : libcmocka-1.1.5-1.el8.x86_64                         18/19 
+  Verifying        : libcmocka-devel-1.1.5-1.el8.x86_64                   19/19 
+Installed products updated.
+
+Installed:
+  cmake-3.26.5-1.el8_9.x86_64                                                   
+  cmake-data-3.26.5-1.el8_9.noarch                                              
+  cmake-filesystem-3.26.5-1.el8_9.x86_64                                        
+  cmake-rpm-macros-3.26.5-1.el8_9.noarch                                        
+  emacs-filesystem-1:26.1-11.el8.noarch                                         
+  environment-modules-4.5.2-4.el8.x86_64                                        
+  groff-base-1.22.3-18.el8.x86_64                                               
+  less-530-2.el8_9.x86_64                                                       
+  libcmocka-1.1.5-1.el8.x86_64                                                  
+  libcmocka-devel-1.1.5-1.el8.x86_64                                            
+  libpipeline-1.5.0-2.el8.x86_64                                                
+  libuv-1:1.41.1-1.el8_4.x86_64                                                 
+  libzstd-devel-1.4.4-1.el8.x86_64                                              
+  man-db-2.7.6.1-18.el8.x86_64                                                  
+  popt-devel-1.18-1.el8.x86_64                                                  
+  procps-ng-3.3.15-14.el8.x86_64                                                
+  rpm-devel-4.14.3-28.el8_9.x86_64                                              
+  tcl-1:8.6.8-2.el8.x86_64                                                      
+  vim-filesystem-2:8.0.1763-19.el8_6.4.noarch                                   
+
+Complete!
+Finish: build setup for scl-utils-2.0.3-6.el8.src.rpm
+Start: rpmbuild scl-utils-2.0.3-6.el8.src.rpm
+warning: Macro expanded in comment on line 68: %{?fedora} <= 21
+
+warning: Macro expanded in comment on line 69: %{_datadir}/bash-completion/completions/scl
+
+Building target platforms: x86_64
+Building for target x86_64
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.yIRHdG
++ umask 022
++ cd /builddir/build/BUILD
++ cd /builddir/build/BUILD
++ rm -rf scl-utils-2.0.3
++ /usr/bin/gzip -dc /builddir/build/SOURCES/scl-utils-2.0.3.tar.gz
++ /usr/bin/tar -xof -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd scl-utils-2.0.3
++ /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
++ /usr/bin/cat /builddir/build/SOURCES/0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
++ /usr/bin/patch -p1 -s --fuzz=0 --no-backup-if-mismatch
++ /usr/bin/cat /builddir/build/SOURCES/BZ-2056462-do-not-error-out-on-SIGINT.patch
++ /usr/bin/patch -p1 -s --fuzz=0 --no-backup-if-mismatch
++ /usr/bin/cat /builddir/build/SOURCES/BZ-2091000-remove-tmp-file.patch
++ /usr/bin/patch -p1 -s --fuzz=0 --no-backup-if-mismatch
++ /usr/bin/cat /builddir/build/SOURCES/rpm419.patch
++ /usr/bin/patch -p1 -s --fuzz=0 --no-backup-if-mismatch
++ /usr/bin/cat /builddir/build/SOURCES/43.patch
++ /usr/bin/patch -p1 -s --fuzz=0 --no-backup-if-mismatch
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.ypNlHl
++ umask 022
++ cd /builddir/build/BUILD
++ cd scl-utils-2.0.3
++ CFLAGS='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection'
++ export CFLAGS
++ CXXFLAGS='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection'
++ export CXXFLAGS
++ FFLAGS='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -I/usr/lib64/gfortran/modules'
++ export FFLAGS
++ FCFLAGS='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -I/usr/lib64/gfortran/modules'
++ export FCFLAGS
++ LDFLAGS='-Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld'
++ export LDFLAGS
++ /usr/bin/cmake -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG -DCMAKE_Fortran_FLAGS_RELEASE:STRING=-DNDEBUG -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr -DINCLUDE_INSTALL_DIR:PATH=/usr/include -DLIB_INSTALL_DIR:PATH=/usr/lib64 -DSYSCONF_INSTALL_DIR:PATH=/etc -DSHARE_INSTALL_PREFIX:PATH=/usr/share -DLIB_SUFFIX=64 -DBUILD_SHARED_LIBS:BOOL=ON .
+CMake Deprecation Warning at CMakeLists.txt:1 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The C compiler identification is GNU 8.5.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+CMake Warning at CMakeLists.txt:47 (FIND_PACKAGE):
+  By not providing "Findbash-completion.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "bash-completion", but CMake did not find one.
+
+  Could not find a package configuration file provided by "bash-completion"
+  with any of the following names:
+
+    bash-completionConfig.cmake
+    bash-completion-config.cmake
+
+  Add the installation prefix of "bash-completion" to CMAKE_PREFIX_PATH or
+  set "bash-completion_DIR" to a directory containing one of the above files.
+  If "bash-completion" provides a separate development package or SDK, be
+  sure it has been installed.
+
+
+-- Using fallback bash completion dir /etc/bash_completion.d
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_SHARED_LIBS
+    CMAKE_CXX_FLAGS_RELEASE
+    CMAKE_C_FLAGS_RELEASE
+    CMAKE_Fortran_FLAGS_RELEASE
+    INCLUDE_INSTALL_DIR
+    LIB_INSTALL_DIR
+    LIB_SUFFIX
+    SHARE_INSTALL_PREFIX
+    SYSCONF_INSTALL_DIR
+
+
+-- Build files have been written to: /builddir/build/BUILD/scl-utils-2.0.3
++ make -j4 'CFLAGS=-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection' 'LDFLAGS=-Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld'
+/usr/bin/cmake -S/builddir/build/BUILD/scl-utils-2.0.3 -B/builddir/build/BUILD/scl-utils-2.0.3 --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles /builddir/build/BUILD/scl-utils-2.0.3//CMakeFiles/progress.marks
+make  -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f src/CMakeFiles/scl.dir/build.make src/CMakeFiles/scl.dir/depend
+make  -f tests/CMakeFiles/test_scllib.dir/build.make tests/CMakeFiles/test_scllib.dir/depend
+make  -f tests/CMakeFiles/test_args.dir/build.make tests/CMakeFiles/test_args.dir/depend
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/src /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/src /builddir/build/BUILD/scl-utils-2.0.3/src/CMakeFiles/scl.dir/DependInfo.cmake --color=
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3/tests/CMakeFiles/test_scllib.dir/DependInfo.cmake --color=
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3/tests/CMakeFiles/test_args.dir/DependInfo.cmake --color=
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f src/CMakeFiles/scl.dir/build.make src/CMakeFiles/scl.dir/build
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f tests/CMakeFiles/test_args.dir/build.make tests/CMakeFiles/test_args.dir/build
+make  -f tests/CMakeFiles/test_scllib.dir/build.make tests/CMakeFiles/test_scllib.dir/build
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+[  4%] Building C object src/CMakeFiles/scl.dir/scl.c.o
+[  8%] Building C object src/CMakeFiles/scl.dir/debug.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/debug.c.o -MF CMakeFiles/scl.dir/debug.c.o.d -o CMakeFiles/scl.dir/debug.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/debug.c
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/scl.c.o -MF CMakeFiles/scl.dir/scl.c.o.d -o CMakeFiles/scl.dir/scl.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/scl.c
+[ 12%] Building C object tests/CMakeFiles/test_args.dir/test_args.c.o
+[ 16%] Building C object tests/CMakeFiles/test_scllib.dir/test_scllib.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_args.dir/test_args.c.o -MF CMakeFiles/test_args.dir/test_args.c.o.d -o CMakeFiles/test_args.dir/test_args.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/tests/test_args.c
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/test_scllib.c.o -MF CMakeFiles/test_scllib.dir/test_scllib.c.o.d -o CMakeFiles/test_scllib.dir/test_scllib.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/tests/test_scllib.c
+[ 20%] Building C object src/CMakeFiles/scl.dir/scllib.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/scllib.c.o -MF CMakeFiles/scl.dir/scllib.c.o.d -o CMakeFiles/scl.dir/scllib.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/scllib.c
+[ 25%] Building C object tests/CMakeFiles/test_scllib.dir/test_common.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/test_common.c.o -MF CMakeFiles/test_scllib.dir/test_common.c.o.d -o CMakeFiles/test_scllib.dir/test_common.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/tests/test_common.c
+[ 29%] Building C object tests/CMakeFiles/test_args.dir/test_common.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_args.dir/test_common.c.o -MF CMakeFiles/test_args.dir/test_common.c.o.d -o CMakeFiles/test_args.dir/test_common.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/tests/test_common.c
+[ 33%] Building C object src/CMakeFiles/scl.dir/lib_common.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/lib_common.c.o -MF CMakeFiles/scl.dir/lib_common.c.o.d -o CMakeFiles/scl.dir/lib_common.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/lib_common.c
+[ 37%] Building C object tests/CMakeFiles/test_scllib.dir/dict.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/dict.c.o -MF CMakeFiles/test_scllib.dir/dict.c.o.d -o CMakeFiles/test_scllib.dir/dict.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/tests/dict.c
+[ 41%] Building C object tests/CMakeFiles/test_args.dir/__/src/args.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_args.dir/__/src/args.c.o -MF CMakeFiles/test_args.dir/__/src/args.c.o.d -o CMakeFiles/test_args.dir/__/src/args.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/args.c
+[ 45%] Building C object tests/CMakeFiles/test_scllib.dir/__/src/scllib.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/__/src/scllib.c.o -MF CMakeFiles/test_scllib.dir/__/src/scllib.c.o.d -o CMakeFiles/test_scllib.dir/__/src/scllib.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/scllib.c
+[ 50%] Building C object tests/CMakeFiles/test_args.dir/__/src/sclmalloc.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_args.dir/__/src/sclmalloc.c.o -MF CMakeFiles/test_args.dir/__/src/sclmalloc.c.o.d -o CMakeFiles/test_args.dir/__/src/sclmalloc.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/sclmalloc.c
+[ 54%] Building C object tests/CMakeFiles/test_args.dir/__/src/lib_common.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_args.dir/__/src/lib_common.c.o -MF CMakeFiles/test_args.dir/__/src/lib_common.c.o.d -o CMakeFiles/test_args.dir/__/src/lib_common.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/lib_common.c
+[ 58%] Building C object tests/CMakeFiles/test_scllib.dir/__/src/sclmalloc.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/__/src/sclmalloc.c.o -MF CMakeFiles/test_scllib.dir/__/src/sclmalloc.c.o.d -o CMakeFiles/test_scllib.dir/__/src/sclmalloc.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/sclmalloc.c
+[ 62%] Building C object src/CMakeFiles/scl.dir/args.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/args.c.o -MF CMakeFiles/scl.dir/args.c.o.d -o CMakeFiles/scl.dir/args.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/args.c
+[ 66%] Building C object tests/CMakeFiles/test_args.dir/__/src/debug.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_args.dir/__/src/debug.c.o -MF CMakeFiles/test_args.dir/__/src/debug.c.o.d -o CMakeFiles/test_args.dir/__/src/debug.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/debug.c
+[ 70%] Building C object tests/CMakeFiles/test_scllib.dir/__/src/lib_common.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/__/src/lib_common.c.o -MF CMakeFiles/test_scllib.dir/__/src/lib_common.c.o.d -o CMakeFiles/test_scllib.dir/__/src/lib_common.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/lib_common.c
+[ 75%] Building C object src/CMakeFiles/scl.dir/sclmalloc.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/sclmalloc.c.o -MF CMakeFiles/scl.dir/sclmalloc.c.o.d -o CMakeFiles/scl.dir/sclmalloc.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/sclmalloc.c
+[ 79%] Linking C executable test_args
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cmake -E cmake_link_script CMakeFiles/test_args.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -rdynamic CMakeFiles/test_args.dir/test_args.c.o CMakeFiles/test_args.dir/test_common.c.o CMakeFiles/test_args.dir/__/src/args.c.o CMakeFiles/test_args.dir/__/src/sclmalloc.c.o CMakeFiles/test_args.dir/__/src/lib_common.c.o CMakeFiles/test_args.dir/__/src/debug.c.o -o test_args  -lcmocka 
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+[ 83%] Building C object src/CMakeFiles/scl.dir/fallback.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -MD -MT src/CMakeFiles/scl.dir/fallback.c.o -MF CMakeFiles/scl.dir/fallback.c.o.d -o CMakeFiles/scl.dir/fallback.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/fallback.c
+[ 83%] Built target test_args
+[ 87%] Building C object tests/CMakeFiles/test_scllib.dir/__/src/debug.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/__/src/debug.c.o -MF CMakeFiles/test_scllib.dir/__/src/debug.c.o.d -o CMakeFiles/test_scllib.dir/__/src/debug.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/debug.c
+[ 91%] Building C object tests/CMakeFiles/test_scllib.dir/__/src/fallback.c.o
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cc  -I/builddir/build/BUILD/scl-utils-2.0.3/tests/. -I/builddir/build/BUILD/scl-utils-2.0.3/tests/../src -I/builddir/build/BUILD/scl-utils-2.0.3/src -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -MD -MT tests/CMakeFiles/test_scllib.dir/__/src/fallback.c.o -MF CMakeFiles/test_scllib.dir/__/src/fallback.c.o.d -o CMakeFiles/test_scllib.dir/__/src/fallback.c.o -c /builddir/build/BUILD/scl-utils-2.0.3/src/fallback.c
+[ 95%] Linking C executable test_scllib
+cd /builddir/build/BUILD/scl-utils-2.0.3/tests && /usr/bin/cmake -E cmake_link_script CMakeFiles/test_scllib.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -fPIE -Wl,--wrap=get_command_output -Wl,--wrap=system -Wl,--wrap=putenv -Wl,--wrap=getenv -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -rdynamic CMakeFiles/test_scllib.dir/test_scllib.c.o CMakeFiles/test_scllib.dir/test_common.c.o CMakeFiles/test_scllib.dir/dict.c.o CMakeFiles/test_scllib.dir/__/src/scllib.c.o CMakeFiles/test_scllib.dir/__/src/sclmalloc.c.o CMakeFiles/test_scllib.dir/__/src/lib_common.c.o CMakeFiles/test_scllib.dir/__/src/debug.c.o CMakeFiles/test_scllib.dir/__/src/fallback.c.o -o test_scllib  -lcmocka -lrpm -lrpmio 
+[100%] Linking C executable scl
+cd /builddir/build/BUILD/scl-utils-2.0.3/src && /usr/bin/cmake -E cmake_link_script CMakeFiles/scl.dir/link.txt --verbose=1
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+/usr/bin/cc -Wall -pedantic --std=gnu99 -D_GNU_SOURCE -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -rdynamic CMakeFiles/scl.dir/scl.c.o CMakeFiles/scl.dir/debug.c.o CMakeFiles/scl.dir/scllib.c.o CMakeFiles/scl.dir/lib_common.c.o CMakeFiles/scl.dir/args.c.o CMakeFiles/scl.dir/sclmalloc.c.o CMakeFiles/scl.dir/fallback.c.o -o scl  -lrpm -lrpmio 
+[100%] Built target test_scllib
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+[100%] Built target scl
+make[1]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+/usr/bin/cmake -E cmake_progress_start /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles 0
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.BCGAoE
++ umask 022
++ cd /builddir/build/BUILD
++ '[' /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64 '!=' / ']'
++ rm -rf /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
+++ dirname /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
++ mkdir -p /builddir/build/BUILDROOT
++ mkdir /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
++ cd scl-utils-2.0.3
++ rm -rf /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
++ make install DESTDIR=/builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
+/usr/bin/cmake -S/builddir/build/BUILD/scl-utils-2.0.3 -B/builddir/build/BUILD/scl-utils-2.0.3 --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles /builddir/build/BUILD/scl-utils-2.0.3//CMakeFiles/progress.marks
+make  -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f src/CMakeFiles/scl.dir/build.make src/CMakeFiles/scl.dir/depend
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/src /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/src /builddir/build/BUILD/scl-utils-2.0.3/src/CMakeFiles/scl.dir/DependInfo.cmake --color=
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f src/CMakeFiles/scl.dir/build.make src/CMakeFiles/scl.dir/build
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[2]: Nothing to be done for 'src/CMakeFiles/scl.dir/build'.
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+[ 33%] Built target scl
+make  -f tests/CMakeFiles/test_scllib.dir/build.make tests/CMakeFiles/test_scllib.dir/depend
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3/tests/CMakeFiles/test_scllib.dir/DependInfo.cmake --color=
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f tests/CMakeFiles/test_scllib.dir/build.make tests/CMakeFiles/test_scllib.dir/build
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[2]: Nothing to be done for 'tests/CMakeFiles/test_scllib.dir/build'.
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+[ 70%] Built target test_scllib
+make  -f tests/CMakeFiles/test_args.dir/build.make tests/CMakeFiles/test_args.dir/depend
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/tests /builddir/build/BUILD/scl-utils-2.0.3/tests/CMakeFiles/test_args.dir/DependInfo.cmake --color=
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f tests/CMakeFiles/test_args.dir/build.make tests/CMakeFiles/test_args.dir/build
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[2]: Nothing to be done for 'tests/CMakeFiles/test_args.dir/build'.
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+[100%] Built target test_args
+make[1]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+/usr/bin/cmake -E cmake_progress_start /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles 0
+make  -f CMakeFiles/Makefile2 preinstall
+make[1]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make[1]: Nothing to be done for 'preinstall'.
+make[1]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+Install the project...
+/usr/bin/cmake -P cmake_install.cmake
+-- Install configuration: ""
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/rpm/macros.scl
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/fileattrs/scl.attr
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/fileattrs/sclbuild.attr
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/brp-scl-compress
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/brp-scl-python-bytecompile
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/scldeps.sh
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/share/man/man1/scl.1
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/bin/scl_enabled
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/bin/scl_source
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/profile.d/scl-init.sh
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/profile.d/scl-init.csh
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/scl/func_scl.csh
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/bash_completion.d/scl
+-- Installing: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/bin/scl
++ '[' /usr/lib/rpm/macros.d '!=' /etc/rpm ']'
++ mkdir -p /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/macros.d
++ mv /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/rpm/macros.scl /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/lib/rpm/macros.d
++ rmdir /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/rpm
++ cat /builddir/build/SOURCES/macros.scl-filesystem
++ mkdir -p /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/scl
++ cd /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/scl
++ mkdir modulefiles
++ mkdir prefixes
++ ln -s prefixes conf
++ /usr/lib/rpm/find-debuginfo.sh -j4 --strict-build-id -m -i --build-id-seed 2.0.3-6.el8 --unique-debug-suffix -2.0.3-6.el8.x86_64 --unique-debug-src-base scl-utils-2.0.3-6.el8.x86_64 --run-dwz --dwz-low-mem-die-limit 10000000 --dwz-max-die-limit 110000000 -S debugsourcefiles.list /builddir/build/BUILD/scl-utils-2.0.3
+extracting debug info from /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/bin/scl
+/usr/lib/rpm/sepdebugcrcfix: Updated 1 CRC32s, 0 CRC32s did match.
+102 blocks
++ /usr/lib/rpm/check-buildroot
++ /usr/lib/rpm/redhat/brp-ldconfig
+/sbin/ldconfig: Warning: ignoring configuration file that cannot be opened: /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/etc/ld.so.conf: No such file or directory
++ /usr/lib/rpm/brp-compress
++ /usr/lib/rpm/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/brp-python-bytecompile '' 1
++ /usr/lib/rpm/brp-python-hardlink
++ PYTHON3=/usr/bin/python3.6
++ /usr/lib/rpm/redhat/brp-mangle-shebangs
+Executing(%check): /bin/sh -e /var/tmp/rpm-tmp.KZsoO4
++ umask 022
++ cd /builddir/build/BUILD
++ cd scl-utils-2.0.3
++ make check
+/usr/bin/cmake -S/builddir/build/BUILD/scl-utils-2.0.3 -B/builddir/build/BUILD/scl-utils-2.0.3 --check-build-system CMakeFiles/Makefile.cmake 0
+make  -f CMakeFiles/Makefile2 check
+make[1]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+/usr/bin/cmake -S/builddir/build/BUILD/scl-utils-2.0.3 -B/builddir/build/BUILD/scl-utils-2.0.3 --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles 0
+make  -f CMakeFiles/Makefile2 CMakeFiles/check.dir/all
+make[2]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f CMakeFiles/check.dir/build.make CMakeFiles/check.dir/depend
+make[3]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+cd /builddir/build/BUILD/scl-utils-2.0.3 && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3 /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles/check.dir/DependInfo.cmake --color=
+make[3]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+make  -f CMakeFiles/check.dir/build.make CMakeFiles/check.dir/build
+make[3]: Entering directory '/builddir/build/BUILD/scl-utils-2.0.3'
+/usr/bin/ctest --output-on-failure
+Test project /builddir/build/BUILD/scl-utils-2.0.3
+    Start 1: test_scllib
+1/2 Test #1: test_scllib ......................   Passed    0.00 sec
+    Start 2: test_args
+2/2 Test #2: test_args ........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.00 sec
+make[3]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+Built target check
+make[2]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
+/usr/bin/cmake -E cmake_progress_start /builddir/build/BUILD/scl-utils-2.0.3/CMakeFiles 0
+make[1]: Leaving directory '/builddir/build/BUILD/scl-utils-2.0.3'
++ exit 0
+Processing files: scl-utils-2.0.3-6.el8.x86_64
+Executing(%doc): /bin/sh -e /var/tmp/rpm-tmp.j7pw7P
++ umask 022
++ cd /builddir/build/BUILD
++ cd scl-utils-2.0.3
++ DOCDIR=/builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/share/doc/scl-utils
++ export LC_ALL=C
++ LC_ALL=C
++ export DOCDIR
++ /usr/bin/mkdir -p /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/share/doc/scl-utils
++ cp -pr LICENSE /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64/usr/share/doc/scl-utils
++ exit 0
+Provides: config(scl-utils) = 1:2.0.3-6.el8 scl-utils = 1:2.0.3-6.el8 scl-utils(x86-64) = 1:2.0.3-6.el8
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Requires: /bin/bash /bin/sh libc.so.6()(64bit) libc.so.6(GLIBC_2.14)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.8)(64bit) librpm.so.8()(64bit) librpmio.so.8()(64bit) rtld(GNU_HASH)
+Processing files: scl-utils-build-2.0.3-6.el8.x86_64
+Provides: scl-utils-build = 1:2.0.3-6.el8 scl-utils-build(x86-64) = 1:2.0.3-6.el8
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Requires: /bin/bash /bin/sh
+Processing files: scl-utils-debugsource-2.0.3-6.el8.x86_64
+Provides: scl-utils-debugsource = 1:2.0.3-6.el8 scl-utils-debugsource(x86-64) = 1:2.0.3-6.el8
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Processing files: scl-utils-debuginfo-2.0.3-6.el8.x86_64
+Provides: debuginfo(build-id) = a651eefef5e6201f0bacb1c327d03da175577352 scl-utils-debuginfo = 1:2.0.3-6.el8 scl-utils-debuginfo(x86-64) = 1:2.0.3-6.el8
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Recommends: scl-utils-debugsource(x86-64) = 1:2.0.3-6.el8
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
+Wrote: /builddir/build/RPMS/scl-utils-2.0.3-6.el8.x86_64.rpm
+Wrote: /builddir/build/RPMS/scl-utils-build-2.0.3-6.el8.x86_64.rpm
+Wrote: /builddir/build/RPMS/scl-utils-debugsource-2.0.3-6.el8.x86_64.rpm
+Wrote: /builddir/build/RPMS/scl-utils-debuginfo-2.0.3-6.el8.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.dGRJrA
++ umask 022
++ cd /builddir/build/BUILD
++ cd scl-utils-2.0.3
++ /usr/bin/rm -rf /builddir/build/BUILDROOT/scl-utils-2.0.3-6.el8.x86_64
++ exit 0
+Finish: rpmbuild scl-utils-2.0.3-6.el8.src.rpm
+Finish: build phase for scl-utils-2.0.3-6.el8.src.rpm
+INFO: chroot_scan: 3 files copied to /var/lib/copr-rpmbuild/results/chroot_scan
+INFO: /var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/log/dnf.rpm.log
+/var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/log/dnf.librepo.log
+/var/lib/mock/rhel+epel-8-x86_64-1716304491.226082/root/var/log/dnf.log
+INFO: Done(/var/lib/copr-rpmbuild/results/scl-utils-2.0.3-6.el8.src.rpm) Config(child) 0 minutes 12 seconds
+INFO: Results and/or logs in: /var/lib/copr-rpmbuild/results
+INFO: Cleaning up build root ('cleanup_on_success=True')
+Start: clean chroot
+INFO: unmounting tmpfs.
+Finish: clean chroot
+Finish: run
+Running RPMResults tool
+Package info:
+{
+    "packages": [
+        {
+            "name": "scl-utils-debuginfo",
+            "epoch": 1,
+            "version": "2.0.3",
+            "release": "6.el8",
+            "arch": "x86_64"
+        },
+        {
+            "name": "scl-utils-debugsource",
+            "epoch": 1,
+            "version": "2.0.3",
+            "release": "6.el8",
+            "arch": "x86_64"
+        },
+        {
+            "name": "scl-utils",
+            "epoch": 1,
+            "version": "2.0.3",
+            "release": "6.el8",
+            "arch": "src"
+        },
+        {
+            "name": "scl-utils-build",
+            "epoch": 1,
+            "version": "2.0.3",
+            "release": "6.el8",
+            "arch": "x86_64"
+        },
+        {
+            "name": "scl-utils",
+            "epoch": 1,
+            "version": "2.0.3",
+            "release": "6.el8",
+            "arch": "x86_64"
+        }
+    ]
+}
+RPMResults finished
+
