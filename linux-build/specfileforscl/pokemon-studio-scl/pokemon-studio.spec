@@ -21,6 +21,13 @@
 
 # do not produce empty debuginfo package
 %global debug_package %{nil}
+%define osstring %(source /etc/os-release; echo ${NAME})
+%if 0%{?rhel} <= 5
+%define epelstring %(echo epel-release)
+%endif
+%if 0%{?fedora} <= 35
+%define epelstring %(echo fedora-release)
+%endif
 
 Summary: Package that installs %scl
 Name: %scl_name
