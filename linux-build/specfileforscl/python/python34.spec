@@ -1,3 +1,5 @@
+# source and patch
+# https://dl.fedoraproject.org/pub/epel/7/SRPMS/Packages/p/python34-3.4.10-8.el7.src.rpm
 # ======================================================
 # Conditionals and other variables controlling the build
 # ======================================================
