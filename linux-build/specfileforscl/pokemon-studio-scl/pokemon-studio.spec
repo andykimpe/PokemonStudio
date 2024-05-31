@@ -2,44 +2,45 @@
 %global _scl_vendor pokemon-studio
 %global scl pokemon-studio
 %global scl_prefix pokemon-studio-
-%global scl_name %scl
+%global scl_name %scl     
 %global macrosdir        %(d=%{_rpmconfigdir}/macros.d; [ -d $d ] || d=%{_root_sysconfdir}/rpm; echo $d)
 %global install_scl      1
-BuildRequires: scl-utils-build
-BuildRequires: shc gcc
-%{?scl_package:%scl_package %scl}
 %if 0%{?fedora} >= 26 || 0%{?rhel} >= 8
 %global rh_layout        1
 %endif
+
+%if 0%{?fedora} >= 20 && 0%{?fedora} < 27
+# Requires scl-utils v2 for SCL integration, dropeed in F29
+%global with_modules     1
+%else
+# Works with file installed in /usr/share/Modules/modulefiles/
+%global with_modules     0
+%endif
+
+%scl_package %scl
+
 # do not produce empty debuginfo package
 %global debug_package %{nil}
-%define osstring %(source /etc/os-release; echo ${NAME})
-%if 0%{?rhel} <= 5
-%define epelstring %(echo epel-release)
-%endif
-%if 0%{?fedora} <= 35
-%define epelstring %(echo fedora-release)
-%endif
 
 Summary: Package that installs %scl
 Name: %scl_name
 Version: 2.2.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: PokemonStudio
 Group: Applications/File
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Source0: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/README
-Source1: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE.md
-Source2: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE-SIMPLIFIED.md
-Source3: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE-FR.md
-Source4: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE-FR-SIMPLIFIEE.md
-Source5: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/CONTRIBUTING.md
-Source6: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/CodeGuidelines.md
-Source7: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/EPIC_Cleanup_responsibility_of_Studio.md
-Source8: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/macros-build
-Source9: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/pokemon-studio.desktop
-Source10: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/pokemon-studio.sh
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/macros-build
+Source1: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/README
+Source2: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE.md
+Source3: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE-SIMPLIFIED.md
+Source4: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE-FR.md
+Source5: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/LICENSE-FR-SIMPLIFIEE.md
+Source6: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/CONTRIBUTING.md
+Source7: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/CodeGuidelines.md
+Source8: https://github.com/PokemonWorkshop/PokemonStudio/raw/develop/EPIC_Cleanup_responsibility_of_Studio.md
+Source9: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/macros-build
+Source10: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/pokemon-studio.desktop
+Source11: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/pokemon-studio-scl/pokemon-studio.sh
 BuildRequires: scl-utils-build
 BuildRequires: help2man
 # Temporary work-around
@@ -56,16 +57,6 @@ Requires:  %{epelstring}
 BuildRequires:  epel-next-release
 Requires:  epel-next-release
 %endif
-%if 0%{?rhel} <= 6
-#python 3 found on epel on rhel 7 and +
-BuildRequires: python3-devel
-%global __python /usr/bin/python3
-%else
-BuildRequires: python-devel
-%global __python /usr/bin/python
-%endif
-
-%global rrcdir %{_scl_root}/usr/lib/rpm/redhat
 
 %description
 This is the main package for %scl Software Collection.
@@ -75,15 +66,10 @@ Summary:   Package that handles %scl Software Collection.
 Group:     Development/Languages
 Requires:  scl-utils
 Requires:  environment-modules
+Requires(post): %{_root_sbindir}/semanage
+Requires(post): %{_root_sbindir}/selinuxenabled
 Provides:  %{?scl_name}-runtime(%{scl_vendor})
 Provides:  %{?scl_name}-runtime(%{scl_vendor})%{?_isa}
-%if 0%{?rhel} >= 7
-Requires(post): /usr/sbin/semanage
-Requires(post): /usr/sbin/selinuxenabled
-%else
-Requires(post): libselinux policycoreutils-python
-Requires(postun): libselinux policycoreutils-python
-%endif
 
 %description runtime
 Package shipping essential scripts to work with %scl Software Collection.
@@ -92,14 +78,10 @@ Package shipping essential scripts to work with %scl Software Collection.
 Summary:   Package shipping basic build configuration
 Group:     Development/Languages
 Requires:  scl-utils-build
-Requires:  %{?scl_name}-runtime%{?_isa} = %{version}-%{release}
-%if 0%{?rhel} >= 7
-Requires(post): /usr/sbin/semanage
-Requires(post): /usr/sbin/selinuxenabled
-%else
-Requires(post): libselinux policycoreutils-python
-Requires(postun): libselinux policycoreutils-python
-%endif
+Requires(post): %{_root_sbindir}/semanage
+Requires(post): %{_root_sbindir}/selinuxenabled
+Provides:  %{?scl_name}-runtime(%{scl_vendor})
+Provides:  %{?scl_name}-runtime(%{scl_vendor})%{?_isa}
 
 %description build
 Package shipping essential configuration macros
@@ -108,7 +90,10 @@ to build %scl Software Collection.
 %package scldevel
 Summary:   Package shipping development files for %scl
 Group:     Development/Languages
-Requires:  %{?scl_name}-runtime%{?_isa} = %{version}-%{release}
+Requires(post): %{_root_sbindir}/semanage
+Requires(post): %{_root_sbindir}/selinuxenabled
+Provides:  %{?scl_name}-runtime(%{scl_vendor})
+Provides:  %{?scl_name}-runtime(%{scl_vendor})%{?_isa}
 
 %description scldevel
 Package shipping development files, especially usefull for development of
