@@ -1,0 +1,1922 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Petr Viktorin <pviktori@redhat.com>
+Date: Tue, 28 Jul 2020 18:01:55 +0200
+Subject: [PATCH] 00353: Update test certs and keys
+
+Manual backport of bpo-41183, bpo-34542, GH-8997, commit
+1da2b23504a68ed0432aa74a17ec2533933f5af8 to Python 3.4.
+
+Adds make_ssl_certs.py and secp384r1.pem from Python 3.5.
+---
+ Lib/test/allsans.pem                          |  81 +++++++
+ Lib/test/idnsans.pem                          | 169 ++++++++++++++
+ Lib/test/keycert.passwd.pem                   |  97 +++++---
+ Lib/test/keycert.pem                          |  89 +++++---
+ Lib/test/keycert2.pem                         |  89 +++++---
+ Lib/test/keycert3.pem                         | 212 +++++++++++++-----
+ Lib/test/keycert4.pem                         | 212 +++++++++++++-----
+ Lib/test/keycertecc.pem                       | 107 +++++++++
+ Lib/test/make_ssl_certs.py                    | 144 ++++++++++--
+ Lib/test/pycacert.pem                         | 141 +++++++-----
+ Lib/test/pycakey.pem                          |  64 +++---
+ Lib/test/revocation.crl                       |  19 +-
+ Lib/test/secp384r1.pem                        |   7 +
+ Lib/test/ssl_cert.pem                         |  37 +--
+ Lib/test/ssl_key.passwd.pem                   |  60 +++--
+ Lib/test/ssl_key.pem                          |  52 +++--
+ Lib/test/test_asyncio/test_events.py          |  18 +-
+ Lib/test/test_ssl.py                          |   6 +-
+ .../2020-07-01-16-59-46.bpo-41183.9stVAW.rst  |   1 +
+ 19 files changed, 1235 insertions(+), 370 deletions(-)
+ create mode 100644 Lib/test/allsans.pem
+ create mode 100644 Lib/test/idnsans.pem
+ create mode 100644 Lib/test/keycertecc.pem
+ create mode 100644 Lib/test/secp384r1.pem
+ create mode 100644 Misc/NEWS.d/next/Library/2020-07-01-16-59-46.bpo-41183.9stVAW.rst
+
+diff --git a/Lib/test/allsans.pem b/Lib/test/allsans.pem
+new file mode 100644
+index 00000000000..e8b81f1d72c
+--- /dev/null
++++ b/Lib/test/allsans.pem
+@@ -0,0 +1,81 @@
++-----BEGIN PRIVATE KEY-----
++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
++8B5cIXLJUUVjGA+ppHNKVcQ=
++-----END PRIVATE KEY-----
++-----BEGIN CERTIFICATE-----
++MIIHRjCCBa6gAwIBAgIUGEfdpIqjoG6DWDJuz/IjrTmCDBgwDQYJKoZIhvcNAQEL
++BQAwXTELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYD
++VQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjEQMA4GA1UEAwwHYWxsc2Fu
++czAeFw0yMDA3MjgxNjAzNTZaFw0zMDA3MjYxNjAzNTZaMF0xCzAJBgNVBAYTAlhZ
++MRcwFQYDVQQHDA5DYXN0bGUgQW50aHJheDEjMCEGA1UECgwaUHl0aG9uIFNvZnR3
++YXJlIEZvdW5kYXRpb24xEDAOBgNVBAMMB2FsbHNhbnMwggGiMA0GCSqGSIb3DQEB
++AQUAA4IBjwAwggGKAoIBgQDfEfs3QUDi78ljTsk5C0syTupZjSrf5l4GgpWCueKK
++3i7hSa9agZ5enjz+c6KU5+Y7iTmoucXCYkjBG+XzMlGxTPJR0QqYrO7ar/hTH+o7
++TttA5zXifwKWZcx+Z2YdpSzl9RDdwiJ5FfBLngGiAYO3vk8m09pe9xbGH7/eFnpU
++1Hj+Ex4n0eZ0yTtO+FC+qWJpZMSXeOJ3dYThld1JjI7SCA+82Wqxm530ATBvgJNA
++/U9xBr9d1lYk4kZIzxlgmRpu1/nsImU8+r6G6WXARpTcnwWSkbXvg9IYTGixlWG6
++xp+uWmIYJmIgiOYjvxKFJ8b2sBAwPMrbIEpK4uq10VdtXdWMW7lXtGmIny3LvtNn
++Z55IT7su7lxiAzAnWlCufP7Vji7FWvsUkev9CEXqunD4F/QXaWHrSJl2VimdCD7q
++6eLh7JbFS4FOZSjNWc3P4DlLEe82/wfdHhOgCwJaTrmVKATYqdPs5KUWMtMj0DXz
++GQxiBVONbhRYtRtYHDKtDEsCAwEAAaOCAvwwggL4MIIBMAYDVR0RBIIBJzCCASOC
++B2FsbHNhbnOgHgYDKgMEoBcMFXNvbWUgb3RoZXIgaWRlbnRpZmllcqA1BgYrBgEF
++AgKgKzApoBAbDktFUkJFUk9TLlJFQUxNoRUwE6ADAgEBoQwwChsIdXNlcm5hbWWB
++EHVzZXJAZXhhbXBsZS5vcmeCD3d3dy5leGFtcGxlLm9yZ6RnMGUxCzAJBgNVBAYT
++AlhZMRcwFQYDVQQHDA5DYXN0bGUgQW50aHJheDEjMCEGA1UECgwaUHl0aG9uIFNv
++ZnR3YXJlIEZvdW5kYXRpb24xGDAWBgNVBAMMD2Rpcm5hbWUgZXhhbXBsZYYXaHR0
++cHM6Ly93d3cucHl0aG9uLm9yZy+HBH8AAAGHEAAAAAAAAAAAAAAAAAAAAAGIBCoD
++BAUwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcD
++AjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBTVn9yulr5cphXtB46UimlyTTMrfjCB
++mgYDVR0jBIGSMIGPgBTVn9yulr5cphXtB46UimlyTTMrfqFhpF8wXTELMAkGA1UE
++BhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24g
++U29mdHdhcmUgRm91bmRhdGlvbjEQMA4GA1UEAwwHYWxsc2Fuc4IUGEfdpIqjoG6D
++WDJuz/IjrTmCDBgwgYMGCCsGAQUFBwEBBHcwdTA8BggrBgEFBQcwAoYwaHR0cDov
++L3Rlc3RjYS5weXRob250ZXN0Lm5ldC90ZXN0Y2EvcHljYWNlcnQuY2VyMDUGCCsG
++AQUFBzABhilodHRwOi8vdGVzdGNhLnB5dGhvbnRlc3QubmV0L3Rlc3RjYS9vY3Nw
++LzBDBgNVHR8EPDA6MDigNqA0hjJodHRwOi8vdGVzdGNhLnB5dGhvbnRlc3QubmV0
++L3Rlc3RjYS9yZXZvY2F0aW9uLmNybDANBgkqhkiG9w0BAQsFAAOCAYEARjOnV+5Y
++MOIjhrcdDaMY2oonVBSo31GrBNSw3Nxqj0QqEJZ/Qg5JV7U2KfZrzYIBzWyU81e7
++yzsZvnwG+mAxkSnye7/Sd3QBlcgLBtcBWCundCK6l/2Op+3eDJCs6/iC8fmMfyoS
++FIsnWKZYi+DqSCLQ6LgGDlZdWCKEOO1GsDAriZMM5BZRChMbXzvXu6NSK69RhucS
++/dB0RxIaABsIIfnjafLlSDHkU8TwpOa7tU/SBF82X9Mcy3IjxwqXJEwZ5ncJux/5
++nqHj/zrrPH+6Hs+c7U8g87ZzblMomKHdNM0SPZZb9rxMIzN2q8OmDjSDxzvcfaUm
++8fkMmKM8gpajzef9o4b6LnJGIPqm7WdMIPQLhUe7S9fWsp0IT8Pxa52B78WHYijS
++caMaXT0ccLrgvofceGjG8Ft/bVJyZMvq5dDZe1DsJBlCOYwg8JHuMxFtyGECgCfC
++h2XG25+I1HEJ4L9ciQFgOpTxT4IMYADtGvR4rpuHhQGqJ905oi1bYZ1a
++-----END CERTIFICATE-----
+diff --git a/Lib/test/idnsans.pem b/Lib/test/idnsans.pem
+new file mode 100644
+index 00000000000..4d8039681bc
+--- /dev/null
++++ b/Lib/test/idnsans.pem
+@@ -0,0 +1,169 @@
++-----BEGIN PRIVATE KEY-----
++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
++d97XFAcl1DfrtnFj6cLEyxLr
++-----END PRIVATE KEY-----
++Certificate:
++    Data:
++        Version: 3 (0x2)
++        Serial Number:
++            76:c4:32:f6:d2:ab:1d:ee:77:2d:c7:0e:93:de:67:46:4e:32:07:c9
++        Signature Algorithm: sha256WithRSAEncryption
++        Issuer: C=XY, O=Python Software Foundation CA, CN=our-ca-server
++        Validity
++            Not Before: Jul 28 16:03:56 2020 GMT
++            Not After : Jun  6 16:03:56 2030 GMT
++        Subject: C=XY, L=Castle Anthrax, O=Python Software Foundation, CN=idnsans
++        Subject Public Key Info:
++            Public Key Algorithm: rsaEncryption
++                RSA Public-Key: (3072 bit)
++                Modulus:
++                    00:bf:76:60:f2:67:79:cd:56:0d:c7:9b:b5:b4:f9:
++                    3d:0a:85:a8:2b:95:44:af:0e:8e:5e:d8:ba:5f:12:
++                    08:1b:3d:8d:75:4d:ff:5b:7d:3c:9d:12:a5:27:42:
++                    c6:89:44:2d:f6:76:ef:96:ad:f1:07:55:bc:6f:01:
++                    6e:58:3c:a7:fd:38:70:85:fe:a3:d5:07:2a:98:e5:
++                    20:e8:6a:50:2b:81:36:0a:1f:cd:99:df:21:2c:2d:
++                    7b:62:ce:58:5e:93:a8:32:f4:1a:5d:bb:d1:ae:19:
++                    3c:2c:d6:7f:76:fb:1f:cd:6e:fa:70:77:00:53:50:
++                    ed:0d:4f:3c:e4:73:42:ab:98:a5:10:97:85:62:cb:
++                    1f:bc:74:26:1e:c7:a6:f4:9f:93:03:7a:ef:f5:63:
++                    2d:5e:a6:d9:ad:bb:96:f0:3b:d5:12:e3:85:f1:ce:
++                    39:f8:d4:08:d2:8f:f3:73:0f:ed:b9:c0:2e:29:38:
++                    e9:6f:0a:e7:cc:54:d3:51:a2:0e:ed:bd:22:0e:f5:
++                    a1:36:4d:e5:4f:df:fe:d1:fc:34:63:92:d7:4e:fb:
++                    c4:96:6e:97:ec:fd:9d:b4:5d:59:c1:02:e3:c4:96:
++                    e2:ea:50:c2:8a:7b:01:e1:ae:43:24:9c:02:49:6c:
++                    7d:ce:33:f1:be:de:f1:9b:a9:c6:a1:ae:17:d4:dc:
++                    36:ed:1e:50:c5:9c:45:ff:60:02:9b:9e:2c:bd:79:
++                    d6:88:36:9f:41:ed:f6:f1:1d:7e:3d:72:3a:e8:b0:
++                    5c:4f:eb:2f:e9:65:75:32:b5:50:8e:7a:cc:2d:df:
++                    80:a4:b8:2f:68:7f:96:38:75:e8:44:d3:de:8c:63:
++                    c0:53:f3:50:7a:04:ef:cd:d4:82:61:1f:8e:ce:ad:
++                    af:06:8e:55:54:76:ec:ec:61:70:be:bb:92:08:75:
++                    41:15:39:ba:1d:dc:1c:1e:13:39:fe:63:8d:6d:f2:
++                    4f:3c:b7:25:94:ae:33:25:2c:f4:e1:70:ff:e4:b5:
++                    14:5a:9b:e5:da:60:9b:b5:0b:5b
++                Exponent: 65537 (0x10001)
++        X509v3 extensions:
++            X509v3 Subject Alternative Name: 
++                DNS:idnsans, DNS:xn--knig-5qa.idn.pythontest.net, DNS:xn--knigsgsschen-lcb0w.idna2003.pythontest.net, DNS:xn--knigsgchen-b4a3dun.idna2008.pythontest.net, DNS:xn--nxasmq6b.idna2003.pythontest.net, DNS:xn--nxasmm1c.idna2008.pythontest.net
++            X509v3 Key Usage: critical
++                Digital Signature, Key Encipherment
++            X509v3 Extended Key Usage: 
++                TLS Web Server Authentication, TLS Web Client Authentication
++            X509v3 Basic Constraints: critical
++                CA:FALSE
++            X509v3 Subject Key Identifier: 
++                2F:2D:0B:F8:B7:DE:8E:1F:14:4C:27:93:CB:7D:8A:7F:BC:F2:D5:7A
++            X509v3 Authority Key Identifier: 
++                keyid:5E:57:A2:AF:07:53:35:F6:A1:5D:33:E3:D4:86:C6:0B:8F:37:95:54
++                DirName:/C=XY/O=Python Software Foundation CA/CN=our-ca-server
++                serial:76:C4:32:F6:D2:AB:1D:EE:77:2D:C7:0E:93:DE:67:46:4E:32:07:C5
++
++            Authority Information Access: 
++                CA Issuers - URI:http://testca.pythontest.net/testca/pycacert.cer
++                OCSP - URI:http://testca.pythontest.net/testca/ocsp/
++
++            X509v3 CRL Distribution Points: 
++
++                Full Name:
++                  URI:http://testca.pythontest.net/testca/revocation.crl
++
++    Signature Algorithm: sha256WithRSAEncryption
++         50:c2:33:0d:9d:c9:87:ea:74:1f:10:b3:b2:c9:53:bb:ea:e1:
++         3b:c9:75:d3:37:0a:4e:04:d3:12:b0:44:1a:7e:92:4e:56:3b:
++         87:be:f3:ec:05:0e:76:51:e3:b8:7e:37:4b:9f:ba:3b:03:62:
++         e5:f4:79:24:a4:6b:7c:e3:f3:49:c3:1d:e1:5f:52:b4:bb:8e:
++         7a:a1:b3:5c:be:d6:09:66:6c:f1:c5:28:d9:9c:12:dc:d7:e7:
++         af:bb:83:10:80:59:bb:70:e9:d6:e2:21:7d:00:3d:51:d7:30:
++         66:3c:c1:f5:63:69:b5:c3:4f:be:2b:50:74:27:f0:c4:19:2c:
++         61:53:54:38:e3:ba:8d:78:b1:43:32:d2:61:04:34:e6:f3:54:
++         f9:32:04:b6:af:fd:7e:c1:b7:d5:75:4e:fa:9f:55:a1:d7:ee:
++         62:45:d1:fa:d8:a0:d0:97:87:86:5c:66:f5:bb:d1:5a:73:33:
++         1c:c0:aa:ae:bd:17:4b:d4:03:81:90:c6:8e:26:5c:0f:12:13:
++         64:5c:83:b1:75:11:01:74:eb:0d:8a:4e:9c:6c:52:6f:38:32:
++         7d:ec:2f:58:dc:cc:ee:56:6f:2a:f1:85:be:19:09:4b:a5:2d:
++         c5:37:c2:8d:67:c7:9b:bb:a8:4b:bf:cd:f1:fe:ff:8b:dc:fe:
++         10:8b:d4:b7:ce:e7:08:09:d4:b7:76:7a:b2:1f:cc:e0:99:73:
++         94:6b:5b:76:33:1a:0d:79:e3:2e:09:46:cd:96:63:26:b3:9a:
++         5e:2b:d4:9d:96:40:c3:db:90:54:a9:7a:f7:fa:57:23:9b:3a:
++         77:f4:34:3b:a9:fd:e6:44:17:54:c8:1b:5b:cc:d1:7b:74:cc:
++         b3:4b:48:38:db:73:1f:0f:c8:7b:eb:b6:41:7e:44:7d:4a:a8:
++         50:06:ac:81:88:92:00:5a:69:ad:66:2b:90:32:95:ad:0c:cd:
++         13:b7:d9:ac:d8:3c:de:5d:66:c6:95:2d:87:4f:b8:d7:a0:59:
++         86:b5:bc:40:7d:b0
++-----BEGIN CERTIFICATE-----
++MIIG1TCCBT2gAwIBAgIUdsQy9tKrHe53LccOk95nRk4yB8kwDQYJKoZIhvcNAQEL
++BQAwTTELMAkGA1UEBhMCWFkxJjAkBgNVBAoMHVB5dGhvbiBTb2Z0d2FyZSBGb3Vu
++ZGF0aW9uIENBMRYwFAYDVQQDDA1vdXItY2Etc2VydmVyMB4XDTIwMDcyODE2MDM1
++NloXDTMwMDYwNjE2MDM1NlowXTELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3Rs
++ZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjEQ
++MA4GA1UEAwwHaWRuc2FuczCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGB
++AL92YPJnec1WDcebtbT5PQqFqCuVRK8Ojl7Yul8SCBs9jXVN/1t9PJ0SpSdCxolE
++LfZ275at8QdVvG8Bblg8p/04cIX+o9UHKpjlIOhqUCuBNgofzZnfISwte2LOWF6T
++qDL0Gl270a4ZPCzWf3b7H81u+nB3AFNQ7Q1PPORzQquYpRCXhWLLH7x0Jh7HpvSf
++kwN67/VjLV6m2a27lvA71RLjhfHOOfjUCNKP83MP7bnALik46W8K58xU01GiDu29
++Ig71oTZN5U/f/tH8NGOS1077xJZul+z9nbRdWcEC48SW4upQwop7AeGuQyScAkls
++fc4z8b7e8ZupxqGuF9TcNu0eUMWcRf9gApueLL151og2n0Ht9vEdfj1yOuiwXE/r
++L+lldTK1UI56zC3fgKS4L2h/ljh16ETT3oxjwFPzUHoE783UgmEfjs6trwaOVVR2
++7OxhcL67kgh1QRU5uh3cHB4TOf5jjW3yTzy3JZSuMyUs9OFw/+S1FFqb5dpgm7UL
++WwIDAQABo4ICmzCCApcwgeEGA1UdEQSB2TCB1oIHaWRuc2Fuc4IfeG4tLWtuaWct
++NXFhLmlkbi5weXRob250ZXN0Lm5ldIIueG4tLWtuaWdzZ3NzY2hlbi1sY2Iwdy5p
++ZG5hMjAwMy5weXRob250ZXN0Lm5ldIIueG4tLWtuaWdzZ2NoZW4tYjRhM2R1bi5p
++ZG5hMjAwOC5weXRob250ZXN0Lm5ldIIkeG4tLW54YXNtcTZiLmlkbmEyMDAzLnB5
++dGhvbnRlc3QubmV0giR4bi0tbnhhc21tMWMuaWRuYTIwMDgucHl0aG9udGVzdC5u
++ZXQwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcD
++AjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQvLQv4t96OHxRMJ5PLfYp/vPLVejCB
++iQYDVR0jBIGBMH+AFF5Xoq8HUzX2oV0z49SGxguPN5VUoVGkTzBNMQswCQYDVQQG
++EwJYWTEmMCQGA1UECgwdUHl0aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAU
++BgNVBAMMDW91ci1jYS1zZXJ2ZXKCFHbEMvbSqx3udy3HDpPeZ0ZOMgfFMIGDBggr
++BgEFBQcBAQR3MHUwPAYIKwYBBQUHMAKGMGh0dHA6Ly90ZXN0Y2EucHl0aG9udGVz
++dC5uZXQvdGVzdGNhL3B5Y2FjZXJ0LmNlcjA1BggrBgEFBQcwAYYpaHR0cDovL3Rl
++c3RjYS5weXRob250ZXN0Lm5ldC90ZXN0Y2Evb2NzcC8wQwYDVR0fBDwwOjA4oDag
++NIYyaHR0cDovL3Rlc3RjYS5weXRob250ZXN0Lm5ldC90ZXN0Y2EvcmV2b2NhdGlv
++bi5jcmwwDQYJKoZIhvcNAQELBQADggGBAFDCMw2dyYfqdB8Qs7LJU7vq4TvJddM3
++Ck4E0xKwRBp+kk5WO4e+8+wFDnZR47h+N0ufujsDYuX0eSSka3zj80nDHeFfUrS7
++jnqhs1y+1glmbPHFKNmcEtzX56+7gxCAWbtw6dbiIX0APVHXMGY8wfVjabXDT74r
++UHQn8MQZLGFTVDjjuo14sUMy0mEENObzVPkyBLav/X7Bt9V1TvqfVaHX7mJF0frY
++oNCXh4ZcZvW70VpzMxzAqq69F0vUA4GQxo4mXA8SE2Rcg7F1EQF06w2KTpxsUm84
++Mn3sL1jczO5Wbyrxhb4ZCUulLcU3wo1nx5u7qEu/zfH+/4vc/hCL1LfO5wgJ1Ld2
++erIfzOCZc5RrW3YzGg154y4JRs2WYyazml4r1J2WQMPbkFSpevf6VyObOnf0NDup
++/eZEF1TIG1vM0Xt0zLNLSDjbcx8PyHvrtkF+RH1KqFAGrIGIkgBaaa1mK5Ayla0M
++zRO32azYPN5dZsaVLYdPuNegWYa1vEB9sA==
++-----END CERTIFICATE-----
+diff --git a/Lib/test/keycert.passwd.pem b/Lib/test/keycert.passwd.pem
+index e90574881db..7c07fe2660a 100644
+--- a/Lib/test/keycert.passwd.pem
++++ b/Lib/test/keycert.passwd.pem
+@@ -1,33 +1,68 @@
+------BEGIN RSA PRIVATE KEY-----
+-Proc-Type: 4,ENCRYPTED
+-DEK-Info: DES-EDE3-CBC,1A8D9D2A02EC698A
+-
+-kJYbfZ8L0sfe9Oty3gw0aloNnY5E8fegRfQLZlNoxTl6jNt0nIwI8kDJ36CZgR9c
+-u3FDJm/KqrfUoz8vW+qEnWhSG7QPX2wWGPHd4K94Yz/FgrRzZ0DoK7XxXq9gOtVA
+-AVGQhnz32p+6WhfGsCr9ArXEwRZrTk/FvzEPaU5fHcoSkrNVAGX8IpSVkSDwEDQr
+-Gv17+cfk99UV1OCza6yKHoFkTtrC+PZU71LomBabivS2Oc4B9hYuSR2hF01wTHP+
+-YlWNagZOOVtNz4oKK9x9eNQpmfQXQvPPTfusexKIbKfZrMvJoxcm1gfcZ0H/wK6P
+-6wmXSG35qMOOztCZNtperjs1wzEBXznyK8QmLcAJBjkfarABJX9vBEzZV0OUKhy+
+-noORFwHTllphbmydLhu6ehLUZMHPhzAS5UN7srtpSN81eerDMy0RMUAwA7/PofX1
+-94Me85Q8jP0PC9ETdsJcPqLzAPETEYu0ELewKRcrdyWi+tlLFrpE5KT/s5ecbl9l
+-7B61U4Kfd1PIXc/siINhU3A3bYK+845YyUArUOnKf1kEox7p1RpD7yFqVT04lRTo
+-cibNKATBusXSuBrp2G6GNuhWEOSafWCKJQAzgCYIp6ZTV2khhMUGppc/2H3CF6cO
+-zX0KtlPVZC7hLkB6HT8SxYUwF1zqWY7+/XPPdc37MeEZ87Q3UuZwqORLY+Z0hpgt
+-L5JXBCoklZhCAaN2GqwFLXtGiRSRFGY7xXIhbDTlE65Wv1WGGgDLMKGE1gOz3yAo
+-2jjG1+yAHJUdE69XTFHSqSkvaloA1W03LdMXZ9VuQJ/ySXCie6ABAQ==
+------END RSA PRIVATE KEY-----
++-----BEGIN ENCRYPTED PRIVATE KEY-----
++MIIHbTBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIO6LqAzTFEasCAggA
++MAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAEqBBD8zV2wfcpixhqwYOBulRaKBIIH
++ECOX50fTX6mrpTx4BcLS2HstX0ByuXOJqUbfGtPFrx36niRo5wOvUNujnavirL42
++WmG6kgohzH8747q1CyX60GkL2sJe5NPRkCP51PGrqoLWwOzr7IsThUkHg7yq3DEG
++rjH2fQDDxMn7zVhs3pWrpF4r6g2299JFjvL6A4jehQBG4N6Ofc+/6+R/MVH8z/zd
++8Cl7E1RXPT8NCX8b47W2OewEQeBP8rU/xTrlUcW9P8Y7cXu9W1EQ6rvWNHeX5SFs
++l1moEKXcuPgYAGgO4UiAdCmReOi/BTyu8ezGx/dbJxBjePlot4XS8XLnz2MTfBhj
++fR9YjEH03GwV20bGJQXnaGuwjIQv2pUsIdFqEeEWcvh6dMdcZ/bN9ny5muQEpIl0
++eHVS7YGZH2SXqLaroJ6Uj6ToVMIot/8v4JsxJc9R4cuwK/HspWVyVJcCxYWqG+fP
++NwSAr9mdAkNK6Qop1HMUZ2RHoR/owrqnzMiWN3BEdB0JfFUd2ZOoIyPZrCOQ+vxf
++T3tlXx/qS8Kt8LetKb9P2Gfs+Xs9dXjnSAJgEr9cszWY3LCQuQSGOlFRljFMHoZY
++1QhNafA7odenS5f1DyxrdauchCVdozBWaoSnDH4ybVDBaqdjOH13KP8TB0c9Iw+A
++GJn+Oz3cYC2LVWsJhbjFlMthiUBkrB91M+yJPx9+cmRlOQMnXB+hDpCJbbB3t9Nf
++J9BoiD7wkjNSdNXDeiBnaT/XISbLsjnqaXIJO46jnPLro3gnG5rR87khumzuNfmF
++6nFU2X2jXLfNRhn2O7jhuW6nfiSOVFo6ha/y0YlF8GMr3S+PwtKb3aQSOfEdNq4i
++FJZwTuScSZEJNWaEs7nXdizZRm1kzO2SwCuE5kbVZ/2/QGIkZkZHEFUSI/rd7FWx
++tTZBCbmIaFc0PMcB7A3dzZcye2oMhsiUX3L2ltsif7u2BWHEUA31iodAJ49yhfZI
++UIN6lHi5/sQJ1y0Mz4tLF//MeJ7UhWLHseL5TtA0TWx0NKm+BfL72r/P4Kvu3SWm
++0XQOHDfEAYvsccZhZfnzZ9ZZ+Ni0iLTFtlZH52WNzaduSUrBmvJFczs3v5gGw2km
++U/93LrNLtugZPG5hANHC7Q6DTGnCAUiarQzhN9XHhUl/pqc7YfxBFBHzb1rsofXE
++p8EhDx+vk+kfjuEZRpXQx4DxvAUbaXj8LQQwHx7/lIJa0kIK44ihG2RFTeDcIpsJ
++xeXYZ9A+f02J1VyRkjf2VaBePTVA6ae1b/fzGNtKga3YXWxhv0anwzpewMie4X+5
++/Q4EHIWntXI+DkJ/h9utUSjeVuVw7cLWOhgOAQS9g88Ac0Z5XZVb196AFIii/png
++fSCzaeURg1U1QLer9aZcLRq5Gku0nFJRsnAmnukSql4PPZn0aZ5bYZYRoYrZL7kl
++5BIeImGU6qo7Uf7SmLc+L9ymNOQDewqti42tF0xWmTVzAedYt9MZEAF/uWVutBN4
++9I9c92AqinvzG1nmKuGxM/X74EL22GrwjHDJ4PbZQA/KMh403fOgTL/IVfEjVQbN
++LjEQHZ0h+x2fGPfMQxUAONgHwN3cO5Oua2zrNWQf4C7E2iUBW3gPrxJZcudqUM9a
++MBZj7WgbF4fQj9H88aHhgue3F8CigRfqfA/8VJGMkQe8fQ6T/G5VkZslVHpHwV+X
++qfz7W3R5dmY5kamlsV+co7g+YIhF//gLmyytTdMroyJSGlXsONQ8TMsxIXpCK+9U
++E5w/ZgflAQpsrzD1fIJT49Ae2VTQXocMzfOO61Xs0DyGwnTXKHwGAC/bZukUzwuv
++OtZwVduBJtXoloczIkcCkQBEnXcwOd++gcsZe6tgKq5n37LX0q4U5l+VQhVie3j+
++qso382yNOW+OUGU9HnqusxUxS+5WkrenlDnVKGf80f9Riw/fMgwxDv/mL+Ay36I9
++HtkdhuSat1tR1OU7FDNTgp2WGFs7cmoOY+9pdF4+lzKjPvZ3zjtVy4MSSZkNXSJX
++gsYoTACBDy26bvhQ6mvCSP3RL4S2EOPqS5nSOXA1Jza/v2M741mrFPPxMBHigR+U
++VFamjUtiGYWcichO0Qxu7nIB8+ERvtoppnKr2U5vHzm+AlmldbPl4zNGxeGfz6Bt
++Gqxt4kYp1gF+VpJUkVMjb3xl8+IVoErI3R742V388VaEDxPiP7s5ehahjmyb9ETX
++zrXrw2I1OmQlncvH5SKpIcTNb1jA2D5Fww4vYnlb63KpeOn8onljtRUrD76N8KVP
++y5UE3Mu+CDqQZlQ0VzTQ1wgpaeclhbxluv76rZfxjSVrwKaVmH7pSR+26fQbhn6K
++6xXnM1/v4CF7VoKJpIeCui8nHvpDmoyNVWlSJezPGDlt08q81YGpsiX5DQPvL6TD
++R+W62pjS6CI0cx2dYSLLwb7bEurESiBCRpdLlm3eyLJf
++-----END ENCRYPTED PRIVATE KEY-----
+ -----BEGIN CERTIFICATE-----
+-MIICVDCCAb2gAwIBAgIJANfHOBkZr8JOMA0GCSqGSIb3DQEBBQUAMF8xCzAJBgNV
+-BAYTAlhZMRcwFQYDVQQHEw5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9u
+-IFNvZnR3YXJlIEZvdW5kYXRpb24xEjAQBgNVBAMTCWxvY2FsaG9zdDAeFw0xMDEw
+-MDgyMzAxNTZaFw0yMDEwMDUyMzAxNTZaMF8xCzAJBgNVBAYTAlhZMRcwFQYDVQQH
+-Ew5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9uIFNvZnR3YXJlIEZvdW5k
+-YXRpb24xEjAQBgNVBAMTCWxvY2FsaG9zdDCBnzANBgkqhkiG9w0BAQEFAAOBjQAw
+-gYkCgYEA21vT5isq7F68amYuuNpSFlKDPrMUCa4YWYqZRt2OZ+/3NKaZ2xAiSwr7
+-6MrQF70t5nLbSPpqE5+5VrS58SY+g/sXLiFd6AplH1wJZwh78DofbFYXUggktFMt
+-pTyiX8jtP66bkcPkDADA089RI1TQR6Ca+n7HFa7c1fabVV6i3zkCAwEAAaMYMBYw
+-FAYDVR0RBA0wC4IJbG9jYWxob3N0MA0GCSqGSIb3DQEBBQUAA4GBAHPctQBEQ4wd
+-BJ6+JcpIraopLn8BGhbjNWj40mmRqWB/NAWF6M5ne7KpGAu7tLeG4hb1zLaldK8G
+-lxy2GPSRF6LFS48dpEj2HbMv2nvv6xxalDMJ9+DicWgAKTQ6bcX2j3GUkCR0g/T1
+-CRlNBAAlvhKzO7Clpf9l0YKBEfraJByX
++MIIEZDCCAsygAwIBAgIUC3GAkxz89rvRRhzLHsHor1qoudwwDQYJKoZIhvcNAQEL
++BQAwXzELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYD
++VQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjESMBAGA1UEAwwJbG9jYWxo
++b3N0MB4XDTIwMDcyODE2MDM1NVoXDTMwMDcyNjE2MDM1NVowXzELMAkGA1UEBhMC
++WFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29m
++dHdhcmUgRm91bmRhdGlvbjESMBAGA1UEAwwJbG9jYWxob3N0MIIBojANBgkqhkiG
++9w0BAQEFAAOCAY8AMIIBigKCAYEAufphfpxAKxcb9Quwv57lB5eqzcUozG4ZcEx0
+++IHc1dNFT3ufCV09g6k5JExJW0KN0HPAQu5V1g/2IdbKf0Y13eDaWjRYo2eOMBKr
++JzbJjQp1EusgEe65nvQkAuj2fcwBrKPE1JxZbsSiSwnMBnEd6oSa9ZGExDUCfuLw
++Y41CNS6WggCB8UFdKi06XKaR0Ej2pRplYqSlgE6SkBQjaPJqVQfu6Cp05W1CWeBJ
++Sf08CtWjYsDy1Zb6hKbYQN3NYlupb/r7RtEV2xk0WAi8MwNCTAk/D3TSbxFeTytn
++SrhnbvmwE3vndhv2NPaZuwwXDa7V/ui/E4hdpy3SZB+4tBTcyVnrMsjBYbvZXACK
++xUIHftGFh2D+nYAHldrHS8gknNOJvfnyqTK5/ZzYRE8U7El9ZU/samFmP+pbHbIm
++lAisv2hv9n7KgTkfV4uCZiSZHgcM/A7cH3ulwTTgqw5YnwXRkShLWjYNYugA/bPo
++2/LtMiNG6+u5V716xlEiBU09WmnpAgMBAAGjGDAWMBQGA1UdEQQNMAuCCWxvY2Fs
++aG9zdDANBgkqhkiG9w0BAQsFAAOCAYEAQ+kZ5S8sGEV3vkh/AoZFcLYmWjOlkTtm
++DPqIto+6xJkPnKnXH4ZYnzyEXtaT8xbJ4ESLJ6CFZjUYpXSzlrS4WYUwZwbrXWrs
++n+yjC5LQKuoJwf/aOAO+CTH0PhWBumt/88mXFeK5xYqGzP+ed/fHY66WuXSZt5B5
++T13zXv7Q6RmUfJeoSI24e+cHeDNQsKtJTpvpQSe4Rg32edUCbDNm2gFE9p6WyFdU
++DPxWYef0BD2z7aq5Zj/IXPcvwfgrjq3ZBUwlZ59VGKiAjUeDS5DdOllhEu8piVXL
++LOzeUctu38L83l2ilguz0UCraUkRxA0AwR235L73uERdIZiiKpibVtcydtfnW88J
++SUtDvutjV48BvQ/vd+YN4jlNpDgoUpDJw9jq/1P5BAhDHZIh6j3RUWue59YLsyR0
++h8AI/6Iiv9XQpBN09tbJK4/hku9qJXxMlbS0DLDMkV+UxB3v/Kc08eZbB+Jpj6q6
++kngQOjQ3SjwwhePNc5a/5RB8oeEKKvlr
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/keycert.pem b/Lib/test/keycert.pem
+index 64318aa2e03..e225dd1d107 100644
+--- a/Lib/test/keycert.pem
++++ b/Lib/test/keycert.pem
+@@ -1,31 +1,66 @@
+ -----BEGIN PRIVATE KEY-----
+-MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANtb0+YrKuxevGpm
+-LrjaUhZSgz6zFAmuGFmKmUbdjmfv9zSmmdsQIksK++jK0Be9LeZy20j6ahOfuVa0
+-ufEmPoP7Fy4hXegKZR9cCWcIe/A6H2xWF1IIJLRTLaU8ol/I7T+um5HD5AwAwNPP
+-USNU0Eegmvp+xxWu3NX2m1Veot85AgMBAAECgYA3ZdZ673X0oexFlq7AAmrutkHt
+-CL7LvwrpOiaBjhyTxTeSNWzvtQBkIU8DOI0bIazA4UreAFffwtvEuPmonDb3F+Iq
+-SMAu42XcGyVZEl+gHlTPU9XRX7nTOXVt+MlRRRxL6t9GkGfUAXI3XxJDXW3c0vBK
+-UL9xqD8cORXOfE06rQJBAP8mEX1ERkR64Ptsoe4281vjTlNfIbs7NMPkUnrn9N/Y
+-BLhjNIfQ3HFZG8BTMLfX7kCS9D593DW5tV4Z9BP/c6cCQQDcFzCcVArNh2JSywOQ
+-ZfTfRbJg/Z5Lt9Fkngv1meeGNPgIMLN8Sg679pAOOWmzdMO3V706rNPzSVMME7E5
+-oPIfAkEA8pDddarP5tCvTTgUpmTFbakm0KoTZm2+FzHcnA4jRh+XNTjTOv98Y6Ik
+-eO5d1ZnKXseWvkZncQgxfdnMqqpj5wJAcNq/RVne1DbYlwWchT2Si65MYmmJ8t+F
+-0mcsULqjOnEMwf5e+ptq5LzwbyrHZYq5FNk7ocufPv/ZQrcSSC+cFwJBAKvOJByS
+-x56qyGeZLOQlWS2JS3KJo59XuLFGqcbgN9Om9xFa41Yb4N9NvplFivsvZdw3m1Q/
+-SPIXQuT8RMPDVNQ=
++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
++mv6v9deEwEQvuWCGtIGlHak=
+ -----END PRIVATE KEY-----
+ -----BEGIN CERTIFICATE-----
+-MIICVDCCAb2gAwIBAgIJANfHOBkZr8JOMA0GCSqGSIb3DQEBBQUAMF8xCzAJBgNV
+-BAYTAlhZMRcwFQYDVQQHEw5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9u
+-IFNvZnR3YXJlIEZvdW5kYXRpb24xEjAQBgNVBAMTCWxvY2FsaG9zdDAeFw0xMDEw
+-MDgyMzAxNTZaFw0yMDEwMDUyMzAxNTZaMF8xCzAJBgNVBAYTAlhZMRcwFQYDVQQH
+-Ew5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9uIFNvZnR3YXJlIEZvdW5k
+-YXRpb24xEjAQBgNVBAMTCWxvY2FsaG9zdDCBnzANBgkqhkiG9w0BAQEFAAOBjQAw
+-gYkCgYEA21vT5isq7F68amYuuNpSFlKDPrMUCa4YWYqZRt2OZ+/3NKaZ2xAiSwr7
+-6MrQF70t5nLbSPpqE5+5VrS58SY+g/sXLiFd6AplH1wJZwh78DofbFYXUggktFMt
+-pTyiX8jtP66bkcPkDADA089RI1TQR6Ca+n7HFa7c1fabVV6i3zkCAwEAAaMYMBYw
+-FAYDVR0RBA0wC4IJbG9jYWxob3N0MA0GCSqGSIb3DQEBBQUAA4GBAHPctQBEQ4wd
+-BJ6+JcpIraopLn8BGhbjNWj40mmRqWB/NAWF6M5ne7KpGAu7tLeG4hb1zLaldK8G
+-lxy2GPSRF6LFS48dpEj2HbMv2nvv6xxalDMJ9+DicWgAKTQ6bcX2j3GUkCR0g/T1
+-CRlNBAAlvhKzO7Clpf9l0YKBEfraJByX
++MIIEZDCCAsygAwIBAgIUC3GAkxz89rvRRhzLHsHor1qoudwwDQYJKoZIhvcNAQEL
++BQAwXzELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYD
++VQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjESMBAGA1UEAwwJbG9jYWxo
++b3N0MB4XDTIwMDcyODE2MDM1NVoXDTMwMDcyNjE2MDM1NVowXzELMAkGA1UEBhMC
++WFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29m
++dHdhcmUgRm91bmRhdGlvbjESMBAGA1UEAwwJbG9jYWxob3N0MIIBojANBgkqhkiG
++9w0BAQEFAAOCAY8AMIIBigKCAYEAufphfpxAKxcb9Quwv57lB5eqzcUozG4ZcEx0
+++IHc1dNFT3ufCV09g6k5JExJW0KN0HPAQu5V1g/2IdbKf0Y13eDaWjRYo2eOMBKr
++JzbJjQp1EusgEe65nvQkAuj2fcwBrKPE1JxZbsSiSwnMBnEd6oSa9ZGExDUCfuLw
++Y41CNS6WggCB8UFdKi06XKaR0Ej2pRplYqSlgE6SkBQjaPJqVQfu6Cp05W1CWeBJ
++Sf08CtWjYsDy1Zb6hKbYQN3NYlupb/r7RtEV2xk0WAi8MwNCTAk/D3TSbxFeTytn
++SrhnbvmwE3vndhv2NPaZuwwXDa7V/ui/E4hdpy3SZB+4tBTcyVnrMsjBYbvZXACK
++xUIHftGFh2D+nYAHldrHS8gknNOJvfnyqTK5/ZzYRE8U7El9ZU/samFmP+pbHbIm
++lAisv2hv9n7KgTkfV4uCZiSZHgcM/A7cH3ulwTTgqw5YnwXRkShLWjYNYugA/bPo
++2/LtMiNG6+u5V716xlEiBU09WmnpAgMBAAGjGDAWMBQGA1UdEQQNMAuCCWxvY2Fs
++aG9zdDANBgkqhkiG9w0BAQsFAAOCAYEAQ+kZ5S8sGEV3vkh/AoZFcLYmWjOlkTtm
++DPqIto+6xJkPnKnXH4ZYnzyEXtaT8xbJ4ESLJ6CFZjUYpXSzlrS4WYUwZwbrXWrs
++n+yjC5LQKuoJwf/aOAO+CTH0PhWBumt/88mXFeK5xYqGzP+ed/fHY66WuXSZt5B5
++T13zXv7Q6RmUfJeoSI24e+cHeDNQsKtJTpvpQSe4Rg32edUCbDNm2gFE9p6WyFdU
++DPxWYef0BD2z7aq5Zj/IXPcvwfgrjq3ZBUwlZ59VGKiAjUeDS5DdOllhEu8piVXL
++LOzeUctu38L83l2ilguz0UCraUkRxA0AwR235L73uERdIZiiKpibVtcydtfnW88J
++SUtDvutjV48BvQ/vd+YN4jlNpDgoUpDJw9jq/1P5BAhDHZIh6j3RUWue59YLsyR0
++h8AI/6Iiv9XQpBN09tbJK4/hku9qJXxMlbS0DLDMkV+UxB3v/Kc08eZbB+Jpj6q6
++kngQOjQ3SjwwhePNc5a/5RB8oeEKKvlr
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/keycert2.pem b/Lib/test/keycert2.pem
+index e8a9e082b31..33128cb0797 100644
+--- a/Lib/test/keycert2.pem
++++ b/Lib/test/keycert2.pem
+@@ -1,31 +1,66 @@
+ -----BEGIN PRIVATE KEY-----
+-MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJnsJZVrppL+W5I9
+-zGQrrawWwE5QJpBK9nWw17mXrZ03R1cD9BamLGivVISbPlRlAVnZBEyh1ATpsB7d
+-CUQ+WHEvALquvx4+Yw5l+fXeiYRjrLRBYZuVy8yNtXzU3iWcGObcYRkUdiXdOyP7
+-sLF2YZHRvQZpzgDBKkrraeQ81w21AgMBAAECgYBEm7n07FMHWlE+0kT0sXNsLYfy
+-YE+QKZnJw9WkaDN+zFEEPELkhZVt5BjsMraJr6v2fIEqF0gGGJPkbenffVq2B5dC
+-lWUOxvJHufMK4sM3Cp6s/gOp3LP+QkzVnvJSfAyZU6l+4PGX5pLdUsXYjPxgzjzL
+-S36tF7/2Uv1WePyLUQJBAMsPhYzUXOPRgmbhcJiqi9A9c3GO8kvSDYTCKt3VMnqz
+-HBn6MQ4VQasCD1F+7jWTI0FU/3vdw8non/Fj8hhYqZcCQQDCDRdvmZqDiZnpMqDq
+-L6ZSrLTVtMvZXZbgwForaAD9uHj51TME7+eYT7EG2YCgJTXJ4YvRJEnPNyskwdKt
+-vTSTAkEAtaaN/vyemEJ82BIGStwONNw0ILsSr5cZ9tBHzqiA/tipY+e36HRFiXhP
+-QcU9zXlxyWkDH8iz9DSAmE2jbfoqwwJANlMJ65E543cjIlitGcKLMnvtCCLcKpb7
+-xSG0XJB6Lo11OKPJ66jp0gcFTSCY1Lx2CXVd+gfJrfwI1Pp562+bhwJBAJ9IfDPU
+-R8OpO9v1SGd8x33Owm7uXOpB9d63/T70AD1QOXjKUC4eXYbt0WWfWuny/RNPRuyh
+-w7DXSfUF+kPKolU=
++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
++gnsXHmeiGS6n3VLUCtO76Dg=
+ -----END PRIVATE KEY-----
+ -----BEGIN CERTIFICATE-----
+-MIICXTCCAcagAwIBAgIJAIO3upAG445fMA0GCSqGSIb3DQEBBQUAMGIxCzAJBgNV
+-BAYTAlhZMRcwFQYDVQQHEw5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9u
+-IFNvZnR3YXJlIEZvdW5kYXRpb24xFTATBgNVBAMTDGZha2Vob3N0bmFtZTAeFw0x
+-MDEwMDkxNTAxMDBaFw0yMDEwMDYxNTAxMDBaMGIxCzAJBgNVBAYTAlhZMRcwFQYD
+-VQQHEw5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9uIFNvZnR3YXJlIEZv
+-dW5kYXRpb24xFTATBgNVBAMTDGZha2Vob3N0bmFtZTCBnzANBgkqhkiG9w0BAQEF
+-AAOBjQAwgYkCgYEAmewllWumkv5bkj3MZCutrBbATlAmkEr2dbDXuZetnTdHVwP0
+-FqYsaK9UhJs+VGUBWdkETKHUBOmwHt0JRD5YcS8Auq6/Hj5jDmX59d6JhGOstEFh
+-m5XLzI21fNTeJZwY5txhGRR2Jd07I/uwsXZhkdG9BmnOAMEqSutp5DzXDbUCAwEA
+-AaMbMBkwFwYDVR0RBBAwDoIMZmFrZWhvc3RuYW1lMA0GCSqGSIb3DQEBBQUAA4GB
+-AH+iMClLLGSaKWgwXsmdVo4FhTZZHo8Uprrtg3N9FxEeE50btpDVQysgRt5ias3K
+-m+bME9zbKwvbVWD5zZdjus4pDgzwF/iHyccL8JyYhxOvS/9zmvAtFXj/APIIbZFp
+-IT75d9f88ScIGEtknZQejnrdhB64tYki/EqluiuKBqKD
++MIIEbTCCAtWgAwIBAgIUWwEtRAxIMzGsNMGhokysuz/zIMYwDQYJKoZIhvcNAQEL
++BQAwYjELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYD
++VQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjEVMBMGA1UEAwwMZmFrZWhv
++c3RuYW1lMB4XDTIwMDcyODE2MDM1NVoXDTMwMDcyNjE2MDM1NVowYjELMAkGA1UE
++BhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24g
++U29mdHdhcmUgRm91bmRhdGlvbjEVMBMGA1UEAwwMZmFrZWhvc3RuYW1lMIIBojAN
++BgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAn1tGsBfu+KtrFIJziwfsb7Dt282V
++wR1Tw7Z7QMpVp/3dTkMnkpsjRBuwXuNEO8hB+Wj29f0bbNYA9xBxzAbpwP/LK2s2
++qYCvWDCJ1Px2qBF63w45kDNjneqWTOnJO+wMbxPoeL1B+Ol39u1C3BRJPcYXa6Js
++uQ8JIz4VhpCUaMZvN7owtumNLLBdQM+yORdAWkamM8YzuA9uUzrJKEzRQlByFGQg
++sw5IuLW2Sm53K86Pkp0EHiGnjhjs1DNLuIa577MmoYDBVIxFXfRM/NUw0KiZmTyL
++1xAq6ZDkLmqFbMbam0EruHIoLrqy2h2dGivkDyFrJ+82/drQrV6VG4SqUx3/RVzb
++CyeR6cAZWpe2Xkbaj2BXPYeH+9LwIIHOML8iijaxk1Od5n55FyE726+hNB9wCC/h
++o5wkq6QxhBOi5kbddr6ww3wXnw1Qc6+fxKFYN53BWyAcUO7EetKCpaTTL8QMS37V
++2fLmC31mINMWuNDfugYBo+hZkmkuV3QY//aVAgMBAAGjGzAZMBcGA1UdEQQQMA6C
++DGZha2Vob3N0bmFtZTANBgkqhkiG9w0BAQsFAAOCAYEAUGzMDzz2eOyB9AC9khXO
++9I33X4Sep1+u/zoi8gwDxvtCskxjJ0x5DSEvdyB5VEeJKX/8WrmpHlhnY0cHepkE
++Iyq6FO05M4iTOnzAcUQAhB1emNFe2ELCKVWoHDIphSil0UQmkg3XvX5T69e0cXpG
++gvrCbMfr+Cn+0va7XumooxWf8TObFs5Wp8zO5xasl/OYzca+tE9gedUlVObAQYlE
++pPhdYg5akwDu9O7PS2AnyCb71/izGVbxb5RuFCDy5rl8wIZrbvIvc7/CE6j7/6n0
++iL55ypIyABptuyGLNlDT01MMC7HCXx6vfk+llMAVTQt4npdz/2UV36yG5Io3bF5v
++bUySJVeanPGREeCsqVhvcP5P7huI5P/iy+LQMm1jQ14nFywqaaWVbBBeQBhGVhmm
++QOI+L9Pp011//xH68+GEcuQB6Xi7SoFaJKCpMmMy8ImcuxlR8vhP6l5raWA0AWPK
++ZOmjEO2PnSRet5tTSMOnYlw8qeEfNe6r0vmni+UC1z6X
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/keycert3.pem b/Lib/test/keycert3.pem
+index 5bfa62c4ca3..6e25e6e5b77 100644
+--- a/Lib/test/keycert3.pem
++++ b/Lib/test/keycert3.pem
+@@ -1,73 +1,165 @@
+ -----BEGIN PRIVATE KEY-----
+-MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMLgD0kAKDb5cFyP
+-jbwNfR5CtewdXC+kMXAWD8DLxiTTvhMW7qVnlwOm36mZlszHKvsRf05lT4pegiFM
+-9z2j1OlaN+ci/X7NU22TNN6crYSiN77FjYJP464j876ndSxyD+rzys386T+1r1aZ
+-aggEdkj1TsSsv1zWIYKlPIjlvhuxAgMBAAECgYA0aH+T2Vf3WOPv8KdkcJg6gCRe
+-yJKXOWgWRcicx/CUzOEsTxmFIDPLxqAWA3k7v0B+3vjGw5Y9lycV/5XqXNoQI14j
+-y09iNsumds13u5AKkGdTJnZhQ7UKdoVHfuP44ZdOv/rJ5/VD6F4zWywpe90pcbK+
+-AWDVtusgGQBSieEl1QJBAOyVrUG5l2yoUBtd2zr/kiGm/DYyXlIthQO/A3/LngDW
+-5/ydGxVsT7lAVOgCsoT+0L4efTh90PjzW8LPQrPBWVMCQQDS3h/FtYYd5lfz+FNL
+-9CEe1F1w9l8P749uNUD0g317zv1tatIqVCsQWHfVHNdVvfQ+vSFw38OORO00Xqs9
+-1GJrAkBkoXXEkxCZoy4PteheO/8IWWLGGr6L7di6MzFl1lIqwT6D8L9oaV2vynFT
+-DnKop0pa09Unhjyw57KMNmSE2SUJAkEArloTEzpgRmCq4IK2/NpCeGdHS5uqRlbh
+-1VIa/xGps7EWQl5Mn8swQDel/YP3WGHTjfx7pgSegQfkyaRtGpZ9OQJAa9Vumj8m
+-JAAtI0Bnga8hgQx7BhTQY4CadDxyiRGOGYhwUzYVCqkb2sbVRH9HnwUaJT7cWBY3
+-RnJdHOMXWem7/w==
++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
++ByuD7JQGvH3nLv/vF16fP0MHaw==
+ -----END PRIVATE KEY-----
+ Certificate:
+     Data:
+-        Version: 1 (0x0)
+-        Serial Number: 12723342612721443281 (0xb09264b1f2da21d1)
+-    Signature Algorithm: sha1WithRSAEncryption
++        Version: 3 (0x2)
++        Serial Number:
++            76:c4:32:f6:d2:ab:1d:ee:77:2d:c7:0e:93:de:67:46:4e:32:07:c6
++        Signature Algorithm: sha256WithRSAEncryption
+         Issuer: C=XY, O=Python Software Foundation CA, CN=our-ca-server
+         Validity
+-            Not Before: Jan  4 19:47:07 2013 GMT
+-            Not After : Nov 13 19:47:07 2022 GMT
++            Not Before: Jul 28 16:03:55 2020 GMT
++            Not After : Jun  6 16:03:55 2030 GMT
+         Subject: C=XY, L=Castle Anthrax, O=Python Software Foundation, CN=localhost
+         Subject Public Key Info:
+             Public Key Algorithm: rsaEncryption
+-                Public-Key: (1024 bit)
++                RSA Public-Key: (3072 bit)
+                 Modulus:
+-                    00:c2:e0:0f:49:00:28:36:f9:70:5c:8f:8d:bc:0d:
+-                    7d:1e:42:b5:ec:1d:5c:2f:a4:31:70:16:0f:c0:cb:
+-                    c6:24:d3:be:13:16:ee:a5:67:97:03:a6:df:a9:99:
+-                    96:cc:c7:2a:fb:11:7f:4e:65:4f:8a:5e:82:21:4c:
+-                    f7:3d:a3:d4:e9:5a:37:e7:22:fd:7e:cd:53:6d:93:
+-                    34:de:9c:ad:84:a2:37:be:c5:8d:82:4f:e3:ae:23:
+-                    f3:be:a7:75:2c:72:0f:ea:f3:ca:cd:fc:e9:3f:b5:
+-                    af:56:99:6a:08:04:76:48:f5:4e:c4:ac:bf:5c:d6:
+-                    21:82:a5:3c:88:e5:be:1b:b1
++                    00:9f:af:00:86:fd:ca:c0:0a:3e:f6:9f:0c:92:43:
++                    79:01:fd:14:84:b5:63:9c:ca:ce:09:26:21:0a:1b:
++                    ba:b9:72:9a:5f:d2:e9:a0:fd:52:0a:02:0d:86:a3:
++                    11:96:a5:92:3c:ee:a7:a2:9c:d2:7d:f8:c6:7b:0b:
++                    b6:ff:2a:b1:04:ec:45:60:66:2b:a9:77:9c:3d:c1:
++                    91:bf:e0:76:96:00:b0:01:a2:6d:12:d4:fd:ce:43:
++                    93:f1:32:af:3f:7f:64:f0:66:19:6a:46:cc:a6:6f:
++                    9a:07:40:3e:43:1f:89:53:97:7c:2a:fd:b6:13:e4:
++                    f3:1f:d7:33:a8:06:75:df:d1:e2:f9:82:ca:7e:1b:
++                    91:e3:3e:50:6c:34:1b:e5:c6:f2:c3:0a:87:27:51:
++                    8d:66:b8:8c:44:7d:03:a4:bb:d2:78:b7:12:ee:2d:
++                    2d:1e:1a:d8:f8:64:0c:59:66:8e:f4:9d:32:c8:ca:
++                    94:d2:27:10:89:ee:93:41:c8:7a:e5:b2:69:6d:51:
++                    95:ff:60:e4:58:af:9c:e1:23:0c:8c:b0:11:58:01:
++                    75:fb:54:52:d3:19:88:4b:7f:8f:23:67:55:f4:ea:
++                    df:15:9c:b9:b1:80:92:52:95:9e:f0:bf:e4:d0:1e:
++                    22:1c:87:34:52:47:ef:42:ae:fd:73:1a:61:a4:1e:
++                    f8:fb:50:61:96:8d:50:80:03:6d:81:8a:ee:06:1f:
++                    5a:9f:01:c7:b4:2f:7a:0b:7a:65:04:52:a6:70:eb:
++                    3f:8e:b0:62:38:d0:e9:c3:5f:0f:8f:c7:7c:f4:b5:
++                    ab:bd:15:fb:18:52:0f:ea:8f:95:51:3f:23:5f:e7:
++                    f0:fa:ec:55:30:3c:0d:e2:13:60:0a:fc:7e:19:be:
++                    a4:e1:6d:e7:e8:8d:94:64:bf:8c:74:ad:0e:c4:18:
++                    88:32:c6:97:52:8d:4c:64:b1:be:9d:d6:4b:e6:08:
++                    f1:ed:50:4c:54:47:54:b7:c4:68:b1:3d:ae:bc:63:
++                    ae:64:de:55:57:87:7b:3b:cd:27
+                 Exponent: 65537 (0x10001)
+-    Signature Algorithm: sha1WithRSAEncryption
+-         2f:42:5f:a3:09:2c:fa:51:88:c7:37:7f:ea:0e:63:f0:a2:9a:
+-         e5:5a:e2:c8:20:f0:3f:60:bc:c8:0f:b6:c6:76:ce:db:83:93:
+-         f5:a3:33:67:01:8e:04:cd:00:9a:73:fd:f3:35:86:fa:d7:13:
+-         e2:46:c6:9d:c0:29:53:d4:a9:90:b8:77:4b:e6:83:76:e4:92:
+-         d6:9c:50:cf:43:d0:c6:01:77:61:9a:de:9b:70:f7:72:cd:59:
+-         00:31:69:d9:b4:ca:06:9c:6d:c3:c7:80:8c:68:e6:b5:a2:f8:
+-         ef:1d:bb:16:9f:77:77:ef:87:62:22:9b:4d:69:a4:3a:1a:f1:
+-         21:5e:8c:32:ac:92:fd:15:6b:18:c2:7f:15:0d:98:30:ca:75:
+-         8f:1a:71:df:da:1d:b2:ef:9a:e8:2d:2e:02:fd:4a:3c:aa:96:
+-         0b:06:5d:35:b3:3d:24:87:4b:e0:b0:58:60:2f:45:ac:2e:48:
+-         8a:b0:99:10:65:27:ff:cc:b1:d8:fd:bd:26:6b:b9:0c:05:2a:
+-         f4:45:63:35:51:07:ed:83:85:fe:6f:69:cb:bb:40:a8:ae:b6:
+-         3b:56:4a:2d:a4:ed:6d:11:2c:4d:ed:17:24:fd:47:bc:d3:41:
+-         a2:d3:06:fe:0c:90:d8:d8:94:26:c4:ff:cc:a1:d8:42:77:eb:
+-         fc:a9:94:71
++        X509v3 extensions:
++            X509v3 Subject Alternative Name: 
++                DNS:localhost
++            X509v3 Key Usage: critical
++                Digital Signature, Key Encipherment
++            X509v3 Extended Key Usage: 
++                TLS Web Server Authentication, TLS Web Client Authentication
++            X509v3 Basic Constraints: critical
++                CA:FALSE
++            X509v3 Subject Key Identifier: 
++                37:FD:51:A7:3A:36:E1:BA:1E:C7:60:E2:25:AD:37:2B:04:3F:08:C7
++            X509v3 Authority Key Identifier: 
++                keyid:5E:57:A2:AF:07:53:35:F6:A1:5D:33:E3:D4:86:C6:0B:8F:37:95:54
++                DirName:/C=XY/O=Python Software Foundation CA/CN=our-ca-server
++                serial:76:C4:32:F6:D2:AB:1D:EE:77:2D:C7:0E:93:DE:67:46:4E:32:07:C5
++
++            Authority Information Access: 
++                CA Issuers - URI:http://testca.pythontest.net/testca/pycacert.cer
++                OCSP - URI:http://testca.pythontest.net/testca/ocsp/
++
++            X509v3 CRL Distribution Points: 
++
++                Full Name:
++                  URI:http://testca.pythontest.net/testca/revocation.crl
++
++    Signature Algorithm: sha256WithRSAEncryption
++         73:46:c4:57:dc:5c:54:08:eb:b7:48:81:e4:f5:3e:0b:ce:9a:
++         ce:fc:2b:d1:f1:e5:47:a9:7f:a1:ba:97:7b:98:ff:48:f9:b8:
++         13:6d:15:04:e0:2b:da:7d:83:a2:43:05:9e:09:cc:b1:67:8d:
++         be:da:68:ef:5a:0f:ff:c4:fd:7c:50:a1:bd:8f:1c:28:08:5d:
++         ab:ec:42:75:c1:22:84:ff:be:cd:e3:54:01:f4:fb:7d:4a:3b:
++         df:f8:95:a7:d1:ee:17:ba:51:e5:74:6f:43:e0:1f:67:79:ca:
++         7a:82:a3:6a:4f:32:76:69:9c:e5:96:d4:ca:d1:03:21:f4:bf:
++         56:02:88:36:c4:6f:a2:f6:1b:6e:1a:5a:f8:ef:30:77:a6:c7:
++         2f:42:0e:a7:47:b7:f0:1a:7c:18:55:96:7e:44:39:f8:c1:87:
++         78:2d:d2:96:7b:85:74:b3:31:b5:2e:6b:56:b1:75:61:e1:78:
++         8f:fd:2b:54:aa:48:8e:fa:8b:a8:c6:b2:6f:ea:e7:35:c9:2c:
++         bc:6a:bc:68:59:fa:63:5f:14:ff:36:39:05:67:e4:e4:ec:d9:
++         72:b8:45:b7:82:5c:f0:f7:e1:1e:16:22:72:23:13:59:b4:89:
++         44:9e:cc:8c:11:6e:e1:05:73:dd:83:c5:49:99:15:f8:21:51:
++         e4:75:5b:2e:d1:94:6e:cf:44:f4:2f:01:27:71:2a:d1:dd:7b:
++         04:53:97:a4:cd:03:ef:d8:aa:e7:5d:44:36:1a:72:02:68:2e:
++         b8:72:a8:68:49:0a:69:46:b1:0a:23:9c:89:aa:36:0b:3f:e1:
++         dd:5f:5d:70:5a:f3:08:0b:37:3d:55:61:ce:76:a0:0a:ff:8b:
++         b6:8b:8f:19:99:4a:12:6d:32:56:bf:68:19:c5:b1:e6:f2:19:
++         1c:95:8a:27:60:18:a5:c1:e4:04:4a:e2:64:ef:86:3f:dc:4a:
++         fd:3d:1c:9a:42:f5:03:29:f5:0a:ec:93:59:df:5e:51:12:28:
++         67:f5:df:a8:58:71
+ -----BEGIN CERTIFICATE-----
+-MIICpDCCAYwCCQCwkmSx8toh0TANBgkqhkiG9w0BAQUFADBNMQswCQYDVQQGEwJY
+-WTEmMCQGA1UECgwdUHl0aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAUBgNV
+-BAMMDW91ci1jYS1zZXJ2ZXIwHhcNMTMwMTA0MTk0NzA3WhcNMjIxMTEzMTk0NzA3
+-WjBfMQswCQYDVQQGEwJYWTEXMBUGA1UEBxMOQ2FzdGxlIEFudGhyYXgxIzAhBgNV
+-BAoTGlB5dGhvbiBTb2Z0d2FyZSBGb3VuZGF0aW9uMRIwEAYDVQQDEwlsb2NhbGhv
+-c3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMLgD0kAKDb5cFyPjbwNfR5C
+-tewdXC+kMXAWD8DLxiTTvhMW7qVnlwOm36mZlszHKvsRf05lT4pegiFM9z2j1Ola
+-N+ci/X7NU22TNN6crYSiN77FjYJP464j876ndSxyD+rzys386T+1r1aZaggEdkj1
+-TsSsv1zWIYKlPIjlvhuxAgMBAAEwDQYJKoZIhvcNAQEFBQADggEBAC9CX6MJLPpR
+-iMc3f+oOY/CimuVa4sgg8D9gvMgPtsZ2ztuDk/WjM2cBjgTNAJpz/fM1hvrXE+JG
+-xp3AKVPUqZC4d0vmg3bkktacUM9D0MYBd2Ga3ptw93LNWQAxadm0ygacbcPHgIxo
+-5rWi+O8duxafd3fvh2Iim01ppDoa8SFejDKskv0VaxjCfxUNmDDKdY8acd/aHbLv
+-mugtLgL9SjyqlgsGXTWzPSSHS+CwWGAvRawuSIqwmRBlJ//Msdj9vSZruQwFKvRF
+-YzVRB+2Dhf5vacu7QKiutjtWSi2k7W0RLE3tFyT9R7zTQaLTBv4MkNjYlCbE/8yh
+-2EJ36/yplHE=
++MIIGCTCCBHGgAwIBAgIUdsQy9tKrHe53LccOk95nRk4yB8YwDQYJKoZIhvcNAQEL
++BQAwTTELMAkGA1UEBhMCWFkxJjAkBgNVBAoMHVB5dGhvbiBTb2Z0d2FyZSBGb3Vu
++ZGF0aW9uIENBMRYwFAYDVQQDDA1vdXItY2Etc2VydmVyMB4XDTIwMDcyODE2MDM1
++NVoXDTMwMDYwNjE2MDM1NVowXzELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3Rs
++ZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjES
++MBAGA1UEAwwJbG9jYWxob3N0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKC
++AYEAn68Ahv3KwAo+9p8MkkN5Af0UhLVjnMrOCSYhChu6uXKaX9LpoP1SCgINhqMR
++lqWSPO6nopzSffjGewu2/yqxBOxFYGYrqXecPcGRv+B2lgCwAaJtEtT9zkOT8TKv
++P39k8GYZakbMpm+aB0A+Qx+JU5d8Kv22E+TzH9czqAZ139Hi+YLKfhuR4z5QbDQb
++5cbywwqHJ1GNZriMRH0DpLvSeLcS7i0tHhrY+GQMWWaO9J0yyMqU0icQie6TQch6
++5bJpbVGV/2DkWK+c4SMMjLARWAF1+1RS0xmIS3+PI2dV9OrfFZy5sYCSUpWe8L/k
++0B4iHIc0UkfvQq79cxphpB74+1Bhlo1QgANtgYruBh9anwHHtC96C3plBFKmcOs/
++jrBiONDpw18Pj8d89LWrvRX7GFIP6o+VUT8jX+fw+uxVMDwN4hNgCvx+Gb6k4W3n
++6I2UZL+MdK0OxBiIMsaXUo1MZLG+ndZL5gjx7VBMVEdUt8RosT2uvGOuZN5VV4d7
++O80nAgMBAAGjggHNMIIByTAUBgNVHREEDTALgglsb2NhbGhvc3QwDgYDVR0PAQH/
++BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8E
++AjAAMB0GA1UdDgQWBBQ3/VGnOjbhuh7HYOIlrTcrBD8IxzCBiQYDVR0jBIGBMH+A
++FF5Xoq8HUzX2oV0z49SGxguPN5VUoVGkTzBNMQswCQYDVQQGEwJYWTEmMCQGA1UE
++CgwdUHl0aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAUBgNVBAMMDW91ci1j
++YS1zZXJ2ZXKCFHbEMvbSqx3udy3HDpPeZ0ZOMgfFMIGDBggrBgEFBQcBAQR3MHUw
++PAYIKwYBBQUHMAKGMGh0dHA6Ly90ZXN0Y2EucHl0aG9udGVzdC5uZXQvdGVzdGNh
++L3B5Y2FjZXJ0LmNlcjA1BggrBgEFBQcwAYYpaHR0cDovL3Rlc3RjYS5weXRob250
++ZXN0Lm5ldC90ZXN0Y2Evb2NzcC8wQwYDVR0fBDwwOjA4oDagNIYyaHR0cDovL3Rl
++c3RjYS5weXRob250ZXN0Lm5ldC90ZXN0Y2EvcmV2b2NhdGlvbi5jcmwwDQYJKoZI
++hvcNAQELBQADggGBAHNGxFfcXFQI67dIgeT1PgvOms78K9Hx5Uepf6G6l3uY/0j5
++uBNtFQTgK9p9g6JDBZ4JzLFnjb7aaO9aD//E/XxQob2PHCgIXavsQnXBIoT/vs3j
++VAH0+31KO9/4lafR7he6UeV0b0PgH2d5ynqCo2pPMnZpnOWW1MrRAyH0v1YCiDbE
++b6L2G24aWvjvMHemxy9CDqdHt/AafBhVln5EOfjBh3gt0pZ7hXSzMbUua1axdWHh
++eI/9K1SqSI76i6jGsm/q5zXJLLxqvGhZ+mNfFP82OQVn5OTs2XK4RbeCXPD34R4W
++InIjE1m0iUSezIwRbuEFc92DxUmZFfghUeR1Wy7RlG7PRPQvASdxKtHdewRTl6TN
++A+/YquddRDYacgJoLrhyqGhJCmlGsQojnImqNgs/4d1fXXBa8wgLNz1VYc52oAr/
++i7aLjxmZShJtMla/aBnFsebyGRyViidgGKXB5ARK4mTvhj/cSv09HJpC9QMp9Qrs
++k1nfXlESKGf136hYcQ==
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/keycert4.pem b/Lib/test/keycert4.pem
+index 53355c8a50c..845a011b561 100644
+--- a/Lib/test/keycert4.pem
++++ b/Lib/test/keycert4.pem
+@@ -1,73 +1,165 @@
+ -----BEGIN PRIVATE KEY-----
+-MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAK5UQiMI5VkNs2Qv
+-L7gUaiDdFevNUXRjU4DHAe3ZzzYLZNE69h9gO9VCSS16tJ5fT5VEu0EZyGr0e3V2
+-NkX0ZoU0Hc/UaY4qx7LHmn5SYZpIxhJnkf7SyHJK1zUaGlU0/LxYqIuGCtF5dqx1
+-L2OQhEx1GM6RydHdgX69G64LXcY5AgMBAAECgYAhsRMfJkb9ERLMl/oG/5sLQu9L
+-pWDKt6+ZwdxzlZbggQ85CMYshjLKIod2DLL/sLf2x1PRXyRG131M1E3k8zkkz6de
+-R1uDrIN/x91iuYzfLQZGh8bMY7Yjd2eoroa6R/7DjpElGejLxOAaDWO0ST2IFQy9
+-myTGS2jSM97wcXfsSQJBANP3jelJoS5X6BRjTSneY21wcocxVuQh8pXpErALVNsT
+-drrFTeaBuZp7KvbtnIM5g2WRNvaxLZlAY/hXPJvi6ncCQQDSix1cebml6EmPlEZS
+-Mm8gwI2F9ufUunwJmBJcz826Do0ZNGByWDAM/JQZH4FX4GfAFNuj8PUb+GQfadkx
+-i1DPAkEA0lVsNHojvuDsIo8HGuzarNZQT2beWjJ1jdxh9t7HrTx7LIps6rb/fhOK
+-Zs0R6gVAJaEbcWAPZ2tFyECInAdnsQJAUjaeXXjuxFkjOFym5PvqpvhpivEx78Bu
+-JPTr3rAKXmfGMxxfuOa0xK1wSyshP6ZR/RBn/+lcXPKubhHQDOegwwJAJF1DBQnN
+-+/tLmOPULtDwfP4Zixn+/8GmGOahFoRcu6VIGHmRilJTn6MOButw7Glv2YdeC6l/
+-e83Gq6ffLVfKNQ==
++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
++F6PmOJCqrn0QaLJhJp2XBZo=
+ -----END PRIVATE KEY-----
+ Certificate:
+     Data:
+-        Version: 1 (0x0)
+-        Serial Number: 12723342612721443282 (0xb09264b1f2da21d2)
+-    Signature Algorithm: sha1WithRSAEncryption
++        Version: 3 (0x2)
++        Serial Number:
++            76:c4:32:f6:d2:ab:1d:ee:77:2d:c7:0e:93:de:67:46:4e:32:07:c7
++        Signature Algorithm: sha256WithRSAEncryption
+         Issuer: C=XY, O=Python Software Foundation CA, CN=our-ca-server
+         Validity
+-            Not Before: Jan  4 19:47:07 2013 GMT
+-            Not After : Nov 13 19:47:07 2022 GMT
++            Not Before: Jul 28 16:03:56 2020 GMT
++            Not After : Jun  6 16:03:56 2030 GMT
+         Subject: C=XY, L=Castle Anthrax, O=Python Software Foundation, CN=fakehostname
+         Subject Public Key Info:
+             Public Key Algorithm: rsaEncryption
+-                Public-Key: (1024 bit)
++                RSA Public-Key: (3072 bit)
+                 Modulus:
+-                    00:ae:54:42:23:08:e5:59:0d:b3:64:2f:2f:b8:14:
+-                    6a:20:dd:15:eb:cd:51:74:63:53:80:c7:01:ed:d9:
+-                    cf:36:0b:64:d1:3a:f6:1f:60:3b:d5:42:49:2d:7a:
+-                    b4:9e:5f:4f:95:44:bb:41:19:c8:6a:f4:7b:75:76:
+-                    36:45:f4:66:85:34:1d:cf:d4:69:8e:2a:c7:b2:c7:
+-                    9a:7e:52:61:9a:48:c6:12:67:91:fe:d2:c8:72:4a:
+-                    d7:35:1a:1a:55:34:fc:bc:58:a8:8b:86:0a:d1:79:
+-                    76:ac:75:2f:63:90:84:4c:75:18:ce:91:c9:d1:dd:
+-                    81:7e:bd:1b:ae:0b:5d:c6:39
++                    00:b3:f2:59:d5:56:9c:ad:a9:b9:78:78:fd:06:c4:
++                    60:58:61:92:df:1f:e9:be:c6:23:8d:01:27:3b:d4:
++                    ad:c2:3b:e9:22:5c:6e:05:ab:4c:a5:ec:62:64:ea:
++                    78:3d:d2:5a:72:fc:01:be:36:e0:0d:7d:17:77:dc:
++                    3a:4d:cd:31:ef:16:dc:95:f0:86:8b:f1:dd:2b:c5:
++                    7a:d9:ab:8b:a9:07:ad:a9:d2:0f:7d:1f:ad:2f:d9:
++                    56:f7:ac:2a:0c:79:05:08:5c:f7:92:8b:cb:b0:71:
++                    4d:17:34:ec:5a:38:00:d0:12:86:bd:fb:3e:29:13:
++                    9b:e3:d6:0c:e2:48:c8:71:e1:f4:a6:44:b8:41:b3:
++                    ce:21:72:af:13:e7:0a:76:a0:d9:35:0b:4c:59:ba:
++                    d7:8e:3f:f7:0a:cc:96:84:5b:7d:4e:fc:c4:93:54:
++                    69:1a:e2:93:a3:77:d9:e7:dd:87:52:52:d9:09:f0:
++                    39:4b:3d:61:af:e3:82:80:87:90:fb:83:31:cd:c3:
++                    2f:5f:6f:8c:4e:18:c5:6b:f4:fb:6f:5b:60:f0:15:
++                    fb:fb:65:fe:e5:8e:72:2c:f4:fc:9d:12:9c:ec:2b:
++                    16:22:0b:0c:4f:d0:a4:73:18:ba:e6:69:ac:b2:14:
++                    9d:75:57:5a:31:d3:10:36:94:0d:80:ad:53:26:79:
++                    98:58:fe:0b:c6:8d:e1:a8:63:3f:61:4a:fd:66:2a:
++                    ee:62:ce:da:0b:b0:0f:04:ef:46:01:66:2d:c1:5c:
++                    8a:52:0e:a1:5c:f4:6e:84:8b:e6:be:59:91:86:d9:
++                    43:48:50:81:ef:60:ad:aa:c9:86:d2:84:30:d0:ce:
++                    98:91:f0:d3:f8:37:10:4b:99:1f:2a:9c:91:da:1c:
++                    73:44:df:57:3f:2d:9a:de:7d:8e:a1:88:3e:c7:1e:
++                    e0:9e:b8:74:80:7e:3d:3e:28:99:e6:2d:8b:56:30:
++                    53:7a:a8:bc:14:de:d2:c2:e1:63:24:a5:40:da:1f:
++                    47:c5:a5:13:36:fe:0f:0b:b9:7b
+                 Exponent: 65537 (0x10001)
+-    Signature Algorithm: sha1WithRSAEncryption
+-         ad:45:8a:8e:ef:c6:ef:04:41:5c:2c:4a:84:dc:02:76:0c:d0:
+-         66:0f:f0:16:04:58:4d:fd:68:b7:b8:d3:a8:41:a5:5c:3c:6f:
+-         65:3c:d1:f8:ce:43:35:e7:41:5f:53:3d:c9:2c:c3:7d:fc:56:
+-         4a:fa:47:77:38:9d:bb:97:28:0a:3b:91:19:7f:bc:74:ae:15:
+-         6b:bd:20:36:67:45:a5:1e:79:d7:75:e6:89:5c:6d:54:84:d1:
+-         95:d7:a7:b4:33:3c:af:37:c4:79:8f:5e:75:dc:75:c2:18:fb:
+-         61:6f:2d:dc:38:65:5b:ba:67:28:d0:88:d7:8d:b9:23:5a:8e:
+-         e8:c6:bb:db:ce:d5:b8:41:2a:ce:93:08:b6:95:ad:34:20:18:
+-         d5:3b:37:52:74:50:0b:07:2c:b0:6d:a4:4c:7b:f4:e0:fd:d1:
+-         af:17:aa:20:cd:62:e3:f0:9d:37:69:db:41:bd:d4:1c:fb:53:
+-         20:da:88:9d:76:26:67:ce:01:90:a7:80:1d:a9:5b:39:73:68:
+-         54:0a:d1:2a:03:1b:8f:3c:43:5d:5d:c4:51:f1:a7:e7:11:da:
+-         31:2c:49:06:af:04:f4:b8:3c:99:c4:20:b9:06:36:a2:00:92:
+-         61:1d:0c:6d:24:05:e2:82:e1:47:db:a0:5f:ba:b9:fb:ba:fa:
+-         49:12:1e:ce
++        X509v3 extensions:
++            X509v3 Subject Alternative Name: 
++                DNS:fakehostname
++            X509v3 Key Usage: critical
++                Digital Signature, Key Encipherment
++            X509v3 Extended Key Usage: 
++                TLS Web Server Authentication, TLS Web Client Authentication
++            X509v3 Basic Constraints: critical
++                CA:FALSE
++            X509v3 Subject Key Identifier: 
++                70:44:EF:4C:A6:D6:BF:78:FF:F1:C3:DD:E9:4B:D4:26:47:64:38:06
++            X509v3 Authority Key Identifier: 
++                keyid:5E:57:A2:AF:07:53:35:F6:A1:5D:33:E3:D4:86:C6:0B:8F:37:95:54
++                DirName:/C=XY/O=Python Software Foundation CA/CN=our-ca-server
++                serial:76:C4:32:F6:D2:AB:1D:EE:77:2D:C7:0E:93:DE:67:46:4E:32:07:C5
++
++            Authority Information Access: 
++                CA Issuers - URI:http://testca.pythontest.net/testca/pycacert.cer
++                OCSP - URI:http://testca.pythontest.net/testca/ocsp/
++
++            X509v3 CRL Distribution Points: 
++
++                Full Name:
++                  URI:http://testca.pythontest.net/testca/revocation.crl
++
++    Signature Algorithm: sha256WithRSAEncryption
++         85:a0:d8:a7:5d:cb:25:be:59:06:33:1a:bb:76:be:59:17:3f:
++         50:e3:50:5a:f5:d9:01:00:91:53:24:61:ad:49:29:27:88:fe:
++         33:ce:bc:ad:06:9d:57:96:15:38:97:03:b2:c7:61:4f:88:fc:
++         09:94:62:68:42:fb:3e:24:50:a7:c4:bc:86:1d:f1:9d:fb:13:
++         aa:2c:f2:a3:78:0a:67:06:41:5e:71:0d:8b:7f:3b:92:35:c0:
++         37:5d:1f:2c:14:38:f7:f9:77:0c:46:bc:4c:7f:cc:20:9a:1c:
++         b4:e1:f2:52:9a:f2:12:3f:af:d2:08:a7:b7:1d:6f:85:15:f5:
++         16:98:3a:3e:24:3c:8e:0b:69:ff:d5:34:39:42:8b:f8:4b:47:
++         d6:6a:33:75:fe:6a:14:6e:70:87:e6:57:e2:4f:33:47:b4:8b:
++         58:7a:37:00:49:09:39:82:30:67:34:1a:40:0d:85:b8:ff:d6:
++         43:ae:36:b7:ef:58:92:ac:5b:29:03:8d:d9:93:e7:2e:9f:7a:
++         df:67:3d:5e:01:3d:3a:c9:f3:bf:30:3f:38:aa:e5:7e:54:15:
++         c8:9a:60:a1:c5:85:b4:88:07:78:52:25:46:50:9d:bc:6c:a8:
++         9d:ad:de:43:ab:9e:8f:36:55:7b:5c:ed:98:6a:60:1e:24:12:
++         90:22:c4:fc:61:80:6a:35:60:bf:a0:d3:6c:74:04:85:5d:bf:
++         7f:91:c0:33:b2:2a:f9:8f:93:82:87:9b:f2:d7:4d:eb:9a:08:
++         ac:c9:dc:95:4f:c3:72:c1:55:b6:e7:17:c2:c2:f4:2a:20:f3:
++         ac:df:3d:77:a0:0a:b7:a8:96:2d:cc:3a:18:5a:51:6f:9c:72:
++         4b:13:7f:b5:31:8e:58:2e:95:d0:24:18:0f:15:cc:ad:dc:e3:
++         2b:7d:42:dc:0f:b0:e4:65:77:ea:0e:7c:c1:d8:51:6d:c1:8d:
++         e0:95:e0:8f:6c:ec:1d:79:1a:fc:0e:46:30:64:b8:18:ef:46:
++         ae:20:a9:be:0a:d6
+ -----BEGIN CERTIFICATE-----
+-MIICpzCCAY8CCQCwkmSx8toh0jANBgkqhkiG9w0BAQUFADBNMQswCQYDVQQGEwJY
+-WTEmMCQGA1UECgwdUHl0aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAUBgNV
+-BAMMDW91ci1jYS1zZXJ2ZXIwHhcNMTMwMTA0MTk0NzA3WhcNMjIxMTEzMTk0NzA3
+-WjBiMQswCQYDVQQGEwJYWTEXMBUGA1UEBxMOQ2FzdGxlIEFudGhyYXgxIzAhBgNV
+-BAoTGlB5dGhvbiBTb2Z0d2FyZSBGb3VuZGF0aW9uMRUwEwYDVQQDEwxmYWtlaG9z
+-dG5hbWUwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAK5UQiMI5VkNs2QvL7gU
+-aiDdFevNUXRjU4DHAe3ZzzYLZNE69h9gO9VCSS16tJ5fT5VEu0EZyGr0e3V2NkX0
+-ZoU0Hc/UaY4qx7LHmn5SYZpIxhJnkf7SyHJK1zUaGlU0/LxYqIuGCtF5dqx1L2OQ
+-hEx1GM6RydHdgX69G64LXcY5AgMBAAEwDQYJKoZIhvcNAQEFBQADggEBAK1Fio7v
+-xu8EQVwsSoTcAnYM0GYP8BYEWE39aLe406hBpVw8b2U80fjOQzXnQV9TPcksw338
+-Vkr6R3c4nbuXKAo7kRl/vHSuFWu9IDZnRaUeedd15olcbVSE0ZXXp7QzPK83xHmP
+-XnXcdcIY+2FvLdw4ZVu6ZyjQiNeNuSNajujGu9vO1bhBKs6TCLaVrTQgGNU7N1J0
+-UAsHLLBtpEx79OD90a8XqiDNYuPwnTdp20G91Bz7UyDaiJ12JmfOAZCngB2pWzlz
+-aFQK0SoDG488Q11dxFHxp+cR2jEsSQavBPS4PJnEILkGNqIAkmEdDG0kBeKC4Ufb
+-oF+6ufu6+kkSHs4=
++MIIGDzCCBHegAwIBAgIUdsQy9tKrHe53LccOk95nRk4yB8cwDQYJKoZIhvcNAQEL
++BQAwTTELMAkGA1UEBhMCWFkxJjAkBgNVBAoMHVB5dGhvbiBTb2Z0d2FyZSBGb3Vu
++ZGF0aW9uIENBMRYwFAYDVQQDDA1vdXItY2Etc2VydmVyMB4XDTIwMDcyODE2MDM1
++NloXDTMwMDYwNjE2MDM1NlowYjELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3Rs
++ZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjEV
++MBMGA1UEAwwMZmFrZWhvc3RuYW1lMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIB
++igKCAYEAs/JZ1Vacram5eHj9BsRgWGGS3x/pvsYjjQEnO9StwjvpIlxuBatMpexi
++ZOp4PdJacvwBvjbgDX0Xd9w6Tc0x7xbclfCGi/HdK8V62auLqQetqdIPfR+tL9lW
++96wqDHkFCFz3kovLsHFNFzTsWjgA0BKGvfs+KROb49YM4kjIceH0pkS4QbPOIXKv
++E+cKdqDZNQtMWbrXjj/3CsyWhFt9TvzEk1RpGuKTo3fZ592HUlLZCfA5Sz1hr+OC
++gIeQ+4MxzcMvX2+MThjFa/T7b1tg8BX7+2X+5Y5yLPT8nRKc7CsWIgsMT9Ckcxi6
++5mmsshSddVdaMdMQNpQNgK1TJnmYWP4Lxo3hqGM/YUr9ZiruYs7aC7APBO9GAWYt
++wVyKUg6hXPRuhIvmvlmRhtlDSFCB72CtqsmG0oQw0M6YkfDT+DcQS5kfKpyR2hxz
++RN9XPy2a3n2OoYg+xx7gnrh0gH49PiiZ5i2LVjBTeqi8FN7SwuFjJKVA2h9HxaUT
++Nv4PC7l7AgMBAAGjggHQMIIBzDAXBgNVHREEEDAOggxmYWtlaG9zdG5hbWUwDgYD
++VR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNV
++HRMBAf8EAjAAMB0GA1UdDgQWBBRwRO9Mpta/eP/xw93pS9QmR2Q4BjCBiQYDVR0j
++BIGBMH+AFF5Xoq8HUzX2oV0z49SGxguPN5VUoVGkTzBNMQswCQYDVQQGEwJYWTEm
++MCQGA1UECgwdUHl0aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAUBgNVBAMM
++DW91ci1jYS1zZXJ2ZXKCFHbEMvbSqx3udy3HDpPeZ0ZOMgfFMIGDBggrBgEFBQcB
++AQR3MHUwPAYIKwYBBQUHMAKGMGh0dHA6Ly90ZXN0Y2EucHl0aG9udGVzdC5uZXQv
++dGVzdGNhL3B5Y2FjZXJ0LmNlcjA1BggrBgEFBQcwAYYpaHR0cDovL3Rlc3RjYS5w
++eXRob250ZXN0Lm5ldC90ZXN0Y2Evb2NzcC8wQwYDVR0fBDwwOjA4oDagNIYyaHR0
++cDovL3Rlc3RjYS5weXRob250ZXN0Lm5ldC90ZXN0Y2EvcmV2b2NhdGlvbi5jcmww
++DQYJKoZIhvcNAQELBQADggGBAIWg2KddyyW+WQYzGrt2vlkXP1DjUFr12QEAkVMk
++Ya1JKSeI/jPOvK0GnVeWFTiXA7LHYU+I/AmUYmhC+z4kUKfEvIYd8Z37E6os8qN4
++CmcGQV5xDYt/O5I1wDddHywUOPf5dwxGvEx/zCCaHLTh8lKa8hI/r9IIp7cdb4UV
++9RaYOj4kPI4Laf/VNDlCi/hLR9ZqM3X+ahRucIfmV+JPM0e0i1h6NwBJCTmCMGc0
++GkANhbj/1kOuNrfvWJKsWykDjdmT5y6fet9nPV4BPTrJ878wPziq5X5UFciaYKHF
++hbSIB3hSJUZQnbxsqJ2t3kOrno82VXtc7ZhqYB4kEpAixPxhgGo1YL+g02x0BIVd
++v3+RwDOyKvmPk4KHm/LXTeuaCKzJ3JVPw3LBVbbnF8LC9Cog86zfPXegCreoli3M
++OhhaUW+ccksTf7UxjlguldAkGA8VzK3c4yt9QtwPsORld+oOfMHYUW3BjeCV4I9s
++7B15GvwORjBkuBjvRq4gqb4K1g==
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/keycertecc.pem b/Lib/test/keycertecc.pem
+new file mode 100644
+index 00000000000..591e093db55
+--- /dev/null
++++ b/Lib/test/keycertecc.pem
+@@ -0,0 +1,107 @@
++-----BEGIN PRIVATE KEY-----
++MIG2AgEAMBAGByqGSM49AgEGBSuBBAAiBIGeMIGbAgEBBDBtpXFJhtYxdaxktAZc
++vcI/7RVC1iZf2B9WYjisOslwirUr5oAZSKR8AcDS0lY61I+hZANiAAR97u0akZJy
++sioaQo3x5H4cRS+bc2LVv2782j6A6+5IOT79s5/gAz0DJiRUT8BhhhAaLQ4YBehL
++/hDSmos4XpX012imhgCh/UFU0H1I4ly5UFTwzOCWb9Sk3Tr/Eh2r/zU=
++-----END PRIVATE KEY-----
++Certificate:
++    Data:
++        Version: 3 (0x2)
++        Serial Number:
++            76:c4:32:f6:d2:ab:1d:ee:77:2d:c7:0e:93:de:67:46:4e:32:07:c8
++        Signature Algorithm: sha256WithRSAEncryption
++        Issuer: C=XY, O=Python Software Foundation CA, CN=our-ca-server
++        Validity
++            Not Before: Jul 28 16:03:56 2020 GMT
++            Not After : Jun  6 16:03:56 2030 GMT
++        Subject: C=XY, L=Castle Anthrax, O=Python Software Foundation, CN=localhost-ecc
++        Subject Public Key Info:
++            Public Key Algorithm: id-ecPublicKey
++                Public-Key: (384 bit)
++                pub:
++                    04:7d:ee:ed:1a:91:92:72:b2:2a:1a:42:8d:f1:e4:
++                    7e:1c:45:2f:9b:73:62:d5:bf:6e:fc:da:3e:80:eb:
++                    ee:48:39:3e:fd:b3:9f:e0:03:3d:03:26:24:54:4f:
++                    c0:61:86:10:1a:2d:0e:18:05:e8:4b:fe:10:d2:9a:
++                    8b:38:5e:95:f4:d7:68:a6:86:00:a1:fd:41:54:d0:
++                    7d:48:e2:5c:b9:50:54:f0:cc:e0:96:6f:d4:a4:dd:
++                    3a:ff:12:1d:ab:ff:35
++                ASN1 OID: secp384r1
++                NIST CURVE: P-384
++        X509v3 extensions:
++            X509v3 Subject Alternative Name: 
++                DNS:localhost-ecc
++            X509v3 Key Usage: critical
++                Digital Signature, Key Encipherment
++            X509v3 Extended Key Usage: 
++                TLS Web Server Authentication, TLS Web Client Authentication
++            X509v3 Basic Constraints: critical
++                CA:FALSE
++            X509v3 Subject Key Identifier: 
++                11:0F:B0:10:65:C1:75:46:E7:0F:4C:29:B6:C8:BF:26:AF:B6:A1:DC
++            X509v3 Authority Key Identifier: 
++                keyid:5E:57:A2:AF:07:53:35:F6:A1:5D:33:E3:D4:86:C6:0B:8F:37:95:54
++                DirName:/C=XY/O=Python Software Foundation CA/CN=our-ca-server
++                serial:76:C4:32:F6:D2:AB:1D:EE:77:2D:C7:0E:93:DE:67:46:4E:32:07:C5
++
++            Authority Information Access: 
++                CA Issuers - URI:http://testca.pythontest.net/testca/pycacert.cer
++                OCSP - URI:http://testca.pythontest.net/testca/ocsp/
++
++            X509v3 CRL Distribution Points: 
++
++                Full Name:
++                  URI:http://testca.pythontest.net/testca/revocation.crl
++
++    Signature Algorithm: sha256WithRSAEncryption
++         b6:63:23:78:bc:76:f2:f3:85:ed:3c:7e:8e:69:5f:a0:64:b9:
++         44:fd:66:75:8b:94:a3:92:b9:09:46:f2:62:52:1c:87:b8:34:
++         28:fc:f6:83:60:dc:a8:66:b5:07:22:87:4e:91:5c:cf:b6:b9:
++         a5:73:1b:36:04:48:dd:0f:9f:27:f5:0d:50:2a:29:51:0d:a5:
++         71:68:b0:b3:a1:85:b9:4f:75:4a:37:e0:36:00:6b:46:4e:71:
++         95:74:31:9b:e6:40:2b:5c:25:61:2f:27:c0:8c:87:53:ee:e7:
++         37:87:00:b0:88:ce:db:15:42:a5:ae:e9:1a:6d:88:51:53:39:
++         70:19:15:28:5b:07:79:89:b8:a1:8d:9d:e8:7c:91:0f:8f:34:
++         a0:9f:aa:65:86:05:39:f0:9c:a4:ed:54:6d:c3:78:45:f2:72:
++         50:16:0e:26:75:88:ce:61:61:1d:9e:46:fc:9d:87:8d:02:b9:
++         6c:82:17:e5:0a:59:5e:59:5d:e9:e6:1a:b9:36:01:36:2e:b3:
++         96:7b:04:dd:c9:8a:f0:57:81:cf:31:6f:1f:83:5a:af:42:8e:
++         a5:38:6d:82:a2:68:40:29:4a:55:0d:02:dd:b6:32:3b:cb:11:
++         e9:44:7c:6d:50:72:dd:c9:c6:f1:5d:bb:34:c8:db:47:18:79:
++         c0:f4:83:d6:43:d1:e8:84:59:a0:ba:0b:12:37:84:ab:f0:4d:
++         4c:b9:f7:8e:f1:56:62:84:54:99:2e:47:d3:ab:6e:6d:04:10:
++         22:ec:d5:6d:55:d2:6c:6e:3a:65:d2:cd:67:68:72:e5:95:0f:
++         dd:48:5b:9f:a0:4f:29:a8:66:9a:48:e6:e7:a7:b6:86:7f:0f:
++         5f:99:27:51:08:9e:dc:d7:45:0e:4d:93:df:9e:e1:00:93:48:
++         f7:40:a7:5c:48:b1:5b:df:61:46:30:a0:7f:48:7c:90:e4:87:
++         1a:bb:b7:22:a5:83:91:ff:66:4f:e6:9a:58:b4:dd:ba:34:67:
++         b0:57:f9:67:f9:9e
++-----BEGIN CERTIFICATE-----
++MIIE4zCCA0ugAwIBAgIUdsQy9tKrHe53LccOk95nRk4yB8gwDQYJKoZIhvcNAQEL
++BQAwTTELMAkGA1UEBhMCWFkxJjAkBgNVBAoMHVB5dGhvbiBTb2Z0d2FyZSBGb3Vu
++ZGF0aW9uIENBMRYwFAYDVQQDDA1vdXItY2Etc2VydmVyMB4XDTIwMDcyODE2MDM1
++NloXDTMwMDYwNjE2MDM1NlowYzELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3Rs
++ZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjEW
++MBQGA1UEAwwNbG9jYWxob3N0LWVjYzB2MBAGByqGSM49AgEGBSuBBAAiA2IABH3u
++7RqRknKyKhpCjfHkfhxFL5tzYtW/bvzaPoDr7kg5Pv2zn+ADPQMmJFRPwGGGEBot
++DhgF6Ev+ENKaizhelfTXaKaGAKH9QVTQfUjiXLlQVPDM4JZv1KTdOv8SHav/NaOC
++AdEwggHNMBgGA1UdEQQRMA+CDWxvY2FsaG9zdC1lY2MwDgYDVR0PAQH/BAQDAgWg
++MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0G
++A1UdDgQWBBQRD7AQZcF1RucPTCm2yL8mr7ah3DCBiQYDVR0jBIGBMH+AFF5Xoq8H
++UzX2oV0z49SGxguPN5VUoVGkTzBNMQswCQYDVQQGEwJYWTEmMCQGA1UECgwdUHl0
++aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAUBgNVBAMMDW91ci1jYS1zZXJ2
++ZXKCFHbEMvbSqx3udy3HDpPeZ0ZOMgfFMIGDBggrBgEFBQcBAQR3MHUwPAYIKwYB
++BQUHMAKGMGh0dHA6Ly90ZXN0Y2EucHl0aG9udGVzdC5uZXQvdGVzdGNhL3B5Y2Fj
++ZXJ0LmNlcjA1BggrBgEFBQcwAYYpaHR0cDovL3Rlc3RjYS5weXRob250ZXN0Lm5l
++dC90ZXN0Y2Evb2NzcC8wQwYDVR0fBDwwOjA4oDagNIYyaHR0cDovL3Rlc3RjYS5w
++eXRob250ZXN0Lm5ldC90ZXN0Y2EvcmV2b2NhdGlvbi5jcmwwDQYJKoZIhvcNAQEL
++BQADggGBALZjI3i8dvLzhe08fo5pX6BkuUT9ZnWLlKOSuQlG8mJSHIe4NCj89oNg
++3KhmtQcih06RXM+2uaVzGzYESN0Pnyf1DVAqKVENpXFosLOhhblPdUo34DYAa0ZO
++cZV0MZvmQCtcJWEvJ8CMh1Pu5zeHALCIztsVQqWu6RptiFFTOXAZFShbB3mJuKGN
++neh8kQ+PNKCfqmWGBTnwnKTtVG3DeEXyclAWDiZ1iM5hYR2eRvydh40CuWyCF+UK
++WV5ZXenmGrk2ATYus5Z7BN3JivBXgc8xbx+DWq9CjqU4bYKiaEApSlUNAt22MjvL
++EelEfG1Qct3JxvFduzTI20cYecD0g9ZD0eiEWaC6CxI3hKvwTUy5947xVmKEVJku
++R9Orbm0EECLs1W1V0mxuOmXSzWdocuWVD91IW5+gTymoZppI5uentoZ/D1+ZJ1EI
++ntzXRQ5Nk9+e4QCTSPdAp1xIsVvfYUYwoH9IfJDkhxq7tyKlg5H/Zk/mmli03bo0
++Z7BX+Wf5ng==
++-----END CERTIFICATE-----
+diff --git a/Lib/test/make_ssl_certs.py b/Lib/test/make_ssl_certs.py
+index 81d04f82dcf..41b5f46c882 100644
+--- a/Lib/test/make_ssl_certs.py
++++ b/Lib/test/make_ssl_certs.py
+@@ -2,15 +2,17 @@
+ and friends."""
+ 
+ import os
++import pprint
+ import shutil
+-import sys
+ import tempfile
+ from subprocess import *
+ 
+ req_template = """
++    [ default ]
++    base_url               = http://testca.pythontest.net/testca
++
+     [req]
+     distinguished_name     = req_distinguished_name
+-    x509_extensions        = req_x509_extensions
+     prompt                 = no
+ 
+     [req_distinguished_name]
+@@ -19,8 +21,46 @@ req_template = """
+     O                      = Python Software Foundation
+     CN                     = {hostname}
+ 
+-    [req_x509_extensions]
+-    subjectAltName         = DNS:{hostname}
++    [req_x509_extensions_simple]
++    subjectAltName         = @san
++
++    [req_x509_extensions_full]
++    subjectAltName         = @san
++    keyUsage               = critical,keyEncipherment,digitalSignature
++    extendedKeyUsage       = serverAuth,clientAuth
++    basicConstraints       = critical,CA:false
++    subjectKeyIdentifier   = hash
++    authorityKeyIdentifier = keyid:always,issuer:always
++    authorityInfoAccess    = @issuer_ocsp_info
++    crlDistributionPoints  = @crl_info
++
++    [ issuer_ocsp_info ]
++    caIssuers;URI.0        = $base_url/pycacert.cer
++    OCSP;URI.0             = $base_url/ocsp/
++
++    [ crl_info ]
++    URI.0                  = $base_url/revocation.crl
++
++    [san]
++    DNS.1 = {hostname}
++    {extra_san}
++
++    [dir_sect]
++    C                      = XY
++    L                      = Castle Anthrax
++    O                      = Python Software Foundation
++    CN                     = dirname example
++
++    [princ_name]
++    realm = EXP:0, GeneralString:KERBEROS.REALM
++    principal_name = EXP:1, SEQUENCE:principal_seq
++
++    [principal_seq]
++    name_type = EXP:0, INTEGER:1
++    name_string = EXP:1, SEQUENCE:principals
++
++    [principals]
++    princ1 = GeneralString:username
+ 
+     [ ca ]
+     default_ca      = CA_default
+@@ -29,14 +69,13 @@ req_template = """
+     dir = cadir
+     database  = $dir/index.txt
+     crlnumber = $dir/crl.txt
+-    default_md = sha1
++    default_md = sha256
+     default_days = 3600
+     default_crl_days = 3600
+     certificate = pycacert.pem
+     private_key = pycakey.pem
+     serial    = $dir/serial
+     RANDFILE  = $dir/.rand
+-
+     policy          = policy_match
+ 
+     [ policy_match ]
+@@ -67,7 +106,9 @@ req_template = """
+ 
+ here = os.path.abspath(os.path.dirname(__file__))
+ 
+-def make_cert_key(hostname, sign=False):
++
++def make_cert_key(hostname, sign=False, extra_san='',
++                  ext='req_x509_extensions_full', key='rsa:3072'):
+     print("creating cert for " + hostname)
+     tempnames = []
+     for i in range(3):
+@@ -75,10 +116,12 @@ def make_cert_key(hostname, sign=False):
+             tempnames.append(f.name)
+     req_file, cert_file, key_file = tempnames
+     try:
++        req = req_template.format(hostname=hostname, extra_san=extra_san)
+         with open(req_file, 'w') as f:
+-            f.write(req_template.format(hostname=hostname))
++            f.write(req)
+         args = ['req', '-new', '-days', '3650', '-nodes',
+-                '-newkey', 'rsa:1024', '-keyout', key_file,
++                '-newkey', key, '-keyout', key_file,
++                '-extensions', ext,
+                 '-config', req_file]
+         if sign:
+             with tempfile.NamedTemporaryFile(delete=False) as f:
+@@ -91,8 +134,15 @@ def make_cert_key(hostname, sign=False):
+         check_call(['openssl'] + args)
+ 
+         if sign:
+-            args = ['ca', '-config', req_file, '-out', cert_file, '-outdir', 'cadir',
+-                    '-policy', 'policy_anything', '-batch', '-infiles', reqfile ]
++            args = [
++                'ca',
++                '-config', req_file,
++                '-extensions', ext,
++                '-out', cert_file,
++                '-outdir', 'cadir',
++                '-policy', 'policy_anything',
++                '-batch', '-infiles', reqfile
++            ]
+             check_call(['openssl'] + args)
+ 
+ 
+@@ -120,11 +170,11 @@ def make_ca():
+         f.write('unique_subject = no')
+ 
+     with tempfile.NamedTemporaryFile("w") as t:
+-        t.write(req_template.format(hostname='our-ca-server'))
++        t.write(req_template.format(hostname='our-ca-server', extra_san=''))
+         t.flush()
+         with tempfile.NamedTemporaryFile() as f:
+             args = ['req', '-new', '-days', '3650', '-extensions', 'v3_ca', '-nodes',
+-                    '-newkey', 'rsa:2048', '-keyout', 'pycakey.pem',
++                    '-newkey', 'rsa:3072', '-keyout', 'pycakey.pem',
+                     '-out', f.name,
+                     '-subj', '/C=XY/L=Castle Anthrax/O=Python Software Foundation CA/CN=our-ca-server']
+             check_call(['openssl'] + args)
+@@ -136,16 +186,28 @@ def make_ca():
+             args = ['ca', '-config', t.name, '-gencrl', '-out', 'revocation.crl']
+             check_call(['openssl'] + args)
+ 
++    # capath hashes depend on subject!
++    check_call([
++        'openssl', 'x509', '-in', 'pycacert.pem', '-out', 'capath/ceff1710.0'
++    ])
++    shutil.copy('capath/ceff1710.0', 'capath/b1930218.0')
++
++
++def print_cert(path):
++    import _ssl
++    pprint.pprint(_ssl._test_decode_cert(path))
++
++
+ if __name__ == '__main__':
+     os.chdir(here)
+-    cert, key = make_cert_key('localhost')
++    cert, key = make_cert_key('localhost', ext='req_x509_extensions_simple')
+     with open('ssl_cert.pem', 'w') as f:
+         f.write(cert)
+     with open('ssl_key.pem', 'w') as f:
+         f.write(key)
+     print("password protecting ssl_key.pem in ssl_key.passwd.pem")
+-    check_call(['openssl','rsa','-in','ssl_key.pem','-out','ssl_key.passwd.pem','-des3','-passout','pass:somepass'])
+-    check_call(['openssl','rsa','-in','ssl_key.pem','-out','keycert.passwd.pem','-des3','-passout','pass:somepass'])
++    check_call(['openssl','pkey','-in','ssl_key.pem','-out','ssl_key.passwd.pem','-aes256','-passout','pass:somepass'])
++    check_call(['openssl','pkey','-in','ssl_key.pem','-out','keycert.passwd.pem','-aes256','-passout','pass:somepass'])
+ 
+     with open('keycert.pem', 'w') as f:
+         f.write(key)
+@@ -156,7 +218,7 @@ if __name__ == '__main__':
+ 
+     # For certificate matching tests
+     make_ca()
+-    cert, key = make_cert_key('fakehostname')
++    cert, key = make_cert_key('fakehostname', ext='req_x509_extensions_simple')
+     with open('keycert2.pem', 'w') as f:
+         f.write(key)
+         f.write(cert)
+@@ -171,6 +233,50 @@ if __name__ == '__main__':
+         f.write(key)
+         f.write(cert)
+ 
++    cert, key = make_cert_key(
++        'localhost-ecc', True, key='param:secp384r1.pem'
++    )
++    with open('keycertecc.pem', 'w') as f:
++        f.write(key)
++        f.write(cert)
++
++    extra_san = [
++        'otherName.1 = 1.2.3.4;UTF8:some other identifier',
++        'otherName.2 = 1.3.6.1.5.2.2;SEQUENCE:princ_name',
++        'email.1 = user@example.org',
++        'DNS.2 = www.example.org',
++        # GEN_X400
++        'dirName.1 = dir_sect',
++        # GEN_EDIPARTY
++        'URI.1 = https://www.python.org/',
++        'IP.1 = 127.0.0.1',
++        'IP.2 = ::1',
++        'RID.1 = 1.2.3.4.5',
++    ]
++
++    cert, key = make_cert_key('allsans', extra_san='\n'.join(extra_san))
++    with open('allsans.pem', 'w') as f:
++        f.write(key)
++        f.write(cert)
++
++    extra_san = [
++        # könig (king)
++        'DNS.2 = xn--knig-5qa.idn.pythontest.net',
++        # königsgäßchen (king's alleyway)
++        'DNS.3 = xn--knigsgsschen-lcb0w.idna2003.pythontest.net',
++        'DNS.4 = xn--knigsgchen-b4a3dun.idna2008.pythontest.net',
++        # βόλοσ (marble)
++        'DNS.5 = xn--nxasmq6b.idna2003.pythontest.net',
++        'DNS.6 = xn--nxasmm1c.idna2008.pythontest.net',
++    ]
++
++    # IDN SANS, signed
++    cert, key = make_cert_key('idnsans', True, extra_san='\n'.join(extra_san))
++    with open('idnsans.pem', 'w') as f:
++        f.write(key)
++        f.write(cert)
++
+     unmake_ca()
+-    print("\n\nPlease change the values in test_ssl.py, test_parse_cert function related to notAfter,notBefore and serialNumber")
+-    check_call(['openssl','x509','-in','keycert.pem','-dates','-serial','-noout'])
++    print("update Lib/test/test_ssl.py and Lib/test/test_asyncio/util.py")
++    print_cert('keycert.pem')
++    print_cert('keycert3.pem')
+diff --git a/Lib/test/pycacert.pem b/Lib/test/pycacert.pem
+index 09b1f3e08ae..4f252cfa30a 100644
+--- a/Lib/test/pycacert.pem
++++ b/Lib/test/pycacert.pem
+@@ -1,78 +1,99 @@
+ Certificate:
+     Data:
+         Version: 3 (0x2)
+-        Serial Number: 12723342612721443280 (0xb09264b1f2da21d0)
+-    Signature Algorithm: sha1WithRSAEncryption
++        Serial Number:
++            76:c4:32:f6:d2:ab:1d:ee:77:2d:c7:0e:93:de:67:46:4e:32:07:c5
++        Signature Algorithm: sha256WithRSAEncryption
+         Issuer: C=XY, O=Python Software Foundation CA, CN=our-ca-server
+         Validity
+-            Not Before: Jan  4 19:47:07 2013 GMT
+-            Not After : Jan  2 19:47:07 2023 GMT
++            Not Before: Jul 28 16:03:55 2020 GMT
++            Not After : Jul 26 16:03:55 2030 GMT
+         Subject: C=XY, O=Python Software Foundation CA, CN=our-ca-server
+         Subject Public Key Info:
+             Public Key Algorithm: rsaEncryption
+-                Public-Key: (2048 bit)
++                RSA Public-Key: (3072 bit)
+                 Modulus:
+-                    00:e7:de:e9:e3:0c:9f:00:b6:a1:fd:2b:5b:96:d2:
+-                    6f:cc:e0:be:86:b9:20:5e:ec:03:7a:55:ab:ea:a4:
+-                    e9:f9:49:85:d2:66:d5:ed:c7:7a:ea:56:8e:2d:8f:
+-                    e7:42:e2:62:28:a9:9f:d6:1b:8e:eb:b5:b4:9c:9f:
+-                    14:ab:df:e6:94:8b:76:1d:3e:6d:24:61:ed:0c:bf:
+-                    00:8a:61:0c:df:5c:c8:36:73:16:00:cd:47:ba:6d:
+-                    a4:a4:74:88:83:23:0a:19:fc:09:a7:3c:4a:4b:d3:
+-                    e7:1d:2d:e4:ea:4c:54:21:f3:26:db:89:37:18:d4:
+-                    02:bb:40:32:5f:a4:ff:2d:1c:f7:d4:bb:ec:8e:cf:
+-                    5c:82:ac:e6:7c:08:6c:48:85:61:07:7f:25:e0:5c:
+-                    e0:bc:34:5f:e0:b9:04:47:75:c8:47:0b:8d:bc:d6:
+-                    c8:68:5f:33:83:62:d2:20:44:35:b1:ad:81:1a:8a:
+-                    cd:bc:35:b0:5c:8b:47:d6:18:e9:9c:18:97:cc:01:
+-                    3c:29:cc:e8:1e:e4:e4:c1:b8:de:e7:c2:11:18:87:
+-                    5a:93:34:d8:a6:25:f7:14:71:eb:e4:21:a2:d2:0f:
+-                    2e:2e:d4:62:00:35:d3:d6:ef:5c:60:4b:4c:a9:14:
+-                    e2:dd:15:58:46:37:33:26:b7:e7:2e:5d:ed:42:e4:
+-                    c5:4d
++                    00:c7:af:41:93:1a:1e:f8:4c:d4:67:a4:52:f4:10:
++                    9a:b5:28:8c:a2:24:74:02:70:cc:6b:3c:95:a2:15:
++                    be:51:67:be:bf:5a:9a:54:80:c3:3f:e5:6e:ff:51:
++                    ea:45:40:97:64:09:20:c8:2f:8f:50:15:cc:d1:d6:
++                    7e:5c:ff:ed:80:3a:a2:00:3c:bc:7c:69:7a:f0:ef:
++                    77:c4:24:5b:62:37:62:d1:03:b9:49:c0:42:87:23:
++                    1e:69:df:50:62:17:be:76:5f:da:74:c3:3f:01:50:
++                    0f:17:96:ab:73:8c:27:da:1a:e3:95:c1:31:bb:6e:
++                    86:3b:9b:a3:9c:07:2c:c6:7b:2a:69:22:9c:d5:e5:
++                    1a:c3:9f:7b:99:59:75:84:6c:b2:67:37:be:6b:0c:
++                    e5:ac:58:2d:bc:7e:dd:a9:d9:3c:13:2e:81:43:65:
++                    af:16:8a:99:c2:7f:b3:1b:44:95:65:1f:3b:e2:f7:
++                    52:29:f6:e3:ec:bf:37:a5:20:e4:15:63:22:8d:21:
++                    14:36:17:58:23:a7:13:b3:37:29:70:56:8c:6d:9c:
++                    18:1d:29:35:db:43:e7:72:1a:cb:ce:c9:c0:df:0d:
++                    54:71:2f:bf:b2:31:69:ed:e2:2a:7b:26:e2:d8:b0:
++                    21:6f:7b:d2:6f:5f:d7:13:fd:a2:d9:eb:0c:b0:cf:
++                    44:d0:f1:23:87:58:01:32:cf:70:40:2f:78:7c:40:
++                    25:8d:9d:95:a3:93:4f:25:e9:e5:d5:d5:e1:af:1e:
++                    4e:50:93:32:59:e6:6d:f4:4c:26:f6:d4:8f:45:06:
++                    b2:7e:34:c7:f2:81:e8:b6:73:2c:0a:c2:ae:d7:29:
++                    f7:ba:42:32:a4:ca:c7:c0:5c:9f:be:9e:52:b6:44:
++                    bb:7d:78:75:13:81:06:05:47:d2:bd:2c:c4:7e:7a:
++                    84:12:56:c0:66:c6:a0:80:83:24:c2:dd:03:b7:94:
++                    96:9a:71:c8:0b:89:42:5d:5d:b5:34:a5:81:7b:0f:
++                    f8:60:56:29:58:c5:7b:13:e4:a1
+                 Exponent: 65537 (0x10001)
+         X509v3 extensions:
+             X509v3 Subject Key Identifier: 
+-                BC:DD:62:D9:76:DA:1B:D2:54:6B:CF:E0:66:9B:1E:1E:7B:56:0C:0B
++                5E:57:A2:AF:07:53:35:F6:A1:5D:33:E3:D4:86:C6:0B:8F:37:95:54
+             X509v3 Authority Key Identifier: 
+-                keyid:BC:DD:62:D9:76:DA:1B:D2:54:6B:CF:E0:66:9B:1E:1E:7B:56:0C:0B
++                keyid:5E:57:A2:AF:07:53:35:F6:A1:5D:33:E3:D4:86:C6:0B:8F:37:95:54
+ 
+             X509v3 Basic Constraints: 
+                 CA:TRUE
+-    Signature Algorithm: sha1WithRSAEncryption
+-         7d:0a:f5:cb:8d:d3:5d:bd:99:8e:f8:2b:0f:ba:eb:c2:d9:a6:
+-         27:4f:2e:7b:2f:0e:64:d8:1c:35:50:4e:ee:fc:90:b9:8d:6d:
+-         a8:c5:c6:06:b0:af:f3:2d:bf:3b:b8:42:07:dd:18:7d:6d:95:
+-         54:57:85:18:60:47:2f:eb:78:1b:f9:e8:17:fd:5a:0d:87:17:
+-         28:ac:4c:6a:e6:bc:29:f4:f4:55:70:29:42:de:85:ea:ab:6c:
+-         23:06:64:30:75:02:8e:53:bc:5e:01:33:37:cc:1e:cd:b8:a4:
+-         fd:ca:e4:5f:65:3b:83:1c:86:f1:55:02:a0:3a:8f:db:91:b7:
+-         40:14:b4:e7:8d:d2:ee:73:ba:e3:e5:34:2d:bc:94:6f:4e:24:
+-         06:f7:5f:8b:0e:a7:8e:6b:de:5e:75:f4:32:9a:50:b1:44:33:
+-         9a:d0:05:e2:78:82:ff:db:da:8a:63:eb:a9:dd:d1:bf:a0:61:
+-         ad:e3:9e:8a:24:5d:62:0e:e7:4c:91:7f:ef:df:34:36:3b:2f:
+-         5d:f5:84:b2:2f:c4:6d:93:96:1a:6f:30:28:f1:da:12:9a:64:
+-         b4:40:33:1d:bd:de:2b:53:a8:ea:be:d6:bc:4e:96:f5:44:fb:
+-         32:18:ae:d5:1f:f6:69:af:b6:4e:7b:1d:58:ec:3b:a9:53:a3:
+-         5e:58:c8:9e
++    Signature Algorithm: sha256WithRSAEncryption
++         c1:89:91:a4:6e:4c:d6:57:e3:6a:94:db:b2:a0:85:43:0b:94:
++         79:5c:5e:9e:e7:03:a0:2d:0f:b9:a8:fd:00:1b:c8:b2:e8:d4:
++         26:8b:09:bd:67:5d:f0:f9:6e:e2:60:3b:03:71:12:f3:0a:72:
++         66:36:33:a4:22:2a:5e:c0:b1:b4:c9:25:3c:24:7a:47:7d:a9:
++         18:64:b6:4f:f8:2d:82:7b:91:d1:d0:f3:05:81:75:a0:92:df:
++         b3:08:c7:2d:3d:02:e0:41:81:48:18:15:aa:19:de:0e:be:51:
++         55:63:68:00:3a:c8:55:49:d8:36:a9:0b:41:6e:5e:c8:db:4a:
++         ff:96:fc:d6:cf:dc:61:ab:6a:14:2a:56:59:05:ca:75:ae:7f:
++         3c:ca:88:fb:aa:d8:fe:eb:8e:13:77:d2:c3:64:94:90:b8:03:
++         cb:d5:15:25:ac:ef:a0:87:95:50:f7:48:24:3c:30:79:f3:17:
++         5d:35:f1:fe:b4:08:04:66:90:87:c1:85:dc:c9:bd:c1:e3:05:
++         72:cb:e0:46:76:8d:a8:ee:1f:c5:4b:56:44:c8:73:a0:01:56:
++         90:4e:c0:70:86:d2:1a:b5:60:76:97:93:12:fc:ec:10:ec:73:
++         6f:e0:6c:48:a5:ed:84:8c:f8:c1:50:c0:1d:b2:9b:5e:dc:09:
++         ff:e0:67:10:bb:10:db:26:98:8a:31:56:37:93:ac:67:b5:6f:
++         87:29:46:d5:86:46:99:cd:f6:f4:e8:34:9b:27:d0:7d:d2:1e:
++         54:7c:6b:1a:b8:b2:9c:f2:1f:c9:a9:87:50:79:6b:c7:74:84:
++         07:c9:aa:14:e6:62:9c:56:34:c2:10:68:03:e4:b2:84:63:0b:
++         34:2d:3b:53:1b:7e:3f:2c:c6:96:98:b9:2f:01:44:f2:b2:fd:
++         f5:2b:2c:8f:7d:d8:85:ed:79:6e:fd:a2:2f:7d:bd:db:ab:c6:
++         65:db:9b:08:9a:73:75:39:b6:3d:d8:9d:8a:f9:20:c6:b5:55:
++         29:12:17:b3:f6:ef
+ -----BEGIN CERTIFICATE-----
+-MIIDbTCCAlWgAwIBAgIJALCSZLHy2iHQMA0GCSqGSIb3DQEBBQUAME0xCzAJBgNV
+-BAYTAlhZMSYwJAYDVQQKDB1QeXRob24gU29mdHdhcmUgRm91bmRhdGlvbiBDQTEW
+-MBQGA1UEAwwNb3VyLWNhLXNlcnZlcjAeFw0xMzAxMDQxOTQ3MDdaFw0yMzAxMDIx
+-OTQ3MDdaME0xCzAJBgNVBAYTAlhZMSYwJAYDVQQKDB1QeXRob24gU29mdHdhcmUg
+-Rm91bmRhdGlvbiBDQTEWMBQGA1UEAwwNb3VyLWNhLXNlcnZlcjCCASIwDQYJKoZI
+-hvcNAQEBBQADggEPADCCAQoCggEBAOfe6eMMnwC2of0rW5bSb8zgvoa5IF7sA3pV
+-q+qk6flJhdJm1e3HeupWji2P50LiYiipn9Ybjuu1tJyfFKvf5pSLdh0+bSRh7Qy/
+-AIphDN9cyDZzFgDNR7ptpKR0iIMjChn8Cac8SkvT5x0t5OpMVCHzJtuJNxjUArtA
+-Ml+k/y0c99S77I7PXIKs5nwIbEiFYQd/JeBc4Lw0X+C5BEd1yEcLjbzWyGhfM4Ni
+-0iBENbGtgRqKzbw1sFyLR9YY6ZwYl8wBPCnM6B7k5MG43ufCERiHWpM02KYl9xRx
+-6+QhotIPLi7UYgA109bvXGBLTKkU4t0VWEY3Mya35y5d7ULkxU0CAwEAAaNQME4w
+-HQYDVR0OBBYEFLzdYtl22hvSVGvP4GabHh57VgwLMB8GA1UdIwQYMBaAFLzdYtl2
+-2hvSVGvP4GabHh57VgwLMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEB
+-AH0K9cuN0129mY74Kw+668LZpidPLnsvDmTYHDVQTu78kLmNbajFxgawr/Mtvzu4
+-QgfdGH1tlVRXhRhgRy/reBv56Bf9Wg2HFyisTGrmvCn09FVwKULeheqrbCMGZDB1
+-Ao5TvF4BMzfMHs24pP3K5F9lO4MchvFVAqA6j9uRt0AUtOeN0u5zuuPlNC28lG9O
+-JAb3X4sOp45r3l519DKaULFEM5rQBeJ4gv/b2opj66nd0b+gYa3jnookXWIO50yR
+-f+/fNDY7L131hLIvxG2TlhpvMCjx2hKaZLRAMx293itTqOq+1rxOlvVE+zIYrtUf
+-9mmvtk57HVjsO6lTo15YyJ4=
++MIIEeDCCAuCgAwIBAgIUdsQy9tKrHe53LccOk95nRk4yB8UwDQYJKoZIhvcNAQEL
++BQAwTTELMAkGA1UEBhMCWFkxJjAkBgNVBAoMHVB5dGhvbiBTb2Z0d2FyZSBGb3Vu
++ZGF0aW9uIENBMRYwFAYDVQQDDA1vdXItY2Etc2VydmVyMB4XDTIwMDcyODE2MDM1
++NVoXDTMwMDcyNjE2MDM1NVowTTELMAkGA1UEBhMCWFkxJjAkBgNVBAoMHVB5dGhv
++biBTb2Z0d2FyZSBGb3VuZGF0aW9uIENBMRYwFAYDVQQDDA1vdXItY2Etc2VydmVy
++MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAx69Bkxoe+EzUZ6RS9BCa
++tSiMoiR0AnDMazyVohW+UWe+v1qaVIDDP+Vu/1HqRUCXZAkgyC+PUBXM0dZ+XP/t
++gDqiADy8fGl68O93xCRbYjdi0QO5ScBChyMead9QYhe+dl/adMM/AVAPF5arc4wn
++2hrjlcExu26GO5ujnAcsxnsqaSKc1eUaw597mVl1hGyyZze+awzlrFgtvH7dqdk8
++Ey6BQ2WvFoqZwn+zG0SVZR874vdSKfbj7L83pSDkFWMijSEUNhdYI6cTszcpcFaM
++bZwYHSk120PnchrLzsnA3w1UcS+/sjFp7eIqeybi2LAhb3vSb1/XE/2i2esMsM9E
++0PEjh1gBMs9wQC94fEAljZ2Vo5NPJenl1dXhrx5OUJMyWeZt9Ewm9tSPRQayfjTH
++8oHotnMsCsKu1yn3ukIypMrHwFyfvp5StkS7fXh1E4EGBUfSvSzEfnqEElbAZsag
++gIMkwt0Dt5SWmnHIC4lCXV21NKWBew/4YFYpWMV7E+ShAgMBAAGjUDBOMB0GA1Ud
++DgQWBBReV6KvB1M19qFdM+PUhsYLjzeVVDAfBgNVHSMEGDAWgBReV6KvB1M19qFd
++M+PUhsYLjzeVVDAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBgQDBiZGk
++bkzWV+NqlNuyoIVDC5R5XF6e5wOgLQ+5qP0AG8iy6NQmiwm9Z13w+W7iYDsDcRLz
++CnJmNjOkIipewLG0ySU8JHpHfakYZLZP+C2Ce5HR0PMFgXWgkt+zCMctPQLgQYFI
++GBWqGd4OvlFVY2gAOshVSdg2qQtBbl7I20r/lvzWz9xhq2oUKlZZBcp1rn88yoj7
++qtj+644Td9LDZJSQuAPL1RUlrO+gh5VQ90gkPDB58xddNfH+tAgEZpCHwYXcyb3B
++4wVyy+BGdo2o7h/FS1ZEyHOgAVaQTsBwhtIatWB2l5MS/OwQ7HNv4GxIpe2EjPjB
++UMAdspte3An/4GcQuxDbJpiKMVY3k6xntW+HKUbVhkaZzfb06DSbJ9B90h5UfGsa
++uLKc8h/JqYdQeWvHdIQHyaoU5mKcVjTCEGgD5LKEYws0LTtTG34/LMaWmLkvAUTy
++sv31KyyPfdiF7Xlu/aIvfb3bq8Zl25sImnN1ObY92J2K+SDGtVUpEhez9u8=
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/pycakey.pem b/Lib/test/pycakey.pem
+index fc6effefb21..77dd2f739b0 100644
+--- a/Lib/test/pycakey.pem
++++ b/Lib/test/pycakey.pem
+@@ -1,28 +1,40 @@
+ -----BEGIN PRIVATE KEY-----
+-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDn3unjDJ8AtqH9
+-K1uW0m/M4L6GuSBe7AN6VavqpOn5SYXSZtXtx3rqVo4tj+dC4mIoqZ/WG47rtbSc
+-nxSr3+aUi3YdPm0kYe0MvwCKYQzfXMg2cxYAzUe6baSkdIiDIwoZ/AmnPEpL0+cd
+-LeTqTFQh8ybbiTcY1AK7QDJfpP8tHPfUu+yOz1yCrOZ8CGxIhWEHfyXgXOC8NF/g
+-uQRHdchHC4281shoXzODYtIgRDWxrYEais28NbBci0fWGOmcGJfMATwpzOge5OTB
+-uN7nwhEYh1qTNNimJfcUcevkIaLSDy4u1GIANdPW71xgS0ypFOLdFVhGNzMmt+cu
+-Xe1C5MVNAgMBAAECggEBAJPM7QuUrPn4cLN/Ysd15lwTWn9oHDFFgkYFvCs66gXE
+-ju/6Kx2BjWE4wTJby09AHM/MqB0DvguT7Mf1Q2j3tPQ1HZowg8OwRDleuwp6KIls
+-jBbhL0Jdl/5HC67ktWvZ9wNvO/wFG1rQfT6FVajf9LUbWEaSZbOG2SLhHfsHorzu
+-xjTJaI3bQ/0+79B1exwk5ruwhzFRd/XpY8hls7D/RfPIuHDlBghkW3N59KFWrf5h
+-6bNEh2THm0+IyGcGqs0FD+QCOXyvsjwSUswqrr2ctLREOeDcd5ReUjSxYgjcJRrm
+-J7ceIY/+uwDJxw/OlnmBvF6pQMkKwYW2gFztu+g2t4UCgYEA/9yo01Exz4crxXsy
+-tAlnDJM++nZcm07rtFjTKHUfKY/cCgNTa8udM0svnfwlid/dpgLsI38gx04HHC1i
+-EZ4acz+ToIWedLxM0nq73//xeRWEazOvCz1mMTZaMldahTWAyzN8qVK2B/625Yy4
+-wNYWyweBBwEB8MzaCs73spksXOsCgYEA5/7wvhiofYGFAfMuANeJIwDL2OtBnoOv
+-mVNfCmi3GC38fzwyi5ZpskWDiS2woJ+LQfs9Qu4EcZbUFLd7gbeOvb5gmFUtYope
+-LitUUKunIR18MkQ+mQDBpQPQPhk4QJP5reCbWkrfTu7b5o/iS41s6fBTFmuzhLcT
+-C71vFdCyeKcCgYAiCCqYeOtELDmBOeLDmaCQRqGQ1N96dOPbCBmF/xYXBCCDYG/f
+-HaUaJnz96YTgstsbcrYP/p/Qgqtlbw/lQf9IpwMuzbcG1ejt8g89OyDWNyt2ytgU
+-iaUnFJCos3/Byh0Iah/BsdOueo2/OJl2ZMOBW80orlSgv86cs2y037TL4wKBgQDm
+-OOyW+MlbowhnIvfoBfwlLEkefnej4nKD6WRLZBcue5Qyf355X06Mhsc9foXlH+6G
+-D9h/bswiHNdhp6N82rdgPGiHQx/CxiUoE/+b/nvgNO5mw6qLE2EXbG1e8pAMJcyE
+-bHw+YkawggDfELI036fRj5gki8SeUz8nS1nNgElbyQKBgCRDX9Jh+MwSLu4QBWdt
+-/fi+lv3K6kun/fI7EOV1vCV/j871tICu7pu5BrOLxAHqoVfU9AUX299/2KjCb5pv
+-kjogiUK6qWCWBlfuqDNWGCoUGt1rhznUva0nNjSMy5rinBhhjpROZC2pw48lOluP
+-UuvXsaPph7GTqPuy4Kab12YC
++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
++c8IAQltHI0SB3Mi9zlqGjxU=
+ -----END PRIVATE KEY-----
+diff --git a/Lib/test/revocation.crl b/Lib/test/revocation.crl
+index 6d89b08ebea..8dfcfa2f3c9 100644
+--- a/Lib/test/revocation.crl
++++ b/Lib/test/revocation.crl
+@@ -1,11 +1,14 @@
+ -----BEGIN X509 CRL-----
+-MIIBpjCBjwIBATANBgkqhkiG9w0BAQUFADBNMQswCQYDVQQGEwJYWTEmMCQGA1UE
++MIICJjCBjwIBATANBgkqhkiG9w0BAQsFADBNMQswCQYDVQQGEwJYWTEmMCQGA1UE
+ CgwdUHl0aG9uIFNvZnR3YXJlIEZvdW5kYXRpb24gQ0ExFjAUBgNVBAMMDW91ci1j
+-YS1zZXJ2ZXIXDTEzMTEyMTE3MDg0N1oXDTIzMDkzMDE3MDg0N1qgDjAMMAoGA1Ud
+-FAQDAgEAMA0GCSqGSIb3DQEBBQUAA4IBAQCNJXC2mVKauEeN3LlQ3ZtM5gkH3ExH
+-+i4bmJjtJn497WwvvoIeUdrmVXgJQR93RtV37hZwN0SXMLlNmUZPH4rHhihayw4m
+-unCzVj/OhCCY7/TPjKuJ1O/0XhaLBpBVjQN7R/1ujoRKbSia/CD3vcn7Fqxzw7LK
+-fSRCKRGTj1CZiuxrphtFchwALXSiFDy9mr2ZKhImcyq1PydfgEzU78APpOkMQsIC
+-UNJ/cf3c9emzf+dUtcMEcejQ3mynBo4eIGg1EW42bz4q4hSjzQlKcBV0muw5qXhc
+-HOxH2iTFhQ7SrvVuK/dM14rYM4B5mSX3nRC1kNmXpS9j3wJDhuwmjHed
++YS1zZXJ2ZXIXDTIwMDcyODE2MDM1NVoXDTMwMDYwNjE2MDM1NVqgDjAMMAoGA1Ud
++FAQDAgEAMA0GCSqGSIb3DQEBCwUAA4IBgQCkvDVWlRpkf0R3W6lyQChdTP84AT4K
+++ynIaKG/7bMbjiT8USCgMnSBV3ybukIbZ5Oy1c9dxAUy7I994X21fgbMhSLhQ49H
++WwYfzm2237LFxOBAnYb8AkSUJvNkPaQQX3b4ivDVuR98MBpJjd4k8D8ru9UXp7+k
++kwk/3VLUFgzkmIxhjRv8YvoEjoS8gnpSQT7q0RpoSnKkiSP0gsddB3HZFsirqu0f
++fjHFLqQ6iACug6uxViVPyt3GlurDRmVna5bJ8TsgoG4OpB43tNGOljThc14tRmBg
++lpbTMd0rOZ2H8GQOuxryqhCV3HsAVP9EFZbbsspFm6Ce54j3RqpjB06QHt/FFfjk
++cX1tF8IaO1vCVRzHBU8AJYPl9MRhnpxf8FCssVfgdNaxIXyQPpSEN4LzmgO5kdAK
++bc7reKriO65ZkCnVVwF2pg57z3y8GVeSeKJ6SnfMVY/KKyqFz/5J4GlWQF9OC02h
++bRF/eFMc2ZyTbaenqcZFhpPT5bMGpGdCf2Q=
+ -----END X509 CRL-----
+diff --git a/Lib/test/secp384r1.pem b/Lib/test/secp384r1.pem
+new file mode 100644
+index 00000000000..eef7117af7a
+--- /dev/null
++++ b/Lib/test/secp384r1.pem
+@@ -0,0 +1,7 @@
++$ openssl genpkey -genparam -algorithm EC -pkeyopt ec_paramgen_curve:secp384r1 -pkeyopt ec_param_enc:named_curve -text
++-----BEGIN EC PARAMETERS-----
++BgUrgQQAIg==
++-----END EC PARAMETERS-----
++ECDSA-Parameters: (384 bit)
++ASN1 OID: secp384r1
++NIST CURVE: P-384
+diff --git a/Lib/test/ssl_cert.pem b/Lib/test/ssl_cert.pem
+index 47a7d7e37e8..99300e3776f 100644
+--- a/Lib/test/ssl_cert.pem
++++ b/Lib/test/ssl_cert.pem
+@@ -1,15 +1,26 @@
+ -----BEGIN CERTIFICATE-----
+-MIICVDCCAb2gAwIBAgIJANfHOBkZr8JOMA0GCSqGSIb3DQEBBQUAMF8xCzAJBgNV
+-BAYTAlhZMRcwFQYDVQQHEw5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9u
+-IFNvZnR3YXJlIEZvdW5kYXRpb24xEjAQBgNVBAMTCWxvY2FsaG9zdDAeFw0xMDEw
+-MDgyMzAxNTZaFw0yMDEwMDUyMzAxNTZaMF8xCzAJBgNVBAYTAlhZMRcwFQYDVQQH
+-Ew5DYXN0bGUgQW50aHJheDEjMCEGA1UEChMaUHl0aG9uIFNvZnR3YXJlIEZvdW5k
+-YXRpb24xEjAQBgNVBAMTCWxvY2FsaG9zdDCBnzANBgkqhkiG9w0BAQEFAAOBjQAw
+-gYkCgYEA21vT5isq7F68amYuuNpSFlKDPrMUCa4YWYqZRt2OZ+/3NKaZ2xAiSwr7
+-6MrQF70t5nLbSPpqE5+5VrS58SY+g/sXLiFd6AplH1wJZwh78DofbFYXUggktFMt
+-pTyiX8jtP66bkcPkDADA089RI1TQR6Ca+n7HFa7c1fabVV6i3zkCAwEAAaMYMBYw
+-FAYDVR0RBA0wC4IJbG9jYWxob3N0MA0GCSqGSIb3DQEBBQUAA4GBAHPctQBEQ4wd
+-BJ6+JcpIraopLn8BGhbjNWj40mmRqWB/NAWF6M5ne7KpGAu7tLeG4hb1zLaldK8G
+-lxy2GPSRF6LFS48dpEj2HbMv2nvv6xxalDMJ9+DicWgAKTQ6bcX2j3GUkCR0g/T1
+-CRlNBAAlvhKzO7Clpf9l0YKBEfraJByX
++MIIEZDCCAsygAwIBAgIUC3GAkxz89rvRRhzLHsHor1qoudwwDQYJKoZIhvcNAQEL
++BQAwXzELMAkGA1UEBhMCWFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYD
++VQQKDBpQeXRob24gU29mdHdhcmUgRm91bmRhdGlvbjESMBAGA1UEAwwJbG9jYWxo
++b3N0MB4XDTIwMDcyODE2MDM1NVoXDTMwMDcyNjE2MDM1NVowXzELMAkGA1UEBhMC
++WFkxFzAVBgNVBAcMDkNhc3RsZSBBbnRocmF4MSMwIQYDVQQKDBpQeXRob24gU29m
++dHdhcmUgRm91bmRhdGlvbjESMBAGA1UEAwwJbG9jYWxob3N0MIIBojANBgkqhkiG
++9w0BAQEFAAOCAY8AMIIBigKCAYEAufphfpxAKxcb9Quwv57lB5eqzcUozG4ZcEx0
+++IHc1dNFT3ufCV09g6k5JExJW0KN0HPAQu5V1g/2IdbKf0Y13eDaWjRYo2eOMBKr
++JzbJjQp1EusgEe65nvQkAuj2fcwBrKPE1JxZbsSiSwnMBnEd6oSa9ZGExDUCfuLw
++Y41CNS6WggCB8UFdKi06XKaR0Ej2pRplYqSlgE6SkBQjaPJqVQfu6Cp05W1CWeBJ
++Sf08CtWjYsDy1Zb6hKbYQN3NYlupb/r7RtEV2xk0WAi8MwNCTAk/D3TSbxFeTytn
++SrhnbvmwE3vndhv2NPaZuwwXDa7V/ui/E4hdpy3SZB+4tBTcyVnrMsjBYbvZXACK
++xUIHftGFh2D+nYAHldrHS8gknNOJvfnyqTK5/ZzYRE8U7El9ZU/samFmP+pbHbIm
++lAisv2hv9n7KgTkfV4uCZiSZHgcM/A7cH3ulwTTgqw5YnwXRkShLWjYNYugA/bPo
++2/LtMiNG6+u5V716xlEiBU09WmnpAgMBAAGjGDAWMBQGA1UdEQQNMAuCCWxvY2Fs
++aG9zdDANBgkqhkiG9w0BAQsFAAOCAYEAQ+kZ5S8sGEV3vkh/AoZFcLYmWjOlkTtm
++DPqIto+6xJkPnKnXH4ZYnzyEXtaT8xbJ4ESLJ6CFZjUYpXSzlrS4WYUwZwbrXWrs
++n+yjC5LQKuoJwf/aOAO+CTH0PhWBumt/88mXFeK5xYqGzP+ed/fHY66WuXSZt5B5
++T13zXv7Q6RmUfJeoSI24e+cHeDNQsKtJTpvpQSe4Rg32edUCbDNm2gFE9p6WyFdU
++DPxWYef0BD2z7aq5Zj/IXPcvwfgrjq3ZBUwlZ59VGKiAjUeDS5DdOllhEu8piVXL
++LOzeUctu38L83l2ilguz0UCraUkRxA0AwR235L73uERdIZiiKpibVtcydtfnW88J
++SUtDvutjV48BvQ/vd+YN4jlNpDgoUpDJw9jq/1P5BAhDHZIh6j3RUWue59YLsyR0
++h8AI/6Iiv9XQpBN09tbJK4/hku9qJXxMlbS0DLDMkV+UxB3v/Kc08eZbB+Jpj6q6
++kngQOjQ3SjwwhePNc5a/5RB8oeEKKvlr
+ -----END CERTIFICATE-----
+diff --git a/Lib/test/ssl_key.passwd.pem b/Lib/test/ssl_key.passwd.pem
+index 2524672e70d..d781d8a8175 100644
+--- a/Lib/test/ssl_key.passwd.pem
++++ b/Lib/test/ssl_key.passwd.pem
+@@ -1,18 +1,42 @@
+------BEGIN RSA PRIVATE KEY-----
+-Proc-Type: 4,ENCRYPTED
+-DEK-Info: DES-EDE3-CBC,1A8D9D2A02EC698A
+-
+-kJYbfZ8L0sfe9Oty3gw0aloNnY5E8fegRfQLZlNoxTl6jNt0nIwI8kDJ36CZgR9c
+-u3FDJm/KqrfUoz8vW+qEnWhSG7QPX2wWGPHd4K94Yz/FgrRzZ0DoK7XxXq9gOtVA
+-AVGQhnz32p+6WhfGsCr9ArXEwRZrTk/FvzEPaU5fHcoSkrNVAGX8IpSVkSDwEDQr
+-Gv17+cfk99UV1OCza6yKHoFkTtrC+PZU71LomBabivS2Oc4B9hYuSR2hF01wTHP+
+-YlWNagZOOVtNz4oKK9x9eNQpmfQXQvPPTfusexKIbKfZrMvJoxcm1gfcZ0H/wK6P
+-6wmXSG35qMOOztCZNtperjs1wzEBXznyK8QmLcAJBjkfarABJX9vBEzZV0OUKhy+
+-noORFwHTllphbmydLhu6ehLUZMHPhzAS5UN7srtpSN81eerDMy0RMUAwA7/PofX1
+-94Me85Q8jP0PC9ETdsJcPqLzAPETEYu0ELewKRcrdyWi+tlLFrpE5KT/s5ecbl9l
+-7B61U4Kfd1PIXc/siINhU3A3bYK+845YyUArUOnKf1kEox7p1RpD7yFqVT04lRTo
+-cibNKATBusXSuBrp2G6GNuhWEOSafWCKJQAzgCYIp6ZTV2khhMUGppc/2H3CF6cO
+-zX0KtlPVZC7hLkB6HT8SxYUwF1zqWY7+/XPPdc37MeEZ87Q3UuZwqORLY+Z0hpgt
+-L5JXBCoklZhCAaN2GqwFLXtGiRSRFGY7xXIhbDTlE65Wv1WGGgDLMKGE1gOz3yAo
+-2jjG1+yAHJUdE69XTFHSqSkvaloA1W03LdMXZ9VuQJ/ySXCie6ABAQ==
+------END RSA PRIVATE KEY-----
++-----BEGIN ENCRYPTED PRIVATE KEY-----
++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
++-----END ENCRYPTED PRIVATE KEY-----
+diff --git a/Lib/test/ssl_key.pem b/Lib/test/ssl_key.pem
+index 3fd3bbd54a3..f2cb9ee5320 100644
+--- a/Lib/test/ssl_key.pem
++++ b/Lib/test/ssl_key.pem
+@@ -1,16 +1,40 @@
+ -----BEGIN PRIVATE KEY-----
+-MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANtb0+YrKuxevGpm
+-LrjaUhZSgz6zFAmuGFmKmUbdjmfv9zSmmdsQIksK++jK0Be9LeZy20j6ahOfuVa0
+-ufEmPoP7Fy4hXegKZR9cCWcIe/A6H2xWF1IIJLRTLaU8ol/I7T+um5HD5AwAwNPP
+-USNU0Eegmvp+xxWu3NX2m1Veot85AgMBAAECgYA3ZdZ673X0oexFlq7AAmrutkHt
+-CL7LvwrpOiaBjhyTxTeSNWzvtQBkIU8DOI0bIazA4UreAFffwtvEuPmonDb3F+Iq
+-SMAu42XcGyVZEl+gHlTPU9XRX7nTOXVt+MlRRRxL6t9GkGfUAXI3XxJDXW3c0vBK
+-UL9xqD8cORXOfE06rQJBAP8mEX1ERkR64Ptsoe4281vjTlNfIbs7NMPkUnrn9N/Y
+-BLhjNIfQ3HFZG8BTMLfX7kCS9D593DW5tV4Z9BP/c6cCQQDcFzCcVArNh2JSywOQ
+-ZfTfRbJg/Z5Lt9Fkngv1meeGNPgIMLN8Sg679pAOOWmzdMO3V706rNPzSVMME7E5
+-oPIfAkEA8pDddarP5tCvTTgUpmTFbakm0KoTZm2+FzHcnA4jRh+XNTjTOv98Y6Ik
+-eO5d1ZnKXseWvkZncQgxfdnMqqpj5wJAcNq/RVne1DbYlwWchT2Si65MYmmJ8t+F
+-0mcsULqjOnEMwf5e+ptq5LzwbyrHZYq5FNk7ocufPv/ZQrcSSC+cFwJBAKvOJByS
+-x56qyGeZLOQlWS2JS3KJo59XuLFGqcbgN9Om9xFa41Yb4N9NvplFivsvZdw3m1Q/
+-SPIXQuT8RMPDVNQ=
++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
++mv6v9deEwEQvuWCGtIGlHak=
+ -----END PRIVATE KEY-----
+diff --git a/Lib/test/test_asyncio/test_events.py b/Lib/test/test_asyncio/test_events.py
+index 3db3707d289..b240c3c9c82 100644
+--- a/Lib/test/test_asyncio/test_events.py
++++ b/Lib/test/test_asyncio/test_events.py
+@@ -63,8 +63,8 @@ ONLYCERT = data_file('ssl_cert.pem')
+ ONLYKEY = data_file('ssl_key.pem')
+ SIGNED_CERTFILE = data_file('keycert3.pem')
+ SIGNING_CA = data_file('pycacert.pem')
+-PEERCERT = {'serialNumber': 'B09264B1F2DA21D1',
+-            'version': 1,
++PEERCERT = {'serialNumber': '76C432F6D2AB1DEE772DC70E93DE67464E3207C6',
++            'version': 3,
+             'subject': ((('countryName', 'XY'),),
+                     (('localityName', 'Castle Anthrax'),),
+                     (('organizationName', 'Python Software Foundation'),),
+@@ -72,8 +72,16 @@ PEERCERT = {'serialNumber': 'B09264B1F2DA21D1',
+             'issuer': ((('countryName', 'XY'),),
+                     (('organizationName', 'Python Software Foundation CA'),),
+                     (('commonName', 'our-ca-server'),)),
+-            'notAfter': 'Nov 13 19:47:07 2022 GMT',
+-            'notBefore': 'Jan  4 19:47:07 2013 GMT'}
++            'notAfter': 'Jun  6 16:03:55 2030 GMT',
++            'notBefore': 'Jul 28 16:03:55 2020 GMT',
++            'subjectAltName': (('DNS', 'localhost'),),
++            'OCSP': ('http://testca.pythontest.net/testca/ocsp/',),
++            'caIssuers': (
++                'http://testca.pythontest.net/testca/pycacert.cer',
++                ),
++            'crlDistributionPoints': (
++                'http://testca.pythontest.net/testca/revocation.crl',
++            )}
+ 
+ 
+ class MyBaseProto(asyncio.Protocol):
+@@ -1146,6 +1154,8 @@ class EventLoopTestsMixin:
+         server.close()
+         self.loop.run_until_complete(proto.done)
+ 
++    maxDiff = None
++
+     def test_legacy_create_server_ssl_verified(self):
+         with test_utils.force_legacy_ssl_support():
+             self.test_create_server_ssl_verified()
+diff --git a/Lib/test/test_ssl.py b/Lib/test/test_ssl.py
+index 8edf05594f7..265dd0446d6 100644
+--- a/Lib/test/test_ssl.py
++++ b/Lib/test/test_ssl.py
+@@ -209,9 +209,9 @@ class BasicSocketTests(unittest.TestCase):
+                           (('commonName', 'localhost'),))
+                         )
+         # Note the next three asserts will fail if the keys are regenerated
+-        self.assertEqual(p['notAfter'], asn1time('Oct  5 23:01:56 2020 GMT'))
+-        self.assertEqual(p['notBefore'], asn1time('Oct  8 23:01:56 2010 GMT'))
+-        self.assertEqual(p['serialNumber'], 'D7C7381919AFC24E')
++        self.assertEqual(p['notAfter'], asn1time('Jul 26 16:03:55 2030 GMT'))
++        self.assertEqual(p['notBefore'], asn1time('Jul 28 16:03:55 2020 GMT'))
++        self.assertEqual(p['serialNumber'], '0B7180931CFCF6BBD1461CCB1EC1E8AF5AA8B9DC')
+         self.assertEqual(p['subject'],
+                          ((('countryName', 'XY'),),
+                           (('localityName', 'Castle Anthrax'),),
+diff --git a/Misc/NEWS.d/next/Library/2020-07-01-16-59-46.bpo-41183.9stVAW.rst b/Misc/NEWS.d/next/Library/2020-07-01-16-59-46.bpo-41183.9stVAW.rst
+new file mode 100644
+index 00000000000..1ca3c7d7996
+--- /dev/null
++++ b/Misc/NEWS.d/next/Library/2020-07-01-16-59-46.bpo-41183.9stVAW.rst
+@@ -0,0 +1 @@
++Use 3072 RSA keys and SHA-256 signature for test certs and keys.

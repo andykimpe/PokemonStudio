@@ -1,0 +1,52 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Victor Stinner <vstinner@redhat.com>
+Date: Tue, 19 Jun 2018 18:19:23 +0200
+Subject: [PATCH] 00311: Fix test_dbm_gnu for gdbm 1.15
+
+Fix test_dbm_gnu.test_reorganize() on ppc64le with gdbm 1.15: add a
+larger value to make sure that the file size changes.
+(cherry picked from commit 13c79c677f9ec9437c82eda72fa1c2d288d8fceb)
+---
+ Lib/test/test_dbm_gnu.py                              | 11 ++++++++---
+ .../Tests/2018-06-19-14-04-21.bpo-33901.OFW1Sr.rst    |  2 ++
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+ create mode 100644 Misc/NEWS.d/next/Tests/2018-06-19-14-04-21.bpo-33901.OFW1Sr.rst
+
+diff --git a/Lib/test/test_dbm_gnu.py b/Lib/test/test_dbm_gnu.py
+index a7808f51c7..0a48a6df8e 100644
+--- a/Lib/test/test_dbm_gnu.py
++++ b/Lib/test/test_dbm_gnu.py
+@@ -69,9 +69,13 @@ class TestGdbm(unittest.TestCase):
+         self.g = gdbm.open(filename, 'c')
+         size0 = os.path.getsize(filename)
+ 
+-        self.g['x'] = 'x' * 10000
++        # bpo-33901: on macOS with gdbm 1.15, an empty database uses 16 MiB
++        # and adding an entry of 10,000 B has no effect on the file size.
++        # Add size0 bytes to make sure that the file size changes.
++        value_size = max(size0, 10000)
++        self.g['x'] = 'x' * value_size
+         size1 = os.path.getsize(filename)
+-        self.assertTrue(size0 < size1)
++        self.assertGreater(size1, size0)
+ 
+         del self.g['x']
+         # 'size' is supposed to be the same even after deleting an entry.
+@@ -79,7 +83,8 @@ class TestGdbm(unittest.TestCase):
+ 
+         self.g.reorganize()
+         size2 = os.path.getsize(filename)
+-        self.assertTrue(size1 > size2 >= size0)
++        self.assertLess(size2, size1)
++        self.assertGreaterEqual(size2, size0)
+ 
+     def test_context_manager(self):
+         with gdbm.open(filename, 'c') as db:
+diff --git a/Misc/NEWS.d/next/Tests/2018-06-19-14-04-21.bpo-33901.OFW1Sr.rst b/Misc/NEWS.d/next/Tests/2018-06-19-14-04-21.bpo-33901.OFW1Sr.rst
+new file mode 100644
+index 0000000000..2a2dec3e9f
+--- /dev/null
++++ b/Misc/NEWS.d/next/Tests/2018-06-19-14-04-21.bpo-33901.OFW1Sr.rst
+@@ -0,0 +1,2 @@
++Fix test_dbm_gnu on macOS with gdbm 1.15: add a larger value to make sure that
++the file size changes.

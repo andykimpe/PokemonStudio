@@ -1,6 +1,3 @@
-#original source and patch extract to epel 7 and el 6 rh-python34
-# https://dl.fedoraproject.org/pub/epel/7/SRPMS/Packages/p/python34-3.4.10-8.el7.src.rpm
-# http://archive.kernel.org/centos-vault/6.10/sclo/Source/rh/rh-python34/rh-python34-python-3.4.2-9.el6.src.rpm
 # ======================================================
 # Conditionals and other variables controlling the build
 # ======================================================
@@ -156,7 +153,7 @@
 Summary: Version 3 of the Python programming language aka Python 3000
 Name: python%{pyshortver}
 Version: %{pybasever}.10
-Release: 9%{?dist}
+Release: 8%{?dist}
 License: Python
 
 
@@ -231,56 +228,56 @@ Source: http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.xz
 
 # Avoid having various bogus auto-generated Provides lines for the various
 # python c modules' SONAMEs:
-Source1: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/find-provides-without-python-sonames.sh
+Source1: find-provides-without-python-sonames.sh
 %global _use_internal_dependency_generator 0
 %global __find_provides %{SOURCE1}
 
 # Systemtap tapset to make it easier to use the systemtap static probes
 # (actually a template; LIBRARY_PATH will get fixed up during install)
 # Written by dmalcolm; not yet sent upstream
-Source5: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/libpython.stp
+Source5: libpython.stp
 
 # Example systemtap script using the tapset
 # Written by wcohen, mjw, dmalcolm; not yet sent upstream
-Source6: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/systemtap-example.stp
+Source6: systemtap-example.stp
 
 # Another example systemtap script that uses the tapset
 # Written by dmalcolm; not yet sent upstream
-Source7: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/pyfuntop.stp
+Source7: pyfuntop.stp
 
 # A simple script to check timestamps of bytecode files
 # Run in check section with Python that is currently being built
 # Written by bkabrda
-Source8: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/check-pyc-and-pyo-timestamps.py
+Source8: check-pyc-and-pyo-timestamps.py
 
 # 00001 #
 # Fixup distutils/unixccompiler.py to remove standard library path from rpath:
 # Was Patch0 in ivazquez' python3000 specfile:
-Patch1:         https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00001-rpath.patch
+Patch1:         00001-rpath.patch
 
 # readline test fails on EL6 readline 6.0
 # https://bugs.python.org/issue19884
-Patch2:         https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/python34-readline.patch
+Patch2:         python34-readline.patch
 
 # 00055 #
 # Systemtap support: add statically-defined probe points
 # Patch sent upstream as http://bugs.python.org/issue14776
 # with some subsequent reworking to cope with LANG=C in an rpmbuild
 # (where sys.getfilesystemencoding() == 'ascii')
-Patch55: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00055-systemtap.patch
+Patch55: 00055-systemtap.patch
 
-Patch102: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00102-lib64.patch
+Patch102: 00102-lib64.patch
 
 # 00104 #
 # Only used when "%{_lib}" == "lib64"
 # Another lib64 fix, for distutils/tests/test_install.py; not upstream:
-Patch104: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00104-lib64-fix-for-test_install.patch
+Patch104: 00104-lib64-fix-for-test_install.patch
 
 # 00111 #
 # Patch the Makefile.pre.in so that the generated Makefile doesn't try to build
 # a libpythonMAJOR.MINOR.a (bug 550692):
 # Downstream only: not appropriate for upstream
-Patch111: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00111-no-static-lib.patch
+Patch111: 00111-no-static-lib.patch
 
 # 00113 #
 # Add configure-time support for the COUNT_ALLOCS and CALL_PROFILE options
@@ -288,7 +285,7 @@ Patch111: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # so that if they are enabled, they will be in that build's pyconfig.h, so that
 # extension modules will reliably use them
 # Not yet sent upstream
-Patch113: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00113-more-configuration-flags.patch
+Patch113: 00113-more-configuration-flags.patch
 
 # 00125 #
 # COUNT_ALLOCS is useful for debugging, but the upstream behaviour of always
@@ -296,14 +293,14 @@ Patch113: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # use the debug build.  Add a "PYTHONDUMPCOUNTS" environment variable which
 # must be set to enable the output on exit
 # Not yet sent upstream
-Patch125: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00125-less-verbose-COUNT_ALLOCS.patch
+Patch125: 00125-less-verbose-COUNT_ALLOCS.patch
 
 # 00131 #
 # The four tests in test_io built on top of check_interrupted_write_retry
 # fail when built in Koji, for ppc and ppc64; for some reason, the SIGALRM
 # handlers are never called, and the call to write runs to completion
 # (rhbz#732998)
-Patch131: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00131-disable-tests-in-test_io.patch
+Patch131: 00131-disable-tests-in-test_io.patch
 
 # 00132 #
 # Add non-standard hooks to unittest for use in the "check" phase below, when
@@ -317,44 +314,44 @@ Patch131: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # environment, which we set manually in the appropriate portion of the "check"
 # phase below (and which potentially other python-* rpms could set, to reuse
 # these unittest hooks in their own "check" phases)
-Patch132: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00132-add-rpmbuild-hooks-to-unittest.patch
+Patch132: 00132-add-rpmbuild-hooks-to-unittest.patch
 
 # 00134 #
 # Fix a failure in test_sys.py when configured with COUNT_ALLOCS enabled
 # Not yet sent upstream
-Patch134: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00134-fix-COUNT_ALLOCS-failure-in-test_sys.patch
+Patch134: 00134-fix-COUNT_ALLOCS-failure-in-test_sys.patch
 
 # 00135 #
 # test_weakref's test_callback_in_cycle_resurrection doesn't work with
 # COUNT_ALLOCS, as the metrics keep "C" alive.  Work around this for our
 # debug build:
 # Not yet sent upstream
-Patch135: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00135-fix-test-within-test_weakref-in-debug-build.patch
+Patch135: 00135-fix-test-within-test_weakref-in-debug-build.patch
 
 # 00137 #
 # Some tests within distutils fail when run in an rpmbuild:
-Patch137: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00137-skip-distutils-tests-that-fail-in-rpmbuild.patch
+Patch137: 00137-skip-distutils-tests-that-fail-in-rpmbuild.patch
 
 # 00139 #
 # ARM-specific: skip known failure in test_float:
 #  http://bugs.python.org/issue8265 (rhbz#706253)
-Patch139: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00139-skip-test_float-known-failure-on-arm.patch
+Patch139: 00139-skip-test_float-known-failure-on-arm.patch
 
 # ideally short lived patch disabling a test thats fragile on different arches
-Patch140: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/python3-arm-skip-failing-fragile-test.patch
+Patch140: python3-arm-skip-failing-fragile-test.patch
 
 # 00141 #
 # Fix tests for case when  tests for case when configured with
 # COUNT_ALLOCS (debug build): http://bugs.python.org/issue19527
 # Applies to: test_gc, test_module, test_io, test_logging, test_warnings,
 #             test_threading
-Patch141: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00141-fix-tests_with_COUNT_ALLOCS.patch
+Patch141: 00141-fix-tests_with_COUNT_ALLOCS.patch
 
 # 00143 #
 # Fix the --with-tsc option on ppc64, and rework it on 32-bit ppc to avoid
 # aliasing violations (rhbz#698726)
 # Sent upstream as http://bugs.python.org/issue12872
-Patch143: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00143-tsc-on-ppc.patch
+Patch143: 00143-tsc-on-ppc.patch
 
 # 00146 #
 # Support OpenSSL FIPS mode (e.g. when OPENSSL_FORCE_FIPS_MODE=1 is set)
@@ -378,20 +375,20 @@ Patch143: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # (see http://bugs.python.org/issue16113), but the alterations were left in the
 # patch, since they may be useful again if upstream decides to rerevert sha3
 # implementation and OpenSSL still doesn't support it. For now, they're harmless.
-Patch146: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00146-hashlib-fips.patch
+Patch146: 00146-hashlib-fips.patch
 
 # 00150 #
 # temporarily disable rAssertAlmostEqual in test_cmath on PPC (bz #750811)
 # caused by a glibc bug. This patch can be removed when we have a glibc with
 # the patch mentioned here:
 #   http://sourceware.org/bugzilla/show_bug.cgi?id=13472
-Patch150: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00150-disable-rAssertAlmostEqual-cmath-on-ppc.patch
+Patch150: 00150-disable-rAssertAlmostEqual-cmath-on-ppc.patch
 
 # 00155 #
 # Avoid allocating thunks in ctypes unless absolutely necessary, to avoid
 # generating SELinux denials on "import ctypes" and "import uuid" when
 # embedding Python within httpd (rhbz#814391)
-Patch155: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00155-avoid-ctypes-thunks.patch
+Patch155: 00155-avoid-ctypes-thunks.patch
 
 # 00157 #
 # Update uid/gid handling throughout the standard library: uid_t and gid_t are
@@ -407,7 +404,7 @@ Patch155: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # Update standard library to use this throughout for uid/gid values, so that
 # very large uid/gid values are round-trippable, and -1 remains usable.
 # (rhbz#697470)
-Patch157: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00157-uid-gid-overflows.patch
+Patch157: 00157-uid-gid-overflows.patch
 
 # 00160 #
 # Python 3.3 added os.SEEK_DATA and os.SEEK_HOLE, which may be present in the
@@ -415,30 +412,30 @@ Patch157: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # kernel, hence we disable this test in an rpm build.
 # Adding these was upstream issue http://bugs.python.org/issue10142
 # Not yet sent upstream
-Patch160: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00160-disable-test_fs_holes-in-rpm-build.patch
+Patch160: 00160-disable-test_fs_holes-in-rpm-build.patch
 
 # 00163 #
 # Some tests within test_socket fail intermittently when run inside Koji;
 # disable them using unittest._skipInRpmBuild
 # Not yet sent upstream
-Patch163: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00163-disable-parts-of-test_socket-in-rpm-build.patch
+Patch163: 00163-disable-parts-of-test_socket-in-rpm-build.patch
 
 # 0164 #
 # some tests in test._io interrupted_write-* fail on PPC (rhbz#846849)
 # testChainingDescriptors  test in test_exceptions fails on PPc, too (rhbz#846849)
 # disable those tests so that rebuilds on PPC can continue
-Patch164: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00164-disable-interrupted_write-tests-on-ppc.patch
+Patch164: 00164-disable-interrupted_write-tests-on-ppc.patch
 
 # 00173 #
 # Workaround for ENOPROTOOPT seen in Koji withi test.support.bind_port()
 # (rhbz#913732)
-Patch173: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00173-workaround-ENOPROTOOPT-in-bind_port.patch
+Patch173: 00173-workaround-ENOPROTOOPT-in-bind_port.patch
 
 # 00178 #
 # Don't duplicate various FLAGS in sysconfig values
 # http://bugs.python.org/issue17679
 # Does not affect python2 AFAICS (different sysconfig values initialization)
-Patch178: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00178-dont-duplicate-flags-in-sysconfig.patch
+Patch178: 00178-dont-duplicate-flags-in-sysconfig.patch
 
 # 00179 #
 # Workaround for https://bugzilla.redhat.com/show_bug.cgi?id=951802
@@ -447,12 +444,12 @@ Patch178: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # it just stops printing the traceback - it doesn't fix the actual bug.
 # This bug seems to only affect ARM.
 # Doesn't seem to affect Python 2 AFAICS.
-Patch179: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00179-dont-raise-error-on-gdb-corrupted-frames-in-backtrace.patch
+Patch179: 00179-dont-raise-error-on-gdb-corrupted-frames-in-backtrace.patch
 
 # 00180 #
 # Enable building on ppc64p7
 # Not appropriate for upstream, Fedora-specific naming
-Patch180: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00180-python-add-support-for-ppc64p7.patch
+Patch180: 00180-python-add-support-for-ppc64p7.patch
 
 # 00184 #
 # Fix for https://bugzilla.redhat.com/show_bug.cgi?id=979696
@@ -460,7 +457,7 @@ Patch180: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # Python recognizes ffi.h only if it contains "#define LIBFFI_H",
 # but the wrapper doesn't contain that, which makes the build fail
 # We patch this by also accepting "#define ffi_wrapper_h"
-Patch184: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00184-ctypes-should-build-with-libffi-multilib-wrapper.patch
+Patch184: 00184-ctypes-should-build-with-libffi-multilib-wrapper.patch
 
 # 00186 #
 # Fix for https://bugzilla.redhat.com/show_bug.cgi?id=1023607
@@ -469,7 +466,7 @@ Patch184: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # raising exception when trying to convert test file with bad encoding, and
 # thus not continuing bytecompilation for other files.
 # This was fixed upstream, but the test hasn't been merged yet, so we keep it
-Patch186: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00186-dont-raise-from-py_compile.patch
+Patch186: 00186-dont-raise-from-py_compile.patch
 
 # 00188 #
 # Downstream only patch that should be removed when we compile all guaranteed
@@ -484,7 +481,7 @@ Patch186: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 #   (logging.root.handlers != []), which means that the default setup
 #   (most importantly logging level) is not overriden. That means that a test
 #   relying on this will fail (test_filename_changing_on_output_single_dir)
-Patch188: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00188-fix-lib2to3-tests-when-hashlib-doesnt-compile-properly.patch
+Patch188: 00188-fix-lib2to3-tests-when-hashlib-doesnt-compile-properly.patch
 
 # 00189 #
 #
@@ -492,38 +489,38 @@ Patch188: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # ones
 # https://github.com/bkabrda/rewheel
 %if 0%{with_rewheel}
-Patch189: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00189-add-rewheel-module.patch
+Patch189: 00189-add-rewheel-module.patch
 %endif
 
 # Tests requiring SIGHUP to work don't work in Koji
 # see rhbz#1088233
-Patch194: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/temporarily-disable-tests-requiring-SIGHUP.patch
+Patch194: temporarily-disable-tests-requiring-SIGHUP.patch
 
 # 00196
 #
 #  Fix test_gdb failure on ppc64le
-Patch196: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00196-test-gdb-match-addr-before-builtin.patch
+Patch196: 00196-test-gdb-match-addr-before-builtin.patch
 
 # test_threading fails in koji dues to it's handling of signals
-Patch203: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00203-disable-threading-test-koji.patch
+Patch203: 00203-disable-threading-test-koji.patch
 
 # 00205 #
 # LIBPL variable in makefile takes LIBPL from configure.ac
 # but the LIBPL variable defined there doesn't respect libdir macro
-Patch205: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00205-make-libpl-respect-lib64.patch
+Patch205: 00205-make-libpl-respect-lib64.patch
 
 # 00311
 # Fix test_dbm_gnu for gdbm 1.15
 #
 # Fix test_dbm_gnu.test_reorganize() on ppc64le with gdbm 1.15: add a
 # larger value to make sure that the file size changes.
-Patch311: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00311-fix-test_dbm_gnu-for-gdbm-1-15.patch
+Patch311: 00311-fix-test_dbm_gnu-for-gdbm-1-15.patch
 
 # 00320 #
 # Security fix for CVE-2019-10160: Information Disclosure due to urlsplit improper NFKC normalization
 # Fixed upstream for later branches: https://bugs.python.org/issue36742
 # Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1718867
-Patch320: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00320-CVE-2019-10160.patch
+Patch320: 00320-CVE-2019-10160.patch
 
 # 00332 #
 # Fix CVE-2019-16056: Don't parse email addresses containing
@@ -531,20 +528,20 @@ Patch320: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # Fixed upstream and backported from the 3.5 branch:
 # https://bugs.python.org/issue34155
 # Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1750457
-Patch332: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00332-CVE-2019-16056.patch
+Patch332: 00332-CVE-2019-16056.patch
 
 # 00346 #
 # Fix CVE-2020-8492: wrong backtracking in urllib.request.AbstractBasicAuthHandler allows for a ReDoS
 # Fixed upstream: https://bugs.python.org/issue39503
 # Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1809065
-Patch346: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00346-CVE-2020-8492.patch
+Patch346: 00346-CVE-2020-8492.patch
 
 # 00351 #
 # Avoid infinite loop in the tarfile module
 #
 # Avoid infinite loop when reading specially crafted TAR files using the tarfile module
 # (CVE-2019-20907).
-Patch351: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00351-avoid-infinite-loop-in-tarfile-module.patch
+Patch351: 00351-avoid-infinite-loop-in-tarfile-module.patch
 
 # 00352 #
 # Resolve hash collisions for IPv4Interface and IPv6Interface
@@ -554,7 +551,7 @@ Patch351: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # of generating constant hash values of 32 and 128 respectively causing hash collisions.
 # The fix uses the hash() function to generate hash values for the objects
 # instead of XOR operation.
-Patch352: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00352-resolve-hash-collisions-for-ipv_interface.patch
+Patch352: 00352-resolve-hash-collisions-for-ipv_interface.patch
 
 # 00353
 # Update test certs and keys
@@ -563,7 +560,7 @@ Patch352: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # 1da2b23504a68ed0432aa74a17ec2533933f5af8 to Python 3.4.
 #
 # Adds make_ssl_certs.py and secp384r1.pem from Python 3.5.
-Patch353: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00353-update-test-certs-and-keys.patch
+Patch353: 00353-update-test-certs-and-keys.patch
 
 # 00354 #
 # Reject control chars in HTTP method in httplib.putrequest to prevent
@@ -572,7 +569,7 @@ Patch353: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # Backported from Python 3.5:
 # - https://bugs.python.org/issue39603
 # - python#21946
-Patch354: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/00354-CVE-2020-26116-HTTP-request-method-CRLF-inject.patch
+Patch354: 00354-CVE-2020-26116-HTTP-request-method-CRLF-inject.patch
 
 # (New patches go here ^^^)
 #
@@ -586,7 +583,7 @@ Patch354: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/spe
 # This is the generated patch to "configure"; see the description of
 #   %{regenerate_autotooling_patch}
 # above:
-Patch5000: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/python/05000-autotool-intermediates.patch
+Patch5000: 05000-autotool-intermediates.patch
 
 
 # ======================================================
@@ -1344,16 +1341,6 @@ find %{buildroot} -type f -a -name "*.py" -print0 | \
 
 
 topdir=$(pwd)
-%if 0%{?rhel} == 8
-# If the system that we are building on uses different libdb than mock, we get
-# errors like this from test_gdb:
-# rpmdb: /var/lib/rpm/Name: unexpected file type or format
-# error: cannot open Name index using db3 - Invalid argument (22)
-# rpmdb: /var/lib/rpm/Basenames: unexpected file type or format
-# error: cannot open Basenames index using db3 - Invalid argument (22)
-# => Disabling test before finding a better solution.
-mv Lib/test/test_gdb.py Lib/test/test_gdb.py.notest
-%endif
 CheckPython() {
   ConfName=$1
   ConfDir=$(pwd)/build/$ConfName
@@ -1814,10 +1801,6 @@ CheckPython optimized
 # ======================================================
 # Finally, the changelog:
 # ======================================================
-
-%changelog
-* Thu May 30 2024 Andy Kimpe <andykimpe@gmail.com> - 3.4.10-9
-- add support for epel 6
 
 %changelog
 * Thu Feb 25 2021 Petr Viktorin <pviktori@redhat.com> - 3.4.10-8
