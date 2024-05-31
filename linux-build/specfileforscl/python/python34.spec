@@ -1,5 +1,6 @@
-# source and patch
+# source and patch extract
 # https://dl.fedoraproject.org/pub/epel/7/SRPMS/Packages/p/python34-3.4.10-8.el7.src.rpm
+# http://archive.kernel.org/centos-vault/6.10/sclo/Source/rh/rh-python34/rh-python34-python-3.4.2-9.el6.src.rpm
 # ======================================================
 # Conditionals and other variables controlling the build
 # ======================================================
