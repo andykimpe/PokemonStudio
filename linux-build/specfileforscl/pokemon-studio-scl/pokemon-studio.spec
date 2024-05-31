@@ -1,4 +1,3 @@
-%global __python /usr/bin/python3
 %global _scl_prefix /opt/
 %global _scl_vendor pokemon-studio
 %global scl pokemon-studio
@@ -57,8 +56,14 @@ Requires:  %{epelstring}
 BuildRequires:  epel-next-release
 Requires:  epel-next-release
 %endif
-#python 3 found on epel on rhel 6 and +
+%if 0%{?rhel} <= 6
+#python 3 found on epel on rhel 7 and +
 BuildRequires: python3-devel
+%global __python /usr/bin/python3
+%else
+BuildRequires: python-devel
+%global __python /usr/bin/python
+%endif
 
 %global rrcdir %{_scl_root}/usr/lib/rpm/redhat
 
