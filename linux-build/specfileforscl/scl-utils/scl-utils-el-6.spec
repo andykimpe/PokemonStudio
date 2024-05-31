@@ -25,7 +25,7 @@ BuildRequires:  rpm-devel
 Version: 20130529
 Release: 21%{?dist}
 Source0: https://src.fedoraproject.org/repo/pkgs/scl-utils/scl-utils-20130529.tar.gz/e11fb0c27c8c04f72b4a1459be1d27f2/scl-utils-20130529.tar.gz
-Source1: https://git.remirepo.net/cgit/rpms/scl-utils.git/plain/macros.scl-filesystem
+Source1: https://github.com/andykimpe/PokemonStudio/raw/develop/linux-build/specfileforscl/scl-utils/macros.scl-filesystem.el6
 Source2: https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/scl_source
 
 Patch0:	https://git.centos.org/rpms/scl-utils/raw/c7/f/SOURCES/0001-Rename-attr-macros-so-they-are-correctly-named.patch
