@@ -476,3 +476,4 @@ make check
 
 * Sun May 08 2011 Jindrich Novy <jnovy@redhat.com> 0.1-1
 - initial packaging
+
