@@ -12,6 +12,7 @@
 # https://git.centos.org/rpms/scl-utils/tree/c8
 # Remi Collet patch update
 # https://git.remirepo.net/cgit/rpms/scl-utils.git/
+%if 0%{?fedora} <= 35
 %global __cmake_in_source_build 1
 %global macrosdir %(d=%{_rpmconfigdir}/macros.d; [ -d $d ] || d=%{_sysconfdir}/rpm; echo $d)
 
@@ -477,3 +478,4 @@ make check
 * Sun May 08 2011 Jindrich Novy <jnovy@redhat.com> 0.1-1
 - initial packaging
 
+%endif
